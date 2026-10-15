@@ -466,9 +466,6 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .news-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; margin-top: 6px; background: var(--panel); }
 .ctl.small[aria-pressed="true"], .ctl.small[aria-pressed="true"]:hover { color: var(--on-gold); }
 @media (max-width: 900px) {
-  .player-col.stuck .controls { display: none; }
-  .player-col.stuck .now { padding-bottom: 12px; }
-  .player-col.stuck .now-label { display: none; }
 }
 .listen-page { overflow-anchor: none; }
 .apps { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
@@ -478,7 +475,6 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 @media (max-width: 900px) {
   .apps { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -14px; padding-right: 14px; }
   .apps::-webkit-scrollbar { display: none; }
-  .player-col.stuck .apps { display: none; }
 }
 .player-col, .player-card, .now { min-width: 0; }
 
@@ -529,7 +525,6 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 #rp.mini.am #rp-am { width: 356px; height: auto; min-height: 150px; }
 #rp.am #rp-toggle { display: none; }
 @media (max-width: 760px) {
-  .player-col.stuck .src, .player-col.stuck .src-note { display: none; }
   #rp.mini.am { grid-template-columns: minmax(0, 1fr) auto; }
   #rp.mini.am #rp-am { width: auto; height: auto; min-height: 150px; }
   #rp.mini.am #rp-info { display: none; }
@@ -542,5 +537,17 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .bg-tip { display: none; margin: 10px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
 .bg-tip b { color: var(--text); font-weight: 600; }
 @media (pointer: coarse) { .bg-tip { display: block; } }
-.player-col.stuck .bg-tip, body.rp-am .bg-tip { display: none; }
+body.rp-am .bg-tip { display: none; }
 .src[hidden], .src-btn[hidden] { display: none; }
+
+/* Listen: tools above the video card; on phones only the card stays pinned */
+.player-tools { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; min-width: 0; }
+.player-tools .controls { padding: 0; }
+.player-tools .apps, .player-tools .src { margin-top: 0; }
+.player-tools .src-note, .player-tools .bg-tip { margin: 0; }
+.player-card .now { padding-bottom: 14px; }
+@media (max-width: 900px) {
+  .listen-page .player-col { display: contents; }
+  .listen-page .player-card { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+  .player-tools { margin-bottom: 0; }
+}

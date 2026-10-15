@@ -164,22 +164,24 @@ page = f'''<!doctype html>
   <section class="listen" style="padding-top:24px">
     <div class="wrap listen-grid">
       <div class="player-col">
+        <div class="player-tools">
+          <div class="controls">
+            <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
+            <button type="button" class="ctl main" id="toggle" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg></button>
+            <button type="button" class="ctl" id="next" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg></button>
+            <button type="button" class="ctl small" id="shuffle" aria-pressed="false" aria-label="Shuffle">Shuffle</button>
+          </div>
+          <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
+          <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button><button type="button" class="src-btn" data-src="spotify" aria-pressed="false">Spotify</button><button type="button" class="src-btn" data-src="deezer" aria-pressed="false">Deezer</button></div>
+          <p class="src-note" id="src-note" hidden></p>
+          <p class="bg-tip">Want it to keep playing with your screen off? Choose <b>Play on: Apple Music</b> (a preview, or full songs if you&rsquo;re signed in), or tap <b>Spotify</b>, <b>Apple Music</b> or <b>YouTube Music</b> above to open it in your music app.</p>
+        </div>
         <div class="player-card">
           <div class="player-frame" id="dock"><button type="button" class="player-start" id="start" aria-label="Play"><span class="big-play"></span><span>Play</span></button></div>
           <div class="now">
             <p class="now-label">Now playing</p>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
-            <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
-            <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button><button type="button" class="src-btn" data-src="spotify" aria-pressed="false">Spotify</button><button type="button" class="src-btn" data-src="deezer" aria-pressed="false">Deezer</button></div>
-            <p class="src-note" id="src-note" hidden></p>
-            <p class="bg-tip">Want it to keep playing with your screen off? Choose <b>Play on: Apple Music</b> (a preview, or full songs if you&rsquo;re signed in), or tap <b>Spotify</b>, <b>Apple Music</b> or <b>YouTube Music</b> above to open it in your music app.</p>
-          </div>
-          <div class="controls">
-            <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
-            <button type="button" class="ctl main" id="toggle" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg></button>
-            <button type="button" class="ctl" id="next" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg></button>
-            <button type="button" class="ctl small" id="shuffle" aria-pressed="false" aria-label="Shuffle">Shuffle</button>
           </div>
         </div>
         <p class="yt-note">Songs play from the official YouTube releases by his record labels.</p>
