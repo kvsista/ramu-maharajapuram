@@ -174,7 +174,6 @@ page = f'''<!doctype html>
           <div class="player-frame" id="dock"><button type="button" class="player-start" id="start" aria-label="Play"><span class="big-play"></span><span>Play</span></button></div>
           <div class="now now-row">
             <div class="now-text">
-            <p class="now-label">Now playing</p>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
             </div>

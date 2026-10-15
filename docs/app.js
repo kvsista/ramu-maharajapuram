@@ -15,6 +15,7 @@
     pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>',
     prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg>',
     next: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg>',
+    shuffle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3.5 21.5 8 17 12.5V9.5h-2.2c-1.1 0-2.1.5-2.8 1.4l-4.6 6.2c-1.1 1.4-2.8 2.3-4.6 2.3H1.5v-3h1.3c.9 0 1.7-.4 2.2-1.1l4.6-6.2C10.8 7.4 12.7 6.5 14.8 6.5H17V3.5zm0 8 4.5 4.5L17 20.5v-3h-2.2c-1.6 0-3.1-.6-4.2-1.6l1.9-2.5c.6.7 1.4 1.1 2.3 1.1H17v-3zM1.5 6.5h1.3c1.6 0 3.1.6 4.2 1.6L5.1 10.6c-.6-.7-1.4-1.1-2.3-1.1H1.5v-3z"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/></svg>'
   };
 
@@ -28,10 +29,9 @@
     '<div id="rp-bar">' +
     '  <a id="rp-info" href="' + ROOT + 'listen/"><span id="rp-title"></span><span id="rp-album"></span></a>' +
     '  <div id="rp-ctl">' +
-    '    <button type="button" class="ctl" id="rp-prev" aria-label="Previous song">' + ICON.prev + '</button>' +
-    '    <button type="button" class="ctl main" id="rp-toggle" aria-label="Play">' + ICON.play + '</button>' +
-    '    <button type="button" class="ctl" id="rp-next" aria-label="Next song">' + ICON.next + '</button>' +
-    '    <button type="button" class="ctl" id="rp-close" aria-label="Stop and close the player">' + ICON.close + '</button>' +
+    '    <button type="button" class="icon-btn" id="rp-shuffle" aria-pressed="false" aria-label="Shuffle" title="Shuffle">' + ICON.shuffle + '</button>' +
+    '    <button type="button" class="icon-btn" id="rp-next" aria-label="Next song" title="Next song">' + ICON.next + '</button>' +
+    '    <button type="button" class="icon-btn" id="rp-close" aria-label="Stop and close the player" title="Close">' + ICON.close + '</button>' +
     '  </div>' +
     '</div>';
   document.body.appendChild(shell);
@@ -144,8 +144,7 @@
     const s = current();
     $('rp-title').textContent = s ? s.t : '';
     $('rp-album').textContent = s ? s.a : '';
-    $('rp-toggle').innerHTML = playing ? ICON.pause : ICON.play;
-    $('rp-toggle').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    $('rp-shuffle').setAttribute('aria-pressed', String(shuffle));
     $('rp-info').href = ROOT + 'listen/' + (s ? '#v=' + s.id : '');
   }
 
@@ -227,9 +226,8 @@
   setInterval(() => { if (playing) save(); }, 5000);
   addEventListener('pagehide', save);
 
-  $('rp-toggle').addEventListener('click', toggle);
+  $('rp-shuffle').addEventListener('click', () => { shuffle = !shuffle; save(); paint(); emit('change'); });
   $('rp-next').addEventListener('click', next);
-  $('rp-prev').addEventListener('click', prev);
   $('rp-close').addEventListener('click', close);
 
   /* ---------- navigation without reloading the player ---------- */
@@ -325,7 +323,7 @@
       if (current()) { if (!usingApple() && !player) ensurePlayer(current().id, false, 0); applySource(); }
       paint(); emit('change'); emit('state');
     },
-    setShuffle: (v) => { shuffle = !!v; save(); },
+    setShuffle: (v) => { shuffle = !!v; save(); paint(); },
     getShuffle: () => shuffle,
     queueIds: () => queue.map((s) => s.id),
     on: (t, fn) => { listeners[t].push(fn); return () => { listeners[t] = listeners[t].filter((f) => f !== fn); }; }
