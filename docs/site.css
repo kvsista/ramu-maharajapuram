@@ -95,7 +95,7 @@ section { padding-block: 96px; }
 
 /* WATCH */
 .watch-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
-.watch-tall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.watch-tall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .row-title { font-size: 1.4rem; margin: 56px 0 20px; }
 .clip { margin: 0; min-width: 0; }
 .clip video { width: 100%; background: #000; border-radius: var(--radius); border: 1px solid var(--line); }
@@ -274,3 +274,20 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
   .timeline .event::before { left: 1px; top: 7px; }
   .timeline time { text-align: left; padding-top: 0; padding-right: 0; }
 }
+
+/* PRESS */
+.press-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+.press-card { margin: 0; min-width: 0; background: var(--night); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.press-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: 50% 20%; background: #e9e9ec; }
+.press-card figcaption { padding: 14px 16px 16px; display: grid; gap: 4px; font-size: .9rem; }
+.press-card figcaption span { color: var(--muted); }
+.press-card a { font-weight: 600; text-decoration: none; }
+.press-card a:hover { text-decoration: underline; }
+.bio-box { margin-top: 32px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--night); }
+.bio-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.bio-head h3 { font-size: 1.3rem; }
+.bio-box p { margin: 0; max-width: 75ch; }
+.bio-note { color: var(--muted); font-size: .85rem; margin-top: 10px !important; min-height: 1.2em; }
+@media (max-width: 900px) { .press-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 561px) and (max-width: 900px) { .watch-tall { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .press-grid { grid-template-columns: 1fr; } }
