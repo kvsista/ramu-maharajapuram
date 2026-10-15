@@ -77,6 +77,9 @@
     </div>
   </section>
 
+  <!-- LATEST-VIDEOS:START -->
+  <!-- LATEST-VIDEOS:END -->
+
   <section style="padding-top:24px">
     <div class="wrap">
       <div class="watch-row" style="margin-top:0">
@@ -172,6 +175,12 @@ document.querySelectorAll('[data-full]').forEach((b) => b.addEventListener('clic
 }));
 document.getElementById('lb-close').addEventListener('click', () => lb.close());
 lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+document.querySelectorAll('.yt-lite button').forEach((b) => b.addEventListener('click', () => {
+  const id = b.closest('.yt-lite').dataset.id, f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.title = b.getAttribute('aria-label');
+  b.replaceWith(f);
+}));
 document.querySelectorAll('video').forEach((v) => v.addEventListener('play', () => {
   document.querySelectorAll('video').forEach((o) => { if (o !== v) o.pause(); });
 }));

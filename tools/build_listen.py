@@ -196,7 +196,7 @@ function step(d) {{
 }}
 window.onYouTubeIframeAPIReady = function () {{
   player = new YT.Player('yt', {{
-    host: 'https://www.youtube-nocookie.com', videoId: SONGS[0].id,
+    host: 'https://www.youtube-nocookie.com', videoId: SONGS[cur].id,
     playerVars: {{ playsinline: 1, rel: 0, modestbranding: 1 }},
     events: {{
       onReady: () => {{ ready = true; if (wantPlay) player.loadVideoById(SONGS[cur].id); }},
@@ -212,7 +212,13 @@ window.onYouTubeIframeAPIReady = function () {{
 }};
 const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
 items.forEach(li => li.querySelector('button').addEventListener('click', () => play(+li.dataset.i)));
-$('start').addEventListener('click', () => play(visible()[0] ?? 0));
+$('start').addEventListener('click', () => play(cur));
+// Deep link from the homepage: listen/#v=VIDEO_ID selects that song (browsers need a tap to start sound).
+const hv = (location.hash.match(/^#v=([\\w-]{{11}})$/) || [])[1];
+if (hv) {{
+  const i = SONGS.findIndex(s => s.id === hv);
+  if (i >= 0) {{ cur = i; const li = items[i]; setTimeout(() => li.scrollIntoView({{ block: 'center' }}), 300); }}
+}}
 $('toggle').addEventListener('click', () => {{
   if (!ready) {{ play(cur); return; }}
   const st = player.getPlayerState();

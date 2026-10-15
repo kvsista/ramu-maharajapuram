@@ -33,6 +33,16 @@ for x in b['releases']:
     for p,u in (x.get('links') or {}).items():
         if u: r['links'].setdefault(p,u)
     addtracks(r,x['tracks'],'b')
+# Releases fetched by the weekly job (tools/fetch_catalogue.py); same shape as `b`.
+import os
+auto = json.load(open(D+'/auto_releases.json'))['releases'] if os.path.exists(D+'/auto_releases.json') else []
+for x in auto:
+    r=get(x['title']); r['years'].add(x.get('year'))
+    if x.get('language') not in (None,'unknown'): r['language']=r['language'] or x['language']
+    r['labels'].add(x.get('label')); r['type']=r['type'] or x.get('type')
+    for p,u in (x.get('links') or {}).items():
+        if u: r['links'].setdefault(p,u)
+    addtracks(r,x['tracks'],'b')
 for x in c['releases']:
     r=get(x['title']); r['years'].add(x.get('year'))
     if x.get('language'): r['language']=r['language'] or x['language'].lower()
