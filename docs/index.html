@@ -111,13 +111,14 @@ section { padding-block: 96px; }
 .lang .more a:hover { text-decoration: underline; }
 
 /* WATCH */
-.watch { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 44px; }
-.watch-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+.watch-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+.watch-tall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.row-title { font-size: 1.4rem; margin: 56px 0 20px; }
 .clip { margin: 0; min-width: 0; }
 .clip video { width: 100%; background: #000; border-radius: var(--radius); border: 1px solid var(--line); }
-.clip.wide video { aspect-ratio: 848/392; }
-.clip.tall video { aspect-ratio: 478/850; max-height: 560px; object-fit: contain; margin-inline: auto; }
-.clip.std video { aspect-ratio: 16/9; }
+.clip.tall video { aspect-ratio: 9/16; object-fit: cover; }
+.clip.std video { aspect-ratio: 16/9; object-fit: contain; }
+.ext.tall .thumb { aspect-ratio: 9/16; background-position: center 30%; }
 .clip figcaption { margin-top: 12px; font-size: .95rem; }
 .clip figcaption small { display: block; color: var(--muted); font-size: .85rem; }
 .ext { display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: var(--text); min-width: 0; }
@@ -217,7 +218,6 @@ dialog.lb button { position: fixed; top: 16px; right: 16px; background: var(--pa
   .stats div:nth-child(3) { border-left: 0; padding-left: 0; }
   .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
   .langs { grid-template-columns: 1fr; }
-  .watch { grid-template-columns: 1fr; }
   .watch-row, .perf, .honours { grid-template-columns: 1fr 1fr; }
   .about-photo { max-width: 420px; }
 }
@@ -232,6 +232,9 @@ dialog.lb button { position: fixed; top: 16px; right: 16px; background: var(--pa
   .stats div { padding: 20px 14px; }
   .stats div:nth-child(2), .stats div:nth-child(4) { padding-right: 0; }
   .watch-row, .perf, .honours { grid-template-columns: 1fr; }
+  .watch-tall { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 72%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; padding-bottom: 6px; scrollbar-width: none; }
+  .watch-tall::-webkit-scrollbar { display: none; }
+  .watch-tall > * { scroll-snap-align: start; }
   .places li { font-size: 1.3rem; }
   .places li::after { margin-left: 18px; }
   .award { grid-template-columns: 1fr; gap: 10px; }
@@ -361,17 +364,11 @@ dialog.lb button { position: fixed; top: 16px; right: 16px; background: var(--pa
     <div class="wrap">
       <p class="label">Watch</p>
       <h2>Ramu <em>on stage</em></h2>
-      <div class="watch">
-        <figure class="clip wide">
+      <div class="watch-row">
+        <figure class="clip std">
           <video controls preload="none" playsinline poster="media/canada-brampton-poster.jpg" src="media/canada-brampton.mp4"></video>
           <figcaption>Live in concert, Brampton Tamil Association<small>Canada · 4 min</small></figcaption>
         </figure>
-        <figure class="clip tall">
-          <video controls preload="none" playsinline poster="media/orchestra-poster.jpg" src="media/orchestra.mp4"></video>
-          <figcaption>With the MS Orchestra<small>Concert highlights · 1 min</small></figcaption>
-        </figure>
-      </div>
-      <div class="watch-row">
         <figure class="clip std">
           <video controls preload="none" playsinline poster="media/etv-poster.jpg" src="media/etv.mp4"></video>
           <figcaption>Performing on ETV<small>Television · 5 min</small></figcaption>
@@ -380,8 +377,19 @@ dialog.lb button { position: fixed; top: 16px; right: 16px; background: var(--pa
           <video controls preload="none" playsinline poster="media/live-duet-poster.jpg" src="media/live-duet.mp4"></video>
           <figcaption>Live duet on stage<small>Concert · 1.5 min</small></figcaption>
         </figure>
-        <a class="ext" href="https://www.facebook.com/reel/1552841726238768/" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image:url(media/stage-blue.jpg)"><span class="badge">Watch on Facebook ↗</span></div>
+      </div>
+      <h3 class="row-title">Up close</h3>
+      <div class="watch-tall">
+        <figure class="clip tall">
+          <video controls preload="none" playsinline poster="media/keyboard-session-poster.jpg" src="media/keyboard-session.mp4"></video>
+          <figcaption>An intimate session with keyboard<small>April 2026 · 1.5 min</small></figcaption>
+        </figure>
+        <figure class="clip tall">
+          <video controls preload="none" playsinline poster="media/orchestra-poster.jpg" src="media/orchestra.mp4"></video>
+          <figcaption>With the MS Orchestra<small>Concert highlights · 1 min</small></figcaption>
+        </figure>
+        <a class="ext tall" href="https://www.facebook.com/reel/1552841726238768/" target="_blank" rel="noopener">
+          <div class="thumb" style="background-image:url(media/stage-kurta.jpg)"><span class="badge">Watch on Facebook ↗</span></div>
           <span class="cap">Facebook reel<small>Opens on Facebook</small></span>
         </a>
       </div>
