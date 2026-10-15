@@ -116,7 +116,7 @@ section { padding-block: 96px; }
 /* GALLERY */
 .gallery { columns: 3 260px; column-gap: 16px; margin-top: 44px; }
 .gallery figure { break-inside: avoid; margin: 0 0 16px; position: relative; }
-.gallery button { all: unset; cursor: zoom-in; display: block; width: 100%; border-radius: var(--radius); overflow: hidden; }
+.gallery button { -webkit-appearance: none; appearance: none; all: unset; cursor: zoom-in; display: block; width: 100%; border-radius: var(--radius); overflow: hidden; }
 .gallery button:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
 .gallery img { width: 100%; transition: transform .4s; }
 .gallery button:hover img { transform: scale(1.03); }
@@ -128,7 +128,7 @@ section { padding-block: 96px; }
 .names { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
 .names li { font-family: var(--display); font-size: 1.3rem; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .mosaic { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.mosaic button { all: unset; cursor: zoom-in; display: block; border-radius: 10px; overflow: hidden; }
+.mosaic button { -webkit-appearance: none; appearance: none; all: unset; cursor: zoom-in; display: block; border-radius: 10px; overflow: hidden; }
 .mosaic button:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
 .mosaic img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 25%; transition: transform .4s; }
 .mosaic button:hover img { transform: scale(1.04); }
@@ -138,7 +138,7 @@ section { padding-block: 96px; }
 .mosaic .full img { aspect-ratio: 3/1; object-position: 50% 30%; }
 .honours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
 .honour { margin: 0; min-width: 0; }
-.honour button { all: unset; cursor: zoom-in; display: block; border-radius: var(--radius); overflow: hidden; }
+.honour button { -webkit-appearance: none; appearance: none; all: unset; cursor: zoom-in; display: block; border-radius: var(--radius); overflow: hidden; }
 .honour img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: 50% 25%; }
 .honour figcaption { margin-top: 12px; color: var(--muted); font-size: .92rem; }
 .award { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; padding: 28px; border: 1px solid var(--gold); border-radius: var(--radius); margin-top: 32px; }
@@ -277,12 +277,11 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 
 /* PRESS */
 .press-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
-.press-card { margin: 0; min-width: 0; background: var(--night); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
-.press-card button { all: unset; cursor: zoom-in; display: block; background: #e8e8ec; }
+.press-card { margin: 0; min-width: 0; border-radius: var(--radius); overflow: hidden; background: #e8e8ec; }
+.press-card button { display: block; width: 100%; padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; cursor: zoom-in; -webkit-appearance: none; appearance: none; }
 .press-card button:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: -2px; }
 .press-card img { width: 100%; aspect-ratio: 4/3; object-fit: contain; transition: transform .4s; }
 .press-card button:hover img { transform: scale(1.03); }
-.press-card figcaption { padding: 14px 16px 16px; font-size: .9rem; color: var(--muted); }
 .bio-box { margin-top: 32px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--night); }
 .bio-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
 .bio-head h3 { font-size: 1.3rem; }
