@@ -543,3 +543,4 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .bg-tip b { color: var(--text); font-weight: 600; }
 @media (pointer: coarse) { .bg-tip { display: block; } }
 .player-col.stuck .bg-tip, body.rp-am .bg-tip { display: none; }
+.src[hidden], .src-btn[hidden] { display: none; }
