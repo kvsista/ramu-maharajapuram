@@ -390,7 +390,7 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .now-album { margin: 0; color: var(--muted); font-size: .88rem; }
 .controls { display: flex; align-items: center; gap: 10px; padding: 14px 20px 20px; }
 .ctl { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--text); font-size: 1rem; cursor: pointer; }
-.ctl:hover { border-color: var(--gold); }
+@media (hover: hover) { .ctl:hover { border-color: var(--gold); } }
 .ctl.main { width: 52px; height: 52px; background: var(--gold); color: var(--on-gold); border-color: var(--gold); font-size: 1.1rem; }
 .ctl.small { width: auto; padding: 0 16px; border-radius: 999px; font: 600 .82rem var(--body); margin-left: auto; }
 .ctl.small[aria-pressed="true"] { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
@@ -408,7 +408,9 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .song.playing { background: rgba(210,169,94,.07); }
 @media (max-width: 900px) {
   .listen-grid { grid-template-columns: 1fr; gap: 24px; }
-  .player-col { top: 104px; z-index: 5; }
+  .player-col { top: env(safe-area-inset-top, 0px); z-index: 5; }
+  .listen-page .bar { position: static; }
+  .listen-page { scroll-padding-top: 0; }
   .now { padding: 10px 14px 0; }
   .now-title { font-size: 1.05rem; }
   .now-album { font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -448,7 +450,7 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .ctl svg { width: 18px; height: 18px; fill: currentColor; display: block; }
 .ctl.main svg { width: 22px; height: 22px; }
 .ctl:not(.main) { color: var(--text); }
-.ctl:not(.main):hover { color: var(--gold-hi); }
+@media (hover: hover) { .ctl:not(.main):not([aria-pressed="true"]):hover { color: var(--gold-hi); } }
 
 /* NEWS (from the family's Google Sheet) */
 .news-section[hidden] { display: none; }
@@ -462,3 +464,4 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .news-video { all: unset; cursor: pointer; display: grid; place-items: center; margin-top: 6px; aspect-ratio: 16/9; border-radius: 10px; background: #000 center/cover no-repeat; border: 1px solid var(--line); }
 .news-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 10px; margin-top: 6px; }
 .news-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; margin-top: 6px; background: var(--panel); }
+.ctl.small[aria-pressed="true"], .ctl.small[aria-pressed="true"]:hover { color: var(--on-gold); }
