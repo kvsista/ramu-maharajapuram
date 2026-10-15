@@ -79,9 +79,14 @@
         <figure class="press-card"><button data-full="../media/press/ramu-maharajapuram-on-stage.jpg" aria-label="View photo full size"><img src="../media/press/ramu-maharajapuram-on-stage-thumb.jpg" alt="Ramu Maharajapuram, on stage" loading="lazy"></button></figure>
       </div>
       <div class="bio-box">
-        <div class="bio-head"><h3>Short biography</h3><button type="button" class="btn quiet small" id="copy-bio">Copy text</button></div>
-        <p id="bio-text">Ramu Maharajapuram is a playback and concert singer from Nellore, Andhra Pradesh, based in Chennai. Known to audiences as “SPB Ramu” for a voice that closely recalls S.&nbsp;P.&nbsp;Balasubrahmanyam's, he came to notice on SPB's ETV show <i>Paadutha Theeyaga</i> in 1996 and went on to sing 200 to 300 guide tracks for SPB. He has twice won the Andhra Pradesh Nandi TV Award for Best Male Playback Singer, released 280 albums and singles in Telugu, Tamil, Kannada and Sanskrit since 1998, and performed more than 2,000 concerts in India, the USA and Canada.</p>
-        <p class="bio-note" id="bio-status" aria-live="polite"></p>
+        <div class="bio-head"><h3>Biography</h3><button type="button" class="btn quiet small copy-bio" data-target="bio-long">Copy text</button></div>
+        <p id="bio-long">Ramu Maharajapuram is a playback and concert singer from Nellore, Andhra Pradesh, based in Chennai. Known to audiences as “SPB Ramu” for a voice that closely recalls S.&nbsp;P.&nbsp;Balasubrahmanyam's, he came to notice on SPB's own ETV show <i>Paadutha Theeyaga</i> in 1996 and went on to record 200 to 300 guide tracks for SPB himself. He has twice won the Andhra Pradesh Nandi TV Award for Best Male Playback Singer and has sung for films including <i>Attarintiki Daredi</i>, <i>Partner</i> and <i>Kasthuri Veedu</i>. With 280 albums and singles in Telugu, Tamil, Kannada and Sanskrit since 1998, and more than 2,000 concerts in India, the USA and Canada, he carries SPB's songs to audiences around the world.</p>
+        <p class="bio-note" aria-live="polite"></p>
+      </div>
+      <div class="bio-box">
+        <div class="bio-head"><h3>Short biography <span class="bio-use">for posters and social media</span></h3><button type="button" class="btn quiet small copy-bio" data-target="bio-short">Copy text</button></div>
+        <p id="bio-short">Ramu Maharajapuram, known as “SPB Ramu”, is a two-time Nandi Award-winning playback singer whose voice recalls the great S.&nbsp;P.&nbsp;Balasubrahmanyam. He has sung for films including <i>Attarintiki Daredi</i> and performed more than 2,000 concerts in India and abroad.</p>
+        <p class="bio-note" aria-live="polite"></p>
       </div>
       <p class="muted" style="margin-top:28px">For interviews or anything else, write to <a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> or <a href="../invite/">contact Ramu's team</a>.</p>
     </div>
@@ -111,11 +116,12 @@ document.querySelectorAll('[data-full]').forEach((b) => b.addEventListener('clic
 }));
 document.getElementById('lb-close').addEventListener('click', () => lb.close());
 lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
-document.getElementById('copy-bio').addEventListener('click', () => {
-  const t = document.getElementById('bio-text'), st = document.getElementById('bio-status');
+document.querySelectorAll('.copy-bio').forEach((btn) => btn.addEventListener('click', () => {
+  const t = document.getElementById(btn.dataset.target), st = btn.closest('.bio-box').querySelector('.bio-note');
+  document.querySelectorAll('.bio-note').forEach((n) => { n.textContent = ''; });
   navigator.clipboard.writeText(t.innerText).then(() => { st.textContent = 'Copied to clipboard.'; })
     .catch(() => { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); st.textContent = 'Text selected. Press Ctrl+C or Cmd+C to copy.'; });
-});
+}));
 </script>
 </body>
 </html>

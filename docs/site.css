@@ -418,3 +418,5 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
   .yt-note { display: none; }
 }
 .player-start[hidden] { display: none; }
+.bio-box + .bio-box { margin-top: 20px; }
+.bio-use { font-family: var(--body); font-size: .8rem; color: var(--muted); font-weight: 500; margin-left: 8px; }
