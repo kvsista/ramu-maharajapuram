@@ -247,6 +247,17 @@ document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', ()
   if (!on) {{ b.setAttribute('aria-pressed', 'true'); filt = b.dataset.f; }} else filt = null;
   apply();
 }}));
+// Phones: once the player is pinned at the top, hide the button row to give the list more room.
+const grid = document.querySelector('.listen-grid'), pcol = document.querySelector('.player-col');
+const small = matchMedia('(max-width: 900px)');
+let raf = 0;
+function stuck() {{
+  raf = 0;
+  pcol.classList.toggle('stuck', small.matches && grid.getBoundingClientRect().top < -8);
+}}
+addEventListener('scroll', () => {{ if (!raf) raf = requestAnimationFrame(stuck); }}, {{ passive: true }});
+small.addEventListener('change', stuck);
+stuck();
 mark();
 </script>
 </body>
