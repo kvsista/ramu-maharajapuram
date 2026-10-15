@@ -31,10 +31,10 @@
     const h = (rows.shift() || []).map(s => s.trim().toLowerCase());
     const col = (...names) => h.findIndex(x => names.some(n => x.startsWith(n)));
     const C = { type: col('what is it', 'type'), title: col('title'), date: col('date'), venue: col('city', 'venue'),
-                details: col('details'), link: col('link'), show: col('show') };
+                details: col('details'), link: col('link'), photo: col('photo'), show: col('show') };
     return rows.map(r => ({
       type: (r[C.type] || '').trim(), title: (r[C.title] || '').trim(), date: (r[C.date] || '').trim(),
-      venue: (r[C.venue] || '').trim(), details: (r[C.details] || '').trim(), link: (r[C.link] || '').trim(),
+      venue: (r[C.venue] || '').trim(), details: (r[C.details] || '').trim(), link: (r[C.link] || '').trim(), photo: C.photo >= 0 ? (r[C.photo] || '').trim() : '',
       show: /^y(es)?$/i.test((r[C.show] || '').trim())
     })).filter(x => x.show && x.title && /^\d{4}-\d{2}-\d{2}$/.test(x.date));
   }
@@ -54,6 +54,11 @@
     el.append(meta, t);
     if (x.details) { const p = document.createElement('p'); p.className = 'news-details'; p.textContent = x.details; el.append(p); }
     const link = safe(x.link), id = link && ytId(link);
+    const photo = safe(x.photo);
+    if (photo && !id) {
+      const img = document.createElement('img'); img.className = 'news-photo'; img.loading = 'lazy';
+      img.src = photo; img.alt = x.title; el.append(img);
+    }
     if (id) {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'news-video';
       b.style.backgroundImage = `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`;

@@ -461,3 +461,4 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .news-link:hover { text-decoration: underline; }
 .news-video { all: unset; cursor: pointer; display: grid; place-items: center; margin-top: 6px; aspect-ratio: 16/9; border-radius: 10px; background: #000 center/cover no-repeat; border: 1px solid var(--line); }
 .news-frame { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 10px; margin-top: 6px; }
+.news-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; margin-top: 6px; background: var(--panel); }

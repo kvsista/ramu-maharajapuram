@@ -30,7 +30,7 @@ def col(*names):
 
 
 C = {k: col(*v) for k, v in {'type': ('what is it', 'type'), 'title': ('title',), 'date': ('date',), 'venue': ('city', 'venue'),
-                              'details': ('details',), 'link': ('link',), 'show': ('show',)}.items()}
+                              'details': ('details',), 'link': ('link',), 'photo': ('photo',), 'show': ('show',)}.items()}
 get = lambda r, k: (r[C[k]].strip() if C[k] is not None and C[k] < len(r) else '')
 items = [dict((k, get(r, k)) for k in C) for r in rows[1:]]
 items = [x for x in items if re.fullmatch(r'y(es)?', x['show'], re.I) and x['title'] and re.fullmatch(r'\d{4}-\d{2}-\d{2}', x['date'])]
@@ -47,6 +47,9 @@ def card(x):
     if x['details']:
         out += f'<p class="news-details">{E(x["details"])}</p>'
     link = x['link'] if re.match(r'https?://', x['link'], re.I) else ''
+    photo = x['photo'] if re.match(r'https?://', x['photo'], re.I) else ''
+    if photo and 'youtu' not in link:
+        out += f'<img class="news-photo" src="{E(photo)}" alt="{E(x["title"])}" loading="lazy">'
     if link:
         label = 'View on Facebook ↗' if re.search(r'facebook\.com|fb\.watch', link) else 'Watch ↗' if 'youtu' in link else 'More details ↗'
         out += f'<a class="news-link" href="{E(link)}" target="_blank" rel="noopener">{label}</a>'
