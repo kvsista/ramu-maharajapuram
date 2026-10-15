@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ramu Maharajapuram · Playback &amp; Concert Singer</title>
+<meta name="description" content="Ramu Maharajapuram is a playback and concert singer performing film songs, light music and devotional music in Tamil, Telugu, Kannada and Sanskrit, in India and around the world.">
+<meta property="og:title" content="Ramu Maharajapuram · Playback &amp; Concert Singer">
+<meta property="og:description" content="Film songs, concerts and devotional music in four languages. Invite Ramu to perform in India or abroad.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#11101a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311101a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d2a95e'%3ERM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: an artist's official page. Quiet night palette, the name as the headline, the artist introduced before any invitation. Gold used sparingly. */
+:root {
+  --night: #11101a;
+  --night-2: #17151f;
+  --panel: #1e1b28;
+  --line: #2e2a3a;
+  --text: #f1ebe0;
+  --muted: #a9a1b4;
+  --gold: #d2a95e;
+  --gold-hi: #e4c285;
+  --on-gold: #17110a;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 12px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--night); color: var(--text); font: 17px/1.7 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: var(--gold-hi); }
+a:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); }
+h2 em { font-style: italic; color: var(--gold-hi); }
+.label { font-size: .74rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 16px; }
+.lead { color: var(--muted); max-width: 62ch; margin: 18px 0 0; }
+.rule { width: 48px; height: 1px; background: var(--gold); border: 0; margin: 0 0 28px; }
+
+/* BAR */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(17,16,26,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+.mark { font-family: var(--display); font-size: 1.15rem; color: var(--text); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; letter-spacing: .01em; }
+.bar-links { display: flex; align-items: center; gap: 26px; }
+.bar-links a.plain { color: var(--muted); text-decoration: none; font-size: .9rem; }
+.bar-links a.plain:hover { color: var(--text); }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .95rem; letter-spacing: .01em; transition: background .15s, border-color .15s, color .15s; white-space: nowrap; }
+.btn.primary { background: var(--gold); color: var(--on-gold); }
+.btn.primary:hover { background: var(--gold-hi); }
+.btn.quiet { border: 1px solid var(--line); color: var(--text); }
+.btn.quiet:hover { border-color: var(--gold); }
+.btn.small { padding: 9px 18px; font-size: .88rem; }
+
+/* HERO */
+.hero { position: relative; overflow: hidden; padding-block: 112px 96px; text-align: center; }
+.hero::before { content: ""; position: absolute; left: 50%; top: -35%; width: 1000px; height: 820px; transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(228,194,133,.18), rgba(210,169,94,.05) 40%, transparent 68%); pointer-events: none; }
+.hero .wrap { position: relative; }
+.hero h1 { font-size: clamp(3rem, 9vw, 6.4rem); letter-spacing: -.015em; }
+.hero .role { font-family: var(--display); font-style: italic; font-size: clamp(1.2rem, 2.6vw, 1.6rem); color: var(--gold-hi); margin: 18px 0 0; }
+.hero .lead { margin: 26px auto 0; font-size: 1.08rem; text-align: center; }
+.hero .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 38px; }
+.langs { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: center; margin: 56px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .88rem; }
+.langs b { font-family: var(--display); font-weight: 400; color: var(--text); font-size: 1.15rem; margin-right: 8px; }
+
+section { padding-block: 92px; }
+.alt { background: var(--night-2); border-block: 1px solid var(--line); }
+
+/* ABOUT */
+.about { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start; }
+.about > * { min-width: 0; }
+.about p { margin: 0 0 1.1em; color: var(--text); }
+.about p.muted { color: var(--muted); }
+.pull { font-family: var(--display); font-style: italic; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.3; color: var(--text); margin: 0; }
+.pull small { display: block; margin-top: 18px; font-family: var(--body); font-style: normal; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-top: 36px; }
+.facts div { background: var(--night); padding: 20px 22px; }
+.facts strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.35rem; }
+.facts span { color: var(--muted); font-size: .86rem; }
+
+/* LISTEN */
+.videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 22px; margin-top: 44px; }
+.video { text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.thumb { aspect-ratio: 16/10; max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); position: relative; overflow: hidden;
+  background: radial-gradient(circle at 50% -10%, rgba(228,194,133,.22), transparent 60%), linear-gradient(180deg, var(--panel), var(--night)); display: grid; place-items: center; transition: border-color .15s; }
+.video:hover .thumb { border-color: var(--gold); }
+.play { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--gold); display: grid; place-items: center; }
+.play::before { content: ""; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--gold-hi); transform: translateX(2px); }
+.thumb .ta { position: absolute; left: 14px; right: 14px; bottom: 12px; font-size: .88rem; color: var(--muted); }
+.video .cap { font-size: .95rem; }
+.video .cap small { display: block; color: var(--muted); font-size: .84rem; }
+.stream { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; align-items: center; }
+.stream span { color: var(--muted); font-size: .9rem; margin-right: 6px; }
+
+/* WORKS */
+.works { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; }
+.works > * { min-width: 0; }
+.styles { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+.styles li { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: .88rem; color: var(--muted); }
+.disc { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.disc li { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.disc .t { font-family: var(--display); font-size: 1.12rem; }
+.disc .t i { color: var(--muted); }
+.disc .y { color: var(--muted); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+
+/* PERFORMANCES */
+.perf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 48px; margin-top: 48px; }
+.perf article { min-width: 0; border-top: 1px solid var(--line); padding-top: 22px; }
+.perf h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.perf p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* WORLD */
+.world { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+.world > * { min-width: 0; }
+.notes { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+.notes li { padding-left: 22px; position: relative; color: var(--muted); }
+.notes li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 1px; background: var(--gold); }
+.notes strong { color: var(--text); font-weight: 600; }
+
+/* INVITE */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin: 48px 0 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { counter-increment: s; min-width: 0; }
+.steps li::before { content: counter(s, upper-roman) "."; font-family: var(--display); font-style: italic; font-size: 1.3rem; color: var(--gold); display: block; margin-bottom: 10px; }
+.steps h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.steps p { margin: 0; color: var(--muted); font-size: .95rem; }
+.invite-end { text-align: center; margin-top: 72px; padding-top: 64px; border-top: 1px solid var(--line); }
+.invite-end h2 { margin-bottom: 0; }
+.invite-end .lead { margin-inline: auto; }
+.invite-end .btn { margin-top: 30px; }
+.invite-end .note { color: var(--muted); font-size: .85rem; margin-top: 14px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 30px; color: var(--muted); font-size: .85rem; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 860px) {
+  .about, .works, .world { grid-template-columns: 1fr; gap: 40px; }
+  .perf, .steps { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .bar-links a.plain { display: none; }
+  .hero { padding-block: 72px 64px; }
+  section { padding-block: 68px; }
+  .perf, .steps, .facts { grid-template-columns: 1fr; }
+  .videos { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 76%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; padding-bottom: 6px; scrollbar-width: none; }
+  .videos::-webkit-scrollbar { display: none; }
+  .video { scroll-snap-align: start; }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="mark" href="#top">Ramu Maharajapuram</a>
+    <nav class="bar-links">
+      <a class="plain" href="#about">About</a>
+      <a class="plain" href="#listen">Listen</a>
+      <a class="plain" href="#performances">Performances</a>
+      <a class="btn quiet small" href="#invite">Invite</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Ramu Maharajapuram</h1>
+      <p class="role">Playback &amp; Concert Singer</p>
+      <p class="lead">A voice that carries the warmth of S.&nbsp;P.&nbsp;Balasubrahmanyam, across film songs, light music and devotional music, on stages in India and around the world.</p>
+      <div class="cta">
+        <a class="btn primary" href="#listen">Listen to Ramu</a>
+        <a class="btn quiet" href="#invite">Invite Ramu to perform</a>
+      </div>
+      <ul class="langs" aria-label="Languages">
+        <li><b>தமிழ்</b>Tamil</li>
+        <li><b>తెలుగు</b>Telugu</li>
+        <li><b>ಕನ್ನಡ</b>Kannada</li>
+        <li><b>संस्कृतम्</b>Sanskrit</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="about" class="alt">
+    <div class="wrap about">
+      <div>
+        <p class="label">About</p>
+        <p class="pull">“The singer with SPB's voice.”<small>Cineulagam Podcast · translated from Tamil</small></p>
+      </div>
+      <div>
+        <hr class="rule">
+        <p>Ramu Maharajapuram is a playback and concert singer whose recordings span Tamil, Telugu, Kannada and Sanskrit. His singing moves easily between film songs, the light-music repertoire made beloved by S.&nbsp;P.&nbsp;Balasubrahmanyam, and devotional music.</p>
+        <p class="muted">He has sung for films including <i>Partner</i> and <i>Kasthuri Veedu</i>, and has released a steady body of albums and singles on Apple Music, JioSaavn and other platforms. He travels to perform for audiences in India and abroad.</p>
+        <div class="facts">
+          <div><strong>Film &amp; stage</strong><span>Playback and live concerts</span></div>
+          <div><strong>Four languages</strong><span>Tamil, Telugu, Kannada, Sanskrit</span></div>
+          <div><strong>Worldwide</strong><span>Performs in India and abroad</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="listen">
+    <div class="wrap">
+      <p class="label">Listen</p>
+      <h2>Hear Ramu <em>sing</em></h2>
+      <div class="videos">
+        <a class="video" href="https://www.youtube.com/watch?v=n7RozKwYcCY" target="_blank" rel="noopener"><div class="thumb"><div class="play"></div><span class="ta">சிவமயமாக தெரிகிறதே</span></div><span class="cap">Sivamayamaga Therigirathe<small>YouTube</small></span></a>
+        <a class="video" href="https://www.youtube.com/watch?v=tiabeVe_Ysk" target="_blank" rel="noopener"><div class="thumb"><div class="play"></div><span class="ta">திருத்தணி முருகர் என் குலதெய்வம்</span></div><span class="cap">Thiruthani Murugar En Kuladeivam<small>YouTube</small></span></a>
+        <a class="video" href="https://www.youtube.com/watch?v=_jaUcrUscMc" target="_blank" rel="noopener"><div class="thumb"><div class="play"></div><span class="ta">அஞ்சலி.. அஞ்சலி.. புஷ்பாஞ்சலி</span></div><span class="cap">Anjali Anjali Pushpanjali<small>YouTube</small></span></a>
+        <a class="video" href="https://www.youtube.com/watch?v=58MrbVoGbHg" target="_blank" rel="noopener"><div class="thumb"><div class="play"></div><span class="ta">Cineulagam Podcast</span></div><span class="cap">In conversation with Ramu<small>Interview · YouTube</small></span></a>
+      </div>
+      <div class="stream">
+        <span>Stream Ramu's music</span>
+        <a class="btn quiet small" href="https://music.apple.com/gb/artist/maharajapuram-ramu/1382880352" target="_blank" rel="noopener">Apple Music</a>
+        <a class="btn quiet small" href="https://www.jiosaavn.com/artist/ramu-maharajapuram-songs/8tLMJKNGNWk_" target="_blank" rel="noopener">JioSaavn</a>
+        <a class="btn quiet small" href="https://www.youtube.com/results?search_query=Ramu+Maharajapuram" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap works">
+      <div>
+        <p class="label">Selected work</p>
+        <h2>From film songs <em>to bhakti</em></h2>
+        <p class="lead">A body of work across four languages and many moods, from cinema and melody to keerthanas and the Thiruppaavai.</p>
+        <ul class="styles">
+          <li>Film playback</li><li>Light music</li><li>SPB classics</li><li>Melody</li><li>Devotional</li><li>Keerthanas</li>
+        </ul>
+      </div>
+      <ul class="disc">
+        <li><span class="t">Idam Maarum Nerame (Reprise) · <i>Kasthuri Veedu</i></span><span class="y">Film</span></li>
+        <li><span class="t">Dabbu · <i>Partner</i> (Telugu)</span><span class="y">Film</span></li>
+        <li><span class="t">Margazhiyil Thuyil Elum Madhavan</span><span class="y">2026</span></li>
+        <li><span class="t">Jaya Jaya Sri Dharmasasta Ayyappa</span><span class="y">2025</span></li>
+        <li><span class="t">Annamalai Manasasmarami</span><span class="y">2024</span></li>
+        <li><span class="t">Harihara Thanayudu Ayyappa</span><span class="y">2024</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="performances">
+    <div class="wrap">
+      <p class="label">Performances</p>
+      <h2>On stage and <em>in the studio</em></h2>
+      <div class="perf">
+        <article><h3>Film playback</h3><p>Playback singing for film composers and producers in Tamil, Telugu and beyond.</p></article>
+        <article><h3>Concerts &amp; SPB evenings</h3><p>Film-music and light-music concerts, including evenings celebrating the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam.</p></article>
+        <article><h3>International concerts</h3><p>Performances for cultural associations, festivals and communities outside India.</p></article>
+        <article><h3>Temple festivals &amp; bhakti</h3><p>Devotional concerts with bhajans, keerthanas and songs suited to the deity and occasion.</p></article>
+        <article><h3>Celebrations</h3><p>Weddings, receptions and milestone events, with a programme shaped around the occasion.</p></article>
+        <article><h3>Albums &amp; recordings</h3><p>Studio work for music producers and labels in any of his four languages.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap world">
+      <div>
+        <p class="label">Around the world</p>
+        <h2>Bringing Ramu <em>to your city</em></h2>
+        <p class="lead">Ramu travels to perform for audiences abroad. For organisers planning an overseas concert, sharing these details early helps his team plan the visit well.</p>
+      </div>
+      <ul class="notes">
+        <li><strong>Dates and city.</strong> Some flexibility on dates helps fit a visit into a wider tour.</li>
+        <li><strong>Travel and stay.</strong> Whether flights, visa support and accommodation can be arranged.</li>
+        <li><strong>Musicians.</strong> A full orchestra, a small ensemble, local musicians or tracks.</li>
+        <li><strong>Other cities.</strong> Organisers in nearby cities can be included in one tour.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="invite">
+    <div class="wrap">
+      <p class="label">Invitations</p>
+      <h2>Inviting Ramu <em>to perform</em></h2>
+      <ol class="steps">
+        <li><h3>Tell us about your event</h3><p>Share the occasion, date, city and audience in a short form.</p></li>
+        <li><h3>Hear from Ramu's team</h3><p>His team will be in touch to talk through the programme and arrangements.</p></li>
+        <li><h3>Plan the performance together</h3><p>Settle the songs, musicians and travel so the evening comes together well.</p></li>
+      </ol>
+      <div class="invite-end">
+        <h2>Planning an event?</h2>
+        <p class="lead">A film project, a concert, a temple festival or an evening abroad: Ramu's team would be glad to hear about it.</p>
+        <a class="btn primary" href="https://form.jotform.com/262868493522064" target="_blank" rel="noopener">Invite Ramu to perform</a>
+        <p class="note">Opens a short form. Your details are shared only with Ramu's team.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
+    <span>Playback &amp; Concert Singer</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.claude/
+.DS_Store
+# early draft site
+/index.html
+/styles.css
+/main.js
