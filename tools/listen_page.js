@@ -17,12 +17,17 @@ function mark() {
   const apps = $('apps'); apps.replaceChildren();
   const lab = document.createElement('span'); lab.className = 'apps-label'; lab.textContent = 'Open in'; apps.append(lab);
   names.forEach(([k, n]) => { if (!L[k]) return; const a = document.createElement('a'); a.href = L[k]; a.target = '_blank'; a.rel = 'noopener'; a.className = 'app-chip'; a.textContent = n; apps.append(a); });
-  const apple = RP.usingApple(), wantApple = RP.getSource() === 'apple';
+  const NAMES = { apple: 'Apple Music', spotify: 'Spotify', deezer: 'Deezer' };
+  const srcNow = RP.getSource(), apple = RP.usingApple(), wantApple = srcNow !== 'yt', appName = NAMES[srcNow];
   $('start').hidden = !!c || wantApple;
   document.querySelectorAll('.src-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.src === RP.getSource())));
   const note = $('src-note'), song = c || s;
-  if (wantApple && !RP.hasApple(song)) { note.textContent = 'This song isn\u2019t on Apple Music, so it plays on YouTube.'; note.hidden = false; }
-  else if (apple) { note.textContent = 'Press play in the Apple Music player. Apple Music subscribers can sign in there for full songs; everyone else hears a 30-second preview.'; note.hidden = false; }
+  if (wantApple && !RP.hasApple(song)) { note.textContent = 'This song isn\u2019t on ' + appName + ', so it plays on YouTube.'; note.hidden = false; }
+  else if (apple) {
+    note.textContent = 'Press play in the ' + appName + ' player. You\u2019ll hear a preview, or the full song if you\u2019re signed in to ' + appName + ' in this browser.'
+      + (srcNow === 'apple' ? ' Still a preview after signing in? Safari may block it; sign in at music.apple.com in this browser first, or tap Apple Music under \u201cOpen in\u201d.' : '');
+    note.hidden = false;
+  }
   else note.hidden = true;
   $('toggle').hidden = apple;
   const p = RP.isPlaying();

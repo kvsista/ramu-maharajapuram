@@ -40,7 +40,8 @@
   let queue = [], idx = -1, shuffle = false, player = null, ready = false, pending = null, playing = false;
   let dockEl = null, raf = 0;
   let source = 'yt';
-  try { source = localStorage.getItem('rp-src') === 'apple' ? 'apple' : 'yt'; } catch (e) {}
+  const SOURCES = ['yt', 'apple', 'spotify', 'deezer'];
+  try { const v = localStorage.getItem('rp-src'); source = SOURCES.includes(v) ? v : 'yt'; } catch (e) {}
   let amUrl = '';
   const listeners = { change: [], state: [] };
   const emit = (t) => listeners[t].forEach((f) => { try { f(); } catch (e) { console.error(e); } });
@@ -91,17 +92,26 @@
    * Everyone hears 30-second previews; Apple Music subscribers can sign in inside the player
    * for full songs. Websites can't start or stop it, so visitors press play in Apple's player
    * and there is no automatic next song. */
-  function appleEmbed(s) {
-    const u = s && s.l && s.l.apple;
-    if (!u) return '';
+  // Embed address for a song on the chosen app, or '' if the song isn't on it.
+  function embedFor(s, src) {
+    const l = s && s.l; if (!l) return '';
     try {
-      const x = new URL(u);
-      x.hostname = 'embed.music.apple.com';
-      x.searchParams.delete('uo');
-      return x.href;
-    } catch (e) { return ''; }
+      if (src === 'apple' && l.apple) {
+        const x = new URL(l.apple); x.hostname = 'embed.music.apple.com'; x.searchParams.delete('uo'); return x.href;
+      }
+      if (src === 'spotify' && l.spotify) {
+        const m = l.spotify.match(/open\.spotify\.com\/(track|album)\/([A-Za-z0-9]+)/);
+        return m ? 'https://open.spotify.com/embed/' + m[1] + '/' + m[2] + '?utm_source=generator&theme=0' : '';
+      }
+      if (src === 'deezer' && l.deezer) {
+        const m = l.deezer.match(/deezer\.com\/(?:[a-z]{2}\/)?(track|album)\/(\d+)/);
+        return m ? 'https://widget.deezer.com/widget/dark/' + m[1] + '/' + m[2] + '?tracklist=false' : '';
+      }
+    } catch (e) {}
+    return '';
   }
-  function usingApple() { return source === 'apple' && !!appleEmbed(current()); }
+  function appleEmbed(s) { return embedFor(s, source); }
+  function usingApple() { return source !== 'yt' && !!appleEmbed(current()); }
   function showApple(url) {
     const box = $('rp-am');
     if (url === amUrl && box.firstChild) return;
@@ -109,10 +119,12 @@
     box.innerHTML = '';
     if (!url) return;
     const f = document.createElement('iframe');
-    f.src = url; f.title = 'Apple Music player';
+    f.src = url;
     f.allow = 'autoplay *; encrypted-media *; fullscreen *; clipboard-write';
     f.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
-    f.className = /[?&]i=/.test(url) ? 'am-song' : 'am-album';
+    const single = /[?&]i=|\/track\//.test(url);
+    f.className = 'em-' + source + (single ? ' em-song' : ' em-album');
+    f.title = { apple: 'Apple Music', spotify: 'Spotify', deezer: 'Deezer' }[source] + ' player';
     box.appendChild(f);
   }
   function applySource() {
@@ -142,13 +154,13 @@
   function play(q, i) {
     if (q) setQueue(q, i); else if (i != null) idx = i;
     const s = current(); if (!s) return;
-    if (source === 'apple' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
+    if (source !== 'yt' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
     ensurePlayer(s.id, true, 0); applySource(); show(); paint(); save(); emit('change');
   }
   function prepare(q, i, start) {
     setQueue(q, i);
     const s = current(); if (!s) return;
-    if (source === 'apple' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
+    if (source !== 'yt' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
     ensurePlayer(s.id, false, start || 0); applySource(); show(); paint(); save(); emit('change');
   }
   function step(d) {
@@ -306,8 +318,9 @@
     getSource: () => source,
     usingApple,
     hasApple: (song) => !!appleEmbed(song),
+    hasSource: (song, src) => !!embedFor(song, src),
     setSource: (v) => {
-      source = v === 'apple' ? 'apple' : 'yt';
+      source = SOURCES.includes(v) ? v : 'yt';
       try { localStorage.setItem('rp-src', source); } catch (e) {}
       if (current()) { if (!usingApple() && !player) ensurePlayer(current().id, false, 0); applySource(); }
       paint(); emit('change'); emit('state');
