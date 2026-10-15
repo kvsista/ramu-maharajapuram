@@ -24,6 +24,7 @@
   shell.hidden = true;
   shell.innerHTML =
     '<div id="rp-video"><div id="rp-yt"></div></div>' +
+    '<div id="rp-am" hidden></div>' +
     '<div id="rp-bar">' +
     '  <a id="rp-info" href="' + ROOT + 'listen/"><span id="rp-title"></span><span id="rp-album"></span></a>' +
     '  <div id="rp-ctl">' +
@@ -38,6 +39,9 @@
 
   let queue = [], idx = -1, shuffle = false, player = null, ready = false, pending = null, playing = false;
   let dockEl = null, raf = 0;
+  let source = 'yt';
+  try { source = localStorage.getItem('rp-src') === 'apple' ? 'apple' : 'yt'; } catch (e) {}
+  let amUrl = '';
   const listeners = { change: [], state: [] };
   const emit = (t) => listeners[t].forEach((f) => { try { f(); } catch (e) { console.error(e); } });
 
@@ -83,6 +87,44 @@
     });
   }
 
+  /* ---------- Apple Music (Apple's free embedded player) ----------
+   * Everyone hears 30-second previews; Apple Music subscribers can sign in inside the player
+   * for full songs. Websites can't start or stop it, so visitors press play in Apple's player
+   * and there is no automatic next song. */
+  function appleEmbed(s) {
+    const u = s && s.l && s.l.apple;
+    if (!u) return '';
+    try {
+      const x = new URL(u);
+      x.hostname = 'embed.music.apple.com';
+      x.searchParams.delete('uo');
+      return x.href;
+    } catch (e) { return ''; }
+  }
+  function usingApple() { return source === 'apple' && !!appleEmbed(current()); }
+  function showApple(url) {
+    const box = $('rp-am');
+    if (url === amUrl && box.firstChild) return;
+    amUrl = url;
+    box.innerHTML = '';
+    if (!url) return;
+    const f = document.createElement('iframe');
+    f.src = url; f.title = 'Apple Music player';
+    f.allow = 'autoplay *; encrypted-media *; fullscreen *; clipboard-write';
+    f.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
+    f.className = /[?&]i=/.test(url) ? 'am-song' : 'am-album';
+    box.appendChild(f);
+  }
+  function applySource() {
+    const apple = usingApple();
+    shell.classList.toggle('am', apple);
+    document.body.classList.toggle('rp-am', apple);
+    $('rp-am').hidden = !apple;
+    $('rp-video').hidden = apple;
+    if (apple) { if (player && ready && playing) player.pauseVideo(); showApple(appleEmbed(current())); }
+    else showApple('');
+  }
+
   function current() { return idx >= 0 ? queue[idx] : null; }
   function show() { shell.hidden = !current(); layout(); }
 
@@ -100,12 +142,14 @@
   function play(q, i) {
     if (q) setQueue(q, i); else if (i != null) idx = i;
     const s = current(); if (!s) return;
-    ensurePlayer(s.id, true, 0); show(); paint(); save(); emit('change');
+    if (source === 'apple' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
+    ensurePlayer(s.id, true, 0); applySource(); show(); paint(); save(); emit('change');
   }
   function prepare(q, i, start) {
     setQueue(q, i);
     const s = current(); if (!s) return;
-    ensurePlayer(s.id, false, start || 0); show(); paint(); save(); emit('change');
+    if (source === 'apple' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
+    ensurePlayer(s.id, false, start || 0); applySource(); show(); paint(); save(); emit('change');
   }
   function step(d) {
     if (!queue.length) return;
@@ -116,7 +160,7 @@
   function next() { step(1); }
   function prev() { step(-1); }
   function toggle() {
-    if (!current()) return;
+    if (!current() || usingApple()) return;
     if (!player || !ready) { play(null, idx); return; }
     const st = player.getPlayerState();
     if (st === YT.PlayerState.PLAYING) player.pauseVideo();
@@ -128,6 +172,7 @@
     if (player) { try { player.destroy(); } catch (e) {} }
     player = null; ready = false; playing = false; queue = []; idx = -1;
     const v = $('rp-video'); v.innerHTML = '<div id="rp-yt"></div>';
+    showApple(''); shell.classList.remove('am'); $('rp-am').hidden = true; $('rp-video').hidden = false;
     try { sessionStorage.removeItem('rp'); } catch (e) {}
     show(); paint(); emit('change'); emit('state');
   }
@@ -138,14 +183,16 @@
     shell.classList.toggle('docked', docked);
     shell.classList.toggle('mini', !docked && !shell.hidden);
     document.body.classList.toggle('rp-mini', !docked && !shell.hidden);
+    document.body.classList.toggle('rp-am', shell.classList.contains('am'));
     place();
   }
   function place() {
     raf = 0;
-    const v = $('rp-video');
-    if (!dockEl) { v.style.cssText = ''; return; }
+    const v = $('rp-video'), am = $('rp-am');
+    if (!dockEl) { v.style.cssText = ''; am.style.cssText = ''; return; }
     const r = dockEl.getBoundingClientRect();
-    v.style.cssText = 'left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+    const css = 'left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+    v.style.cssText = css; am.style.cssText = css;
   }
   const schedule = () => { if (dockEl && !raf) raf = requestAnimationFrame(place); };
   addEventListener('scroll', schedule, { passive: true });
@@ -255,7 +302,16 @@
 
   window.RP = {
     play, prepare, toggle, next, prev, pause, close, current, dock, undock, onLeave,
-    isPlaying: () => playing,
+    isPlaying: () => playing && !usingApple(),
+    getSource: () => source,
+    usingApple,
+    hasApple: (song) => !!appleEmbed(song),
+    setSource: (v) => {
+      source = v === 'apple' ? 'apple' : 'yt';
+      try { localStorage.setItem('rp-src', source); } catch (e) {}
+      if (current()) { if (!usingApple() && !player) ensurePlayer(current().id, false, 0); applySource(); }
+      paint(); emit('change'); emit('state');
+    },
     setShuffle: (v) => { shuffle = !!v; save(); },
     getShuffle: () => shuffle,
     queueIds: () => queue.map((s) => s.id),

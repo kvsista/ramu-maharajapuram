@@ -4,7 +4,7 @@ Usage: python3 tools/build_listen.py "research_notes/Ramu discography" docs/list
 Only songs whose YouTube credits name Ramu on an album from his verified discography are included
 (see tools/ytlist.py, ytverify.py, ytfilter.py).
 """
-import json, re, sys, html
+import json, os, re, sys, html
 
 D, OUT = sys.argv[1], sys.argv[2]
 v = json.load(open(D + '/youtube_verified.json'))
@@ -29,6 +29,8 @@ track_links = {}
 for r in cat['releases']:
     for t in r['tracks']:
         track_links[(norm(r['title']), norm(t['title']))] = (t.get('links') or {}, r.get('links') or {})
+        alnum = lambda x: re.sub(r'[^a-z0-9]', '', (x or '').lower())
+        track_links.setdefault((norm(r['title']), alnum(t['title'])), (t.get('links') or {}, r.get('links') or {}))
 
 
 def first(v):
@@ -36,7 +38,7 @@ def first(v):
 
 
 def app_links(vid, title, album):
-    tl, al = track_links.get((norm(album), norm(title)), ({}, {}))
+    tl, al = track_links.get((norm(album), norm(title))) or track_links.get((norm(album), re.sub(r'[^a-z0-9]', '', title.lower())), ({}, {}))
     out = {}
     for key in ['spotify', 'apple', 'jiosaavn', 'deezer']:
         u = first(tl.get(key)) or first(al.get(key))
@@ -107,7 +109,7 @@ ld = {"@context": "https://schema.org", "@graph": [
 
 data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else ''), 'l': s['links']} for s in songs], ensure_ascii=False)
 
-listen_js = 'document.getElementById(\'yr\').textContent = new Date().getFullYear();\nconst SONGS = __SONGS__;\nconst ICON_PLAY = \'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg>\';\nconst ICON_PAUSE = \'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>\';\nconst items = [...document.querySelectorAll(\'.song\')];\nconst byId = new Map(SONGS.map((s, i) => [s.id, i]));\nconst $ = (id) => document.getElementById(id);\nlet sel = 0;  // song shown in the card when nothing is playing yet\n\nfunction visible() { return items.filter(li => !li.hidden).map(li => +li.dataset.i); }\nfunction shownIndex() { const c = RP.current(); return c && byId.has(c.id) ? byId.get(c.id) : sel; }\nfunction mark() {\n  const i = shownIndex(), s = SONGS[i], c = RP.current();\n  items.forEach(li => li.classList.toggle(\'playing\', +li.dataset.i === i));\n  $(\'now-title\').textContent = c ? c.t : s.t; $(\'now-album\').textContent = c ? c.a : s.a;\n  const L = (c ? c.l : s.l) || {}, names = [[\'spotify\', \'Spotify\'], [\'apple\', \'Apple Music\'], [\'ytmusic\', \'YouTube Music\'], [\'jiosaavn\', \'JioSaavn\'], [\'deezer\', \'Deezer\']];\n  const apps = $(\'apps\'); apps.replaceChildren();\n  const lab = document.createElement(\'span\'); lab.className = \'apps-label\'; lab.textContent = \'Open in\'; apps.append(lab);\n  names.forEach(([k, n]) => { if (!L[k]) return; const a = document.createElement(\'a\'); a.href = L[k]; a.target = \'_blank\'; a.rel = \'noopener\'; a.className = \'app-chip\'; a.textContent = n; apps.append(a); });\n  $(\'start\').hidden = !!c;\n  const p = RP.isPlaying();\n  $(\'toggle\').innerHTML = p ? ICON_PAUSE : ICON_PLAY; $(\'toggle\').setAttribute(\'aria-label\', p ? \'Pause\' : \'Play\');\n  $(\'shuffle\').setAttribute(\'aria-pressed\', RP.getShuffle());\n}\nfunction playAt(i) {\n  const v = visible(); const order = v.includes(i) ? v : SONGS.map((_, k) => k);\n  RP.play(order.map(k => SONGS[k]), order.indexOf(i));\n}\nitems.forEach(li => li.querySelector(\'button\').addEventListener(\'click\', () => playAt(+li.dataset.i)));\n$(\'start\').addEventListener(\'click\', () => playAt(shownIndex()));\n$(\'toggle\').addEventListener(\'click\', () => { if (RP.current()) RP.toggle(); else playAt(sel); });\n$(\'next\').addEventListener(\'click\', () => { if (RP.current()) RP.next(); else playAt(visible()[(visible().indexOf(sel) + 1) % visible().length]); });\n$(\'prev\').addEventListener(\'click\', () => { if (RP.current()) RP.prev(); else playAt(sel); });\n$(\'shuffle\').addEventListener(\'click\', () => { RP.setShuffle(!RP.getShuffle()); mark(); });\n\n// Deep link from the homepage: listen/#v=VIDEO_ID selects that song (a tap starts the sound).\nconst hv = (location.hash.match(/^#v=([\\w-]{11})$/) || [])[1];\nif (hv && byId.has(hv) && !(RP.current() && RP.current().id === hv)) {\n  sel = byId.get(hv);\n  if (RP.current()) RP.play(SONGS, sel); else RP.prepare(SONGS, sel, 0);\n  setTimeout(() => items[sel].scrollIntoView({ block: \'center\' }), 300);\n} else if (!RP.current()) {\n  RP.prepare(SONGS, 0, 0);\n} else if (RP._resumeAt != null) {\n  const c = RP.current(); RP.prepare(RP.queueIds().map(id => SONGS[byId.get(id)] || c), RP.queueIds().indexOf(c.id), RP._resumeAt); RP._resumeAt = null;\n}\n\nconst q = $(\'q\'); let filt = null;\nfunction apply() {\n  const t = q.value.trim().toLowerCase(); let n = 0;\n  items.forEach(li => {\n    const ok = (!filt || (filt === \'film\' ? li.dataset.film === \'1\' : li.dataset.lang === filt)) && (!t || li.dataset.q.includes(t));\n    li.hidden = !ok; if (ok) n++;\n  });\n  $(\'count\').textContent = n === items.length ? n + \' songs\' : n + \' of \' + items.length + \' songs\';\n  $(\'empty\').hidden = n > 0;\n}\nq.addEventListener(\'input\', apply);\ndocument.querySelectorAll(\'.filter\').forEach(b => b.addEventListener(\'click\', () => {\n  const on = b.getAttribute(\'aria-pressed\') === \'true\';\n  document.querySelectorAll(\'.filter\').forEach(x => x.setAttribute(\'aria-pressed\', \'false\'));\n  if (!on) { b.setAttribute(\'aria-pressed\', \'true\'); filt = b.dataset.f; } else filt = null;\n  apply();\n}));\n\n// Phones: once the player is pinned at the top, hide the button row to give the list more room.\nconst grid = document.querySelector(\'.listen-grid\'), pcol = document.querySelector(\'.player-col\');\nconst small = matchMedia(\'(max-width: 900px)\');\nlet raf = 0;\nfunction stuck() { raf = 0; pcol.classList.toggle(\'stuck\', small.matches && grid.getBoundingClientRect().top < -8); }\nconst onScroll = () => { if (!raf) raf = requestAnimationFrame(stuck); };\naddEventListener(\'scroll\', onScroll, { passive: true });\nsmall.addEventListener(\'change\', stuck);\n\nRP.dock($(\'dock\'));\nconst offChange = RP.on(\'change\', mark), offState = RP.on(\'state\', mark);\nRP.onLeave(() => { offChange(); offState(); removeEventListener(\'scroll\', onScroll); small.removeEventListener(\'change\', stuck); });\nstuck();\nmark();'.replace('__SONGS__', data)
+listen_js = open(os.path.join(os.path.dirname(__file__), 'listen_page.js')).read().replace('__SONGS__', data)
 
 page = f'''<!doctype html>
 <html lang="en">
@@ -169,6 +171,8 @@ page = f'''<!doctype html>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
             <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
+            <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button></div>
+            <p class="src-note" id="src-note" hidden></p>
           </div>
           <div class="controls">
             <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
