@@ -420,3 +420,6 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .player-start[hidden] { display: none; }
 .bio-box + .bio-box { margin-top: 20px; }
 .bio-use { font-family: var(--body); font-size: .8rem; color: var(--muted); font-weight: 500; margin-left: 8px; }
+.hero .hero-bio { color: var(--text); font-size: 1.12rem; max-width: 46ch; margin-top: 24px; }
+.hero .hero-bio b { font-family: var(--display); font-weight: 400; font-style: italic; color: var(--gold-hi); font-size: 1.1em; }
+@media (max-width: 560px) { .hero .hero-bio { margin-inline: auto; text-align: center; font-size: 1.02rem; } }
