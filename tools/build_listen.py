@@ -24,6 +24,30 @@ album_lang = {}
 for r in cat['releases']:
     album_lang.setdefault(norm(r['title']), r.get('language'))
 
+import urllib.parse
+track_links = {}
+for r in cat['releases']:
+    for t in r['tracks']:
+        track_links[(norm(r['title']), norm(t['title']))] = (t.get('links') or {}, r.get('links') or {})
+
+
+def first(v):
+    return v[0] if isinstance(v, list) else v
+
+
+def app_links(vid, title, album):
+    tl, al = track_links.get((norm(album), norm(title)), ({}, {}))
+    out = {}
+    for key in ['spotify', 'apple', 'jiosaavn', 'deezer']:
+        u = first(tl.get(key)) or first(al.get(key))
+        if u:
+            out[key] = u
+    if 'spotify' not in out:
+        out['spotify'] = 'https://open.spotify.com/search/' + urllib.parse.quote(f'{title} Maharajapuram Ramu')
+    out['ytmusic'] = f'https://music.youtube.com/watch?v={vid}'
+    return out
+
+
 FILMS = {
     'hmX3KFm-1D0': ('Kevvu Keka (comedy version)', 'Attarintiki Daredi', 2013, 'telugu'),
     '--A2Zm54T2U': ('Dabbu', 'Partner (Telugu)', 2023, 'telugu'),
@@ -35,14 +59,16 @@ for x in v:
     m = x['meta']
     if x['id'] in FILMS:
         t, a, y, lang = FILMS[x['id']]
-        songs.append({'id': x['id'], 'title': t, 'album': a, 'year': y, 'lang': lang, 'film': True, 'secs': x['p'].get('secs') or 0})
+        songs.append({'id': x['id'], 'title': t, 'album': a, 'year': y, 'lang': lang, 'film': True, 'secs': x['p'].get('secs') or 0,
+                      'links': app_links(x['id'], x['title'], m.get('album', ''))})
         continue
     key = (norm(x['title']), norm(m['album']))
     if key in seen:
         continue
     seen.add(key)
     songs.append({'id': x['id'], 'title': disp(x['title']), 'album': disp(m['album']), 'year': m.get('year'),
-                  'lang': album_lang.get(norm(m['album'])) or 'other', 'film': False, 'secs': x['p'].get('secs') or 0})
+                  'lang': album_lang.get(norm(m['album'])) or 'other', 'film': False, 'secs': x['p'].get('secs') or 0,
+                  'links': app_links(x['id'], x['title'], m['album'])})
 
 films = sorted([s for s in songs if s['film']], key=lambda s: s['year'])
 rest = sorted([s for s in songs if not s['film']], key=lambda s: (-(s['year'] or 0), s['album'].lower(), s['title'].lower()))
@@ -79,7 +105,7 @@ ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "ListItem", "position": 1, "name": "Ramu Maharajapuram", "item": "https://kvsista.github.io/ramu-maharajapuram/"},
         {"@type": "ListItem", "position": 2, "name": "Listen", "item": "https://kvsista.github.io/ramu-maharajapuram/listen/"}]}]}
 
-data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else '')} for s in songs], ensure_ascii=False)
+data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else ''), 'l': s['links']} for s in songs], ensure_ascii=False)
 
 page = f'''<!doctype html>
 <html lang="en">
@@ -140,6 +166,7 @@ page = f'''<!doctype html>
             <p class="now-label">Now playing</p>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
+            <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
           </div>
           <div class="controls">
             <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
@@ -185,6 +212,10 @@ function visible() {{ return items.filter(li => !li.hidden).map(li => +li.datase
 function mark() {{
   items.forEach(li => li.classList.toggle('playing', +li.dataset.i === cur));
   $('now-title').textContent = SONGS[cur].t; $('now-album').textContent = SONGS[cur].a;
+  const L = SONGS[cur].l || {{}}, names = [['spotify', 'Spotify'], ['apple', 'Apple Music'], ['ytmusic', 'YouTube Music'], ['jiosaavn', 'JioSaavn'], ['deezer', 'Deezer']];
+  const apps = $('apps'); apps.replaceChildren();
+  const lab = document.createElement('span'); lab.className = 'apps-label'; lab.textContent = 'Open in'; apps.append(lab);
+  names.forEach(([k, n]) => {{ if (!L[k]) return; const a = document.createElement('a'); a.href = L[k]; a.target = '_blank'; a.rel = 'noopener'; a.className = 'app-chip'; a.textContent = n; apps.append(a); }});
 }}
 function play(i) {{
   cur = i; mark(); $('start').hidden = true;

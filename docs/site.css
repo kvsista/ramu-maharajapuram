@@ -407,7 +407,7 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .song.playing .st, .song.playing .num { color: var(--gold-hi); }
 .song.playing { background: rgba(210,169,94,.07); }
 @media (max-width: 900px) {
-  .listen-grid { grid-template-columns: 1fr; gap: 24px; }
+  .listen-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .player-col { top: env(safe-area-inset-top, 0px); z-index: 5; }
   .listen-page .bar { position: static; }
   .listen-page { scroll-padding-top: 0; }
@@ -471,3 +471,13 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
   .player-col.stuck .now-label { display: none; }
 }
 .listen-page { overflow-anchor: none; }
+.apps { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.apps-label { white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.app-chip { padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; font-size: .78rem; font-weight: 600; color: var(--text); text-decoration: none; white-space: nowrap; }
+@media (hover: hover) { .app-chip:hover { border-color: var(--gold); color: var(--gold-hi); } }
+@media (max-width: 900px) {
+  .apps { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -14px; padding-right: 14px; }
+  .apps::-webkit-scrollbar { display: none; }
+  .player-col.stuck .apps { display: none; }
+}
+.player-col, .player-card, .now { min-width: 0; }
