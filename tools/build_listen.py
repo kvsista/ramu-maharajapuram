@@ -107,6 +107,8 @@ ld = {"@context": "https://schema.org", "@graph": [
 
 data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else ''), 'l': s['links']} for s in songs], ensure_ascii=False)
 
+listen_js = 'document.getElementById(\'yr\').textContent = new Date().getFullYear();\nconst SONGS = __SONGS__;\nconst ICON_PLAY = \'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg>\';\nconst ICON_PAUSE = \'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>\';\nconst items = [...document.querySelectorAll(\'.song\')];\nconst byId = new Map(SONGS.map((s, i) => [s.id, i]));\nconst $ = (id) => document.getElementById(id);\nlet sel = 0;  // song shown in the card when nothing is playing yet\n\nfunction visible() { return items.filter(li => !li.hidden).map(li => +li.dataset.i); }\nfunction shownIndex() { const c = RP.current(); return c && byId.has(c.id) ? byId.get(c.id) : sel; }\nfunction mark() {\n  const i = shownIndex(), s = SONGS[i], c = RP.current();\n  items.forEach(li => li.classList.toggle(\'playing\', +li.dataset.i === i));\n  $(\'now-title\').textContent = c ? c.t : s.t; $(\'now-album\').textContent = c ? c.a : s.a;\n  const L = (c ? c.l : s.l) || {}, names = [[\'spotify\', \'Spotify\'], [\'apple\', \'Apple Music\'], [\'ytmusic\', \'YouTube Music\'], [\'jiosaavn\', \'JioSaavn\'], [\'deezer\', \'Deezer\']];\n  const apps = $(\'apps\'); apps.replaceChildren();\n  const lab = document.createElement(\'span\'); lab.className = \'apps-label\'; lab.textContent = \'Open in\'; apps.append(lab);\n  names.forEach(([k, n]) => { if (!L[k]) return; const a = document.createElement(\'a\'); a.href = L[k]; a.target = \'_blank\'; a.rel = \'noopener\'; a.className = \'app-chip\'; a.textContent = n; apps.append(a); });\n  $(\'start\').hidden = !!c;\n  const p = RP.isPlaying();\n  $(\'toggle\').innerHTML = p ? ICON_PAUSE : ICON_PLAY; $(\'toggle\').setAttribute(\'aria-label\', p ? \'Pause\' : \'Play\');\n  $(\'shuffle\').setAttribute(\'aria-pressed\', RP.getShuffle());\n}\nfunction playAt(i) {\n  const v = visible(); const order = v.includes(i) ? v : SONGS.map((_, k) => k);\n  RP.play(order.map(k => SONGS[k]), order.indexOf(i));\n}\nitems.forEach(li => li.querySelector(\'button\').addEventListener(\'click\', () => playAt(+li.dataset.i)));\n$(\'start\').addEventListener(\'click\', () => playAt(shownIndex()));\n$(\'toggle\').addEventListener(\'click\', () => { if (RP.current()) RP.toggle(); else playAt(sel); });\n$(\'next\').addEventListener(\'click\', () => { if (RP.current()) RP.next(); else playAt(visible()[(visible().indexOf(sel) + 1) % visible().length]); });\n$(\'prev\').addEventListener(\'click\', () => { if (RP.current()) RP.prev(); else playAt(sel); });\n$(\'shuffle\').addEventListener(\'click\', () => { RP.setShuffle(!RP.getShuffle()); mark(); });\n\n// Deep link from the homepage: listen/#v=VIDEO_ID selects that song (a tap starts the sound).\nconst hv = (location.hash.match(/^#v=([\\w-]{11})$/) || [])[1];\nif (hv && byId.has(hv) && !(RP.current() && RP.current().id === hv)) {\n  sel = byId.get(hv);\n  if (RP.current()) RP.play(SONGS, sel); else RP.prepare(SONGS, sel, 0);\n  setTimeout(() => items[sel].scrollIntoView({ block: \'center\' }), 300);\n} else if (!RP.current()) {\n  RP.prepare(SONGS, 0, 0);\n} else if (RP._resumeAt != null) {\n  const c = RP.current(); RP.prepare(RP.queueIds().map(id => SONGS[byId.get(id)] || c), RP.queueIds().indexOf(c.id), RP._resumeAt); RP._resumeAt = null;\n}\n\nconst q = $(\'q\'); let filt = null;\nfunction apply() {\n  const t = q.value.trim().toLowerCase(); let n = 0;\n  items.forEach(li => {\n    const ok = (!filt || (filt === \'film\' ? li.dataset.film === \'1\' : li.dataset.lang === filt)) && (!t || li.dataset.q.includes(t));\n    li.hidden = !ok; if (ok) n++;\n  });\n  $(\'count\').textContent = n === items.length ? n + \' songs\' : n + \' of \' + items.length + \' songs\';\n  $(\'empty\').hidden = n > 0;\n}\nq.addEventListener(\'input\', apply);\ndocument.querySelectorAll(\'.filter\').forEach(b => b.addEventListener(\'click\', () => {\n  const on = b.getAttribute(\'aria-pressed\') === \'true\';\n  document.querySelectorAll(\'.filter\').forEach(x => x.setAttribute(\'aria-pressed\', \'false\'));\n  if (!on) { b.setAttribute(\'aria-pressed\', \'true\'); filt = b.dataset.f; } else filt = null;\n  apply();\n}));\n\n// Phones: once the player is pinned at the top, hide the button row to give the list more room.\nconst grid = document.querySelector(\'.listen-grid\'), pcol = document.querySelector(\'.player-col\');\nconst small = matchMedia(\'(max-width: 900px)\');\nlet raf = 0;\nfunction stuck() { raf = 0; pcol.classList.toggle(\'stuck\', small.matches && grid.getBoundingClientRect().top < -8); }\nconst onScroll = () => { if (!raf) raf = requestAnimationFrame(stuck); };\naddEventListener(\'scroll\', onScroll, { passive: true });\nsmall.addEventListener(\'change\', stuck);\n\nRP.dock($(\'dock\'));\nconst offChange = RP.on(\'change\', mark), offState = RP.on(\'state\', mark);\nRP.onLeave(() => { offChange(); offState(); removeEventListener(\'scroll\', onScroll); small.removeEventListener(\'change\', stuck); });\nstuck();\nmark();'.replace('__SONGS__', data)
+
 page = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -161,7 +163,7 @@ page = f'''<!doctype html>
     <div class="wrap listen-grid">
       <div class="player-col">
         <div class="player-card">
-          <div class="player-frame"><div id="yt"></div><button type="button" class="player-start" id="start" aria-label="Play the first song"><span class="big-play"></span><span>Play</span></button></div>
+          <div class="player-frame" id="dock"><button type="button" class="player-start" id="start" aria-label="Play"><span class="big-play"></span><span>Play</span></button></div>
           <div class="now">
             <p class="now-label">Now playing</p>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
@@ -201,95 +203,9 @@ page = f'''<!doctype html>
   </div>
 </footer>
 
+<script src="../app.js"></script>
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-const SONGS = {data};
-const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg>', ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>';
-const items = [...document.querySelectorAll('.song')];
-let cur = 0, player = null, ready = false, wantPlay = false, shuffle = false;
-const $ = (id) => document.getElementById(id);
-function visible() {{ return items.filter(li => !li.hidden).map(li => +li.dataset.i); }}
-function mark() {{
-  items.forEach(li => li.classList.toggle('playing', +li.dataset.i === cur));
-  $('now-title').textContent = SONGS[cur].t; $('now-album').textContent = SONGS[cur].a;
-  const L = SONGS[cur].l || {{}}, names = [['spotify', 'Spotify'], ['apple', 'Apple Music'], ['ytmusic', 'YouTube Music'], ['jiosaavn', 'JioSaavn'], ['deezer', 'Deezer']];
-  const apps = $('apps'); apps.replaceChildren();
-  const lab = document.createElement('span'); lab.className = 'apps-label'; lab.textContent = 'Open in'; apps.append(lab);
-  names.forEach(([k, n]) => {{ if (!L[k]) return; const a = document.createElement('a'); a.href = L[k]; a.target = '_blank'; a.rel = 'noopener'; a.className = 'app-chip'; a.textContent = n; apps.append(a); }});
-}}
-function play(i) {{
-  cur = i; mark(); $('start').hidden = true;
-  if (ready) player.loadVideoById(SONGS[i].id); else wantPlay = true;
-}}
-function step(d) {{
-  const v = visible(); if (!v.length) return;
-  if (shuffle) {{ play(v[Math.floor(Math.random() * v.length)]); return; }}
-  const p = v.indexOf(cur); play(v[(p + d + v.length) % v.length]);
-}}
-window.onYouTubeIframeAPIReady = function () {{
-  player = new YT.Player('yt', {{
-    host: 'https://www.youtube-nocookie.com', videoId: SONGS[cur].id,
-    playerVars: {{ playsinline: 1, rel: 0, modestbranding: 1 }},
-    events: {{
-      onReady: () => {{ ready = true; if (wantPlay) player.loadVideoById(SONGS[cur].id); }},
-      onStateChange: (e) => {{
-        if (e.data === YT.PlayerState.ENDED) step(1);
-        const playing = e.data === YT.PlayerState.PLAYING;
-        $('toggle').innerHTML = playing ? ICON_PAUSE : ICON_PLAY; $('toggle').setAttribute('aria-label', playing ? 'Pause' : 'Play');
-        if (playing) $('start').hidden = true;
-      }},
-      onError: () => step(1)
-    }}
-  }});
-}};
-const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
-items.forEach(li => li.querySelector('button').addEventListener('click', () => play(+li.dataset.i)));
-$('start').addEventListener('click', () => play(cur));
-// Deep link from the homepage: listen/#v=VIDEO_ID selects that song (browsers need a tap to start sound).
-const hv = (location.hash.match(/^#v=([\\w-]{{11}})$/) || [])[1];
-if (hv) {{
-  const i = SONGS.findIndex(s => s.id === hv);
-  if (i >= 0) {{ cur = i; const li = items[i]; setTimeout(() => li.scrollIntoView({{ block: 'center' }}), 300); }}
-}}
-$('toggle').addEventListener('click', () => {{
-  if (!ready) {{ play(cur); return; }}
-  const st = player.getPlayerState();
-  if (st === YT.PlayerState.PLAYING) player.pauseVideo();
-  else if (st === YT.PlayerState.PAUSED) player.playVideo();
-  else play(cur);
-}});
-$('next').addEventListener('click', () => step(1));
-$('prev').addEventListener('click', () => step(-1));
-$('shuffle').addEventListener('click', (e) => {{ shuffle = !shuffle; e.currentTarget.setAttribute('aria-pressed', shuffle); }});
-const q = $('q'); let filt = null;
-function apply() {{
-  const t = q.value.trim().toLowerCase(); let n = 0;
-  items.forEach(li => {{
-    const ok = (!filt || (filt === 'film' ? li.dataset.film === '1' : li.dataset.lang === filt)) && (!t || li.dataset.q.includes(t));
-    li.hidden = !ok; if (ok) n++;
-  }});
-  $('count').textContent = n === items.length ? n + ' songs' : n + ' of ' + items.length + ' songs';
-  $('empty').hidden = n > 0;
-}}
-q.addEventListener('input', apply);
-document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => {{
-  const on = b.getAttribute('aria-pressed') === 'true';
-  document.querySelectorAll('.filter').forEach(x => x.setAttribute('aria-pressed', 'false'));
-  if (!on) {{ b.setAttribute('aria-pressed', 'true'); filt = b.dataset.f; }} else filt = null;
-  apply();
-}}));
-// Phones: once the player is pinned at the top, hide the button row to give the list more room.
-const grid = document.querySelector('.listen-grid'), pcol = document.querySelector('.player-col');
-const small = matchMedia('(max-width: 900px)');
-let raf = 0;
-function stuck() {{
-  raf = 0;
-  pcol.classList.toggle('stuck', small.matches && grid.getBoundingClientRect().top < -8);
-}}
-addEventListener('scroll', () => {{ if (!raf) raf = requestAnimationFrame(stuck); }}, {{ passive: true }});
-small.addEventListener('change', stuck);
-stuck();
-mark();
+{listen_js}
 </script>
 </body>
 </html>

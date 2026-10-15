@@ -184,6 +184,7 @@ page=f'''<!doctype html>
     <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>
 </footer>
+<script src="../app.js"></script>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 const rels=[...document.querySelectorAll('.rel')], q=document.getElementById('q'), count=document.getElementById('count'), empty=document.getElementById('empty');

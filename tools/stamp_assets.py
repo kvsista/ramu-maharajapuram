@@ -7,7 +7,7 @@ for site.css, news.js and news-config.js. Run after any change to those files (t
 import hashlib, os, re, sys, glob
 
 DOCS = sys.argv[1]
-ASSETS = ['site.css', 'news.js', 'news-config.js']
+ASSETS = ['site.css', 'news.js', 'news-config.js', 'app.js']
 ver = {a: hashlib.sha1(open(os.path.join(DOCS, a), 'rb').read()).hexdigest()[:10] for a in ASSETS if os.path.exists(os.path.join(DOCS, a))}
 changed = 0
 for page in glob.glob(os.path.join(DOCS, '**', '*.html'), recursive=True):
