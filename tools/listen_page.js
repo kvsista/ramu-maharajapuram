@@ -36,9 +36,7 @@ function mark() {
     note.hidden = false;
   }
   else note.hidden = true;
-  $('toggle').hidden = apple;
   const p = RP.isPlaying();
-  $('toggle').innerHTML = p ? ICON_PAUSE : ICON_PLAY; $('toggle').setAttribute('aria-label', p ? 'Pause' : 'Play');
   $('shuffle').setAttribute('aria-pressed', RP.getShuffle());
 }
 function playAt(i) {
@@ -47,9 +45,7 @@ function playAt(i) {
 }
 items.forEach(li => li.querySelector('button').addEventListener('click', () => playAt(+li.dataset.i)));
 $('start').addEventListener('click', () => playAt(shownIndex()));
-$('toggle').addEventListener('click', () => { if (RP.current()) RP.toggle(); else playAt(sel); });
 $('next').addEventListener('click', () => { if (RP.current()) RP.next(); else playAt(visible()[(visible().indexOf(sel) + 1) % visible().length]); });
-$('prev').addEventListener('click', () => { if (RP.current()) RP.prev(); else playAt(sel); });
 $('shuffle').addEventListener('click', () => { RP.setShuffle(!RP.getShuffle()); mark(); });
 document.querySelectorAll('.src-btn').forEach(b => b.addEventListener('click', () => {
   RP.setSource(b.dataset.src);

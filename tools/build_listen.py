@@ -165,12 +165,6 @@ page = f'''<!doctype html>
     <div class="wrap listen-grid">
       <div class="player-col">
         <div class="player-tools">
-          <div class="controls">
-            <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
-            <button type="button" class="ctl main" id="toggle" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg></button>
-            <button type="button" class="ctl" id="next" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg></button>
-            <button type="button" class="ctl small" id="shuffle" aria-pressed="false" aria-label="Shuffle">Shuffle</button>
-          </div>
           <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
           <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button><button type="button" class="src-btn" data-src="spotify" aria-pressed="false">Spotify</button><button type="button" class="src-btn" data-src="deezer" aria-pressed="false">Deezer</button></div>
           <p class="src-note" id="src-note" hidden></p>
@@ -178,10 +172,16 @@ page = f'''<!doctype html>
         </div>
         <div class="player-card">
           <div class="player-frame" id="dock"><button type="button" class="player-start" id="start" aria-label="Play"><span class="big-play"></span><span>Play</span></button></div>
-          <div class="now">
+          <div class="now now-row">
+            <div class="now-text">
             <p class="now-label">Now playing</p>
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
+            </div>
+            <div class="now-actions">
+              <button type="button" class="icon-btn" id="shuffle" aria-pressed="false" aria-label="Shuffle" title="Shuffle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3.5 21.5 8 17 12.5V9.5h-2.2c-1.1 0-2.1.5-2.8 1.4l-4.6 6.2c-1.1 1.4-2.8 2.3-4.6 2.3H1.5v-3h1.3c.9 0 1.7-.4 2.2-1.1l4.6-6.2C10.8 7.4 12.7 6.5 14.8 6.5H17V3.5zm0 8 4.5 4.5L17 20.5v-3h-2.2c-1.6 0-3.1-.6-4.2-1.6l1.9-2.5c.6.7 1.4 1.1 2.3 1.1H17v-3zM1.5 6.5h1.3c1.6 0 3.1.6 4.2 1.6L5.1 10.6c-.6-.7-1.4-1.1-2.3-1.1H1.5v-3z"/></svg></button>
+              <button type="button" class="icon-btn" id="next" aria-label="Next song" title="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg></button>
+            </div>
           </div>
         </div>
         <p class="yt-note">Songs play from the official YouTube releases by his record labels.</p>

@@ -551,3 +551,16 @@ body.rp-am .bg-tip { display: none; }
   .listen-page .player-card { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
   .player-tools { margin-bottom: 0; }
 }
+
+/* Now-playing card: Shuffle + Next beside the title (play/pause is in the player itself) */
+.now-row { display: flex; align-items: center; gap: 12px; }
+.now-text { flex: 1; min-width: 0; }
+.now-text .now-title, .now-text .now-album { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.now-actions { display: flex; gap: 8px; flex: none; }
+.icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--text);
+  display: grid; place-items: center; cursor: pointer; padding: 0; }
+.icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.icon-btn[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+@media (hover: hover) { .icon-btn:not([aria-pressed="true"]):hover { border-color: var(--gold); color: var(--gold-hi); } }
+.icon-btn:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+@media (max-width: 900px) { .icon-btn { width: 38px; height: 38px; } }
