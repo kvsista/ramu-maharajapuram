@@ -173,7 +173,7 @@ page = f'''<!doctype html>
             <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
             <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button></div>
             <p class="src-note" id="src-note" hidden></p>
-            <p class="bg-tip">Want it to keep playing with your screen off? Tap <b>Spotify</b>, <b>Apple Music</b> or <b>YouTube Music</b> above to open this song in your music app.</p>
+            <p class="bg-tip">Want it to keep playing with your screen off? Choose <b>Play on: Apple Music</b> (full songs if you sign in, otherwise a 30-second preview), or tap <b>Spotify</b>, <b>Apple Music</b> or <b>YouTube Music</b> above to open it in your music app.</p>
           </div>
           <div class="controls">
             <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
