@@ -107,6 +107,7 @@ page=f'''<!doctype html>
     <nav class="tabs" aria-label="Main">
       <a href="../">Home</a>
       <a href="../life-story/">Story</a>
+      <a href="../listen/">Listen</a>
       <a href="../music/" aria-current="page">Music</a>
       <a href="../watch/">Watch</a>
       <a href="../press/">Press</a>
