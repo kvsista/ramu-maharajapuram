@@ -500,11 +500,14 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 #rp-ctl .ctl svg { width: 16px; height: 16px; }
 #rp-ctl .ctl.main svg { width: 20px; height: 20px; }
 @media (max-width: 760px) {
-  #rp.mini { left: 0; right: 0; bottom: 0; width: auto; border-radius: 0; border-width: 1px 0 0; display: grid; grid-template-columns: 200px minmax(0, 1fr);
-    padding-bottom: env(safe-area-inset-bottom, 0px); }
-  #rp.mini #rp-video { width: 200px; height: 200px; }
-  #rp.mini #rp-bar { flex-direction: column; align-items: stretch; justify-content: center; gap: 14px; padding: 12px; }
-  #rp.mini #rp-title { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-  #rp-ctl { justify-content: space-between; }
-  body.rp-mini { padding-bottom: calc(200px + env(safe-area-inset-bottom, 0px)); }
+  /* Compact phone bar: one slim row (video thumbnail, title, controls). */
+  #rp.mini { left: 0; right: 0; bottom: 0; width: auto; border-radius: 0; border-width: 1px 0 0; display: grid; grid-template-columns: 128px minmax(0, 1fr);
+    align-items: center; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  #rp.mini #rp-video { width: 128px; height: 72px; }
+  #rp.mini #rp-bar { padding: 6px 8px 6px 10px; gap: 6px; }
+  #rp.mini #rp-prev { display: none; }
+  #rp-ctl { gap: 4px; }
+  #rp-ctl .ctl { width: 34px; height: 34px; }
+  #rp-ctl .ctl.main { width: 38px; height: 38px; }
+  body.rp-mini { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }
