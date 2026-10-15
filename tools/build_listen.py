@@ -142,9 +142,9 @@ page = f'''<!doctype html>
             <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
           </div>
           <div class="controls">
-            <button type="button" class="ctl" id="prev" aria-label="Previous song">⏮</button>
-            <button type="button" class="ctl main" id="toggle" aria-label="Play">▶</button>
-            <button type="button" class="ctl" id="next" aria-label="Next song">⏭</button>
+            <button type="button" class="ctl" id="prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 5.8v12.4a1 1 0 0 1-1.55.83L9.2 13.2a1.45 1.45 0 0 1 0-2.4l8.25-5.85A1 1 0 0 1 19 5.8z"/></svg></button>
+            <button type="button" class="ctl main" id="toggle" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg></button>
+            <button type="button" class="ctl" id="next" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 5.8v12.4a1 1 0 0 0 1.55.83l8.25-5.83a1.45 1.45 0 0 0 0-2.4L6.55 4.97A1 1 0 0 0 5 5.8z"/></svg></button>
             <button type="button" class="ctl small" id="shuffle" aria-pressed="false" aria-label="Shuffle">Shuffle</button>
           </div>
         </div>
@@ -177,6 +177,7 @@ page = f'''<!doctype html>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 const SONGS = {data};
+const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.4v13.2a1.1 1.1 0 0 0 1.7.92l10.1-6.6a1.1 1.1 0 0 0 0-1.84L9.7 4.48A1.1 1.1 0 0 0 8 5.4z"/></svg>', ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>';
 const items = [...document.querySelectorAll('.song')];
 let cur = 0, player = null, ready = false, wantPlay = false, shuffle = false;
 const $ = (id) => document.getElementById(id);
@@ -203,7 +204,7 @@ window.onYouTubeIframeAPIReady = function () {{
       onStateChange: (e) => {{
         if (e.data === YT.PlayerState.ENDED) step(1);
         const playing = e.data === YT.PlayerState.PLAYING;
-        $('toggle').textContent = playing ? '⏸' : '▶'; $('toggle').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+        $('toggle').innerHTML = playing ? ICON_PAUSE : ICON_PLAY; $('toggle').setAttribute('aria-label', playing ? 'Pause' : 'Play');
         if (playing) $('start').hidden = true;
       }},
       onError: () => step(1)
