@@ -535,3 +535,9 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
   #rp.mini.am #rp-ctl { flex-direction: column; }
   body.rp-mini.rp-am { padding-bottom: calc(175px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Phones and tablets: tip for background play (YouTube in a browser stops when the screen is off) */
+.bg-tip { display: none; margin: 10px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.bg-tip b { color: var(--text); font-weight: 600; }
+@media (pointer: coarse) { .bg-tip { display: block; } }
+.player-col.stuck .bg-tip, body.rp-am .bg-tip { display: none; }
