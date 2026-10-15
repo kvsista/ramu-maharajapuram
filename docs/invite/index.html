@@ -86,6 +86,14 @@
     </div>
   </section>
 
+  <section class="news-section" data-kind="upcoming" hidden>
+    <div class="wrap">
+      <p class="label">Calendar</p>
+      <h2>Upcoming <em>concerts</em></h2>
+      <div class="news-grid" data-news="upcoming"><!-- NEWS:upcoming:START --><!-- NEWS:upcoming:END --></div>
+    </div>
+  </section>
+
   <section class="alt">
     <div class="wrap split">
       <div>
@@ -128,5 +136,7 @@
   </div>
 </footer>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="../news-config.js"></script>
+<script src="../news.js" defer></script>
 </body>
 </html>
