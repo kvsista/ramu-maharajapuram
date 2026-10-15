@@ -168,7 +168,6 @@ page = f'''<!doctype html>
           <div class="apps" id="apps" aria-label="Open this song in a music app"></div>
           <div class="src" role="group" aria-label="Play on"><span class="apps-label">Play on</span><button type="button" class="src-btn" data-src="yt" aria-pressed="true">YouTube</button><button type="button" class="src-btn" data-src="apple" aria-pressed="false">Apple Music</button><button type="button" class="src-btn" data-src="spotify" aria-pressed="false">Spotify</button><button type="button" class="src-btn" data-src="deezer" aria-pressed="false">Deezer</button></div>
           <p class="src-note" id="src-note" hidden></p>
-          <p class="bg-tip">Want it to keep playing with your screen off? Choose <b>Play on: Apple Music</b> (a preview, or full songs if you&rsquo;re signed in), or tap <b>Spotify</b>, <b>Apple Music</b> or <b>YouTube Music</b> above to open it in your music app.</p>
         </div>
         <div class="player-card">
           <div class="player-frame" id="dock"><button type="button" class="player-start" id="start" aria-label="Play"><span class="big-play"></span><span>Play</span></button></div>

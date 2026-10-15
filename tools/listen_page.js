@@ -23,13 +23,11 @@ function mark() {
   const note = $('src-note'), song = c || s;
   // Only offer the apps this song is actually on (YouTube always). The highlighted button is the one playing.
   const inUse = apple ? srcNow : 'yt';
-  let offered = 0;
   document.querySelectorAll('.src-btn').forEach(b => {
     const ok = b.dataset.src === 'yt' || RP.hasSource(song, b.dataset.src);
-    b.hidden = !ok; if (ok) offered++;
+    b.hidden = !ok;
     b.setAttribute('aria-pressed', String(b.dataset.src === inUse));
   });
-  document.querySelector('.src').hidden = offered < 2;
   if (apple) {
     note.textContent = 'Press play in the ' + appName + ' player. You\u2019ll hear a preview, or the full song if you\u2019re signed in to ' + appName + ' in this browser.'
       + (srcNow === 'apple' ? ' Still a preview after signing in? Safari may block it; sign in at music.apple.com in this browser first, or tap Apple Music under \u201cOpen in\u201d.' : '');

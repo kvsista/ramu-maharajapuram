@@ -525,17 +525,13 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 }
 
 /* Phones and tablets: tip for background play (YouTube in a browser stops when the screen is off) */
-.bg-tip { display: none; margin: 10px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
-.bg-tip b { color: var(--text); font-weight: 600; }
-@media (pointer: coarse) { .bg-tip { display: block; } }
-body.rp-am .bg-tip { display: none; }
 .src[hidden], .src-btn[hidden] { display: none; }
 
 /* Listen: tools above the video card; on phones only the card stays pinned */
 .player-tools { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; min-width: 0; }
 .player-tools .controls { padding: 0; }
 .player-tools .apps, .player-tools .src { margin-top: 0; }
-.player-tools .src-note, .player-tools .bg-tip { margin: 0; }
+.player-tools .src-note { margin: 0; }
 .player-card .now { padding-bottom: 14px; }
 @media (max-width: 900px) {
   .listen-page .player-col { display: contents; }
