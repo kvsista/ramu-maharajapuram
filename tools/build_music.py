@@ -25,7 +25,15 @@ ntracks=sum(len(r['tracks']) for r in rel)
 years=[r['year'] for r in rel if r['year']]
 # film cards from film_and_tv credits (richer links)
 ft={x['title']:x for x in d['film_and_tv']}
-film_cards=''
+# In-film song confirmed by Ramu's family (2026-10-15); not on the released soundtrack, so no platform credit exists.
+film_cards='''        <article class="film-card">
+          <p class="film-meta">Telugu film · 2013</p>
+          <h3>“Kevvu Keka” (comedy version)</h3>
+          <p class="film-work"><i>Attarintiki Daredi</i> · Music: Devi Sri Prasad · On screen: Pawan Kalyan, Brahmanandam, Ali</p>
+          <p class="film-note">Full song sung by Ramu. An in-film song, not released on the soundtrack album.</p>
+          <div class="chips"><a class="chip" href="https://www.youtube.com/watch?v=hmX3KFm-1D0" target="_blank" rel="noopener">YouTube</a></div>
+        </article>
+'''
 for key,work,lang,year,music in [('Dabbu','Partner (Telugu)','Telugu',2023,'Santhosh Dhayanidhi'),('Idam Maarum Nerame (Reprise)','Kasthuri Veedu','Tamil',2026,'Karthik Raja')]:
     x=ft[key]; links={k.replace('apple_music','apple'):v for k,v in x['links'].items() if not k.endswith('_album')}
     film_cards+=f'''        <article class="film-card">
@@ -46,6 +54,7 @@ vids=''
 for v in d['videos']:
     if v['kind'] in ('song','concert') and 'Topic' not in (v.get('channel') or ''):
         t=v['title']; t=re.sub(r'\s*\|\s*Maharajapuram Ramu\s*','',t); t=t.split('|')[0].strip() if not t.startswith('SP Balasubrahmanyam') else 'SPB tribute: '+t.split('|')[2].strip()
+        t=t.replace('&', ', with')
         vids+=f'<li><a href="{E(v["url"])}" target="_blank" rel="noopener">{E(t)}</a><span>{E(v.get("channel"))} · {v.get("year") or ""}</span></li>'
 rows=[]
 for r in cat:
@@ -95,11 +104,14 @@ page=f'''<!doctype html>
 <header class="bar">
   <div class="wrap bar-inner">
     <a class="mark" href="../">Ramu Maharajapuram</a>
-    <nav class="bar-links">
-      <a class="plain" href="../life-story/">Life story</a>
-      <a class="plain" href="../#watch">Watch</a>
-      <a class="btn quiet small" href="../#invite">Invite</a>
+    <nav class="tabs" aria-label="Main">
+      <a href="../">Home</a>
+      <a href="../life-story/">Story</a>
+      <a href="../music/" aria-current="page">Music</a>
+      <a href="../watch/">Watch</a>
+      <a href="../press/">Press</a>
     </nav>
+    <a class="btn primary small invite-btn" href="../invite/">Invite</a>
   </div>
 </header>
 <main>
@@ -167,8 +179,8 @@ page=f'''<!doctype html>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
     <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="tel:+919841038926">+91 98410 38926</a></span>
-    <span><a href="../">Home</a> · <a href="../life-story/">Life story</a> · Playback &amp; Concert Singer · “SPB Ramu”</span>
-    <span class="disamb">Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
+    <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../watch/">Watch</a> · <a href="../press/">Press</a> · <a href="../invite/">Invite</a></span>
+    <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>
 </footer>
 <script>

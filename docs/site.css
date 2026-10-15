@@ -291,11 +291,40 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 @media (min-width: 561px) and (max-width: 900px) { .watch-tall { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .press-grid { grid-template-columns: 1fr; } }
 
+/* SITE NAV (shared by every page) */
+.bar .bar-inner { display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center; height: 64px; }
+.tabs { display: flex; gap: 24px; justify-content: flex-end; min-width: 0; }
+.tabs a { color: var(--muted); text-decoration: none; font-size: .92rem; font-weight: 500; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+.tabs a:hover { color: var(--text); }
+.tabs a[aria-current="page"] { color: var(--text); border-bottom-color: var(--gold); }
+.invite-btn { padding: 9px 20px; }
+.cta-band { text-align: center; }
+.cta-band .lead { margin-inline: auto; }
+.cta-band .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+.feature { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; margin-top: 40px; }
+.feature > * { min-width: 0; }
+.feature video { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; border-radius: var(--radius); border: 1px solid var(--line); }
+.feature .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.page-head { padding-block: 56px 8px; }
+.page-head h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); }
+.page-head h1 em { font-style: italic; color: var(--gold-hi); }
+@media (max-width: 760px) {
+  html { scroll-padding-top: 120px; }
+  .bar .bar-inner { grid-template-columns: 1fr auto; grid-template-areas: "mark invite" "tabs tabs"; height: auto; row-gap: 0; padding-top: 10px; }
+  .bar .mark { grid-area: mark; }
+  .bar .invite-btn { grid-area: invite; }
+  .tabs { grid-area: tabs; justify-content: flex-start; gap: 22px; overflow-x: auto; scrollbar-width: none; margin-inline: -20px; padding: 6px 20px 2px; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { padding: 8px 0 10px; }
+  .feature { grid-template-columns: 1fr; gap: 24px; }
+}
+
 /* DISCOGRAPHY */
 .disco-stats { margin-top: 40px; }
 .profiles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 32px; }
 .profiles > span { color: var(--muted); font-size: .9rem; margin-right: 6px; }
-.film-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+.film-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 24px; margin-top: 40px; }
+.film-note { color: var(--muted); font-size: .88rem; margin: -8px 0 18px; }
 .film-card { background: var(--night); border: 1px solid rgba(210,169,94,.5); border-radius: var(--radius); padding: 26px; min-width: 0; }
 .film-meta { font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 10px; }
 .film-card h3 { font-size: 1.6rem; margin-bottom: 6px; }
