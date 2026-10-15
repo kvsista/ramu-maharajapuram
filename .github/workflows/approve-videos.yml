@@ -35,6 +35,7 @@ jobs:
         run: |
           added="$(python3 tools/approve_videos.py data)"
           python3 tools/build_watch_latest.py data docs/watch/index.html
+          python3 tools/stamp_assets.py docs
           git diff --name-only | python3 tools/touch_sitemap.py docs/sitemap.xml
           if [ -n "$(git status --porcelain docs data)" ]; then
             git config user.name "Site updater"

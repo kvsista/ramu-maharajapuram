@@ -42,6 +42,9 @@ jobs:
       - name: Write approved family news into the pages
         run: python3 tools/build_news.py docs
 
+      - name: Version stylesheets and scripts
+        run: python3 tools/stamp_assets.py docs
+
       - name: Find new videos by others
         run: python3 tools/discover_videos.py data > candidates.json
 
