@@ -26,4 +26,10 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://kvsista.github.io/ramu-maharajapuram/media/portrait.jpg</image:loc><image:title>Portrait of Ramu Maharajapuram</image:title></image:image>
   </url>
+  <url>
+    <loc>https://kvsista.github.io/ramu-maharajapuram/music/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
