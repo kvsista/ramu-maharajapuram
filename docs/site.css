@@ -159,7 +159,7 @@ section { padding-block: 96px; }
 .world-photo figcaption { margin-top: 10px; color: var(--muted); font-size: .88rem; }
 
 /* PERFORMANCES */
-.perf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 44px; margin-top: 44px; }
+.perf { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px 44px; margin-top: 44px; }
 .perf article { min-width: 0; border-top: 1px solid var(--line); padding-top: 20px; }
 .perf h3 { font-size: 1.25rem; margin-bottom: 6px; }
 .perf p { margin: 0; color: var(--muted); font-size: .95rem; }
