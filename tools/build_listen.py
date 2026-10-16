@@ -22,7 +22,13 @@ def disp(t):
 
 album_lang = {}
 for r in cat['releases']:
-    album_lang.setdefault(norm(r['title']), r.get('language'))
+    if r.get('language'):
+        album_lang.setdefault(norm(r['title']), r['language'])
+# Albums the services don't label, filled in by hand (data/album_languages.json).
+ap = os.path.join(D, 'album_languages.json')
+for t, l in (json.load(open(ap)).items() if os.path.exists(ap) else []):
+    if not t.startswith('_'):
+        album_lang.setdefault(norm(t), l)
 
 import urllib.parse
 track_links = {}
