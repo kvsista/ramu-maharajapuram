@@ -557,3 +557,11 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 #rp-ctl .icon-btn svg { width: 16px; height: 16px; }
 @media (max-width: 760px) { #rp-ctl .icon-btn { width: 34px; height: 34px; } }
 .player-card .now { padding-top: 12px; }
+
+/* Story timeline: photos and videos beside the text (below it on phones) */
+.timeline .card.has-media { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 24px; align-items: start; }
+.timeline .t-media { display: grid; gap: 10px; }
+.timeline .t-media figure { margin: 0; }
+.timeline .t-media [data-full] { all: unset; cursor: zoom-in; display: block; }
+.timeline .t-media img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
+@media (max-width: 760px) { .timeline .card.has-media { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
