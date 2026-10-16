@@ -7,7 +7,8 @@ const byId = new Map(SONGS.map((s, i) => [s.id, i]));
 const $ = (id) => document.getElementById(id);
 let sel = 0;  // song shown in the card when nothing is playing yet
 
-function visible() { return items.filter(li => !li.hidden).map(li => +li.dataset.i); }
+// Songs that only play on YouTube itself (data-ext) open there and are left out of the queue.
+function visible() { return items.filter(li => !li.hidden && !li.dataset.ext).map(li => +li.dataset.i); }
 function shownIndex() { const c = RP.current(); return c && byId.has(c.id) ? byId.get(c.id) : sel; }
 function mark() {
   const i = shownIndex(), s = SONGS[i], c = RP.current();
@@ -41,7 +42,7 @@ function playAt(i) {
   const v = visible(); const order = v.includes(i) ? v : SONGS.map((_, k) => k);
   RP.play(order.map(k => SONGS[k]), order.indexOf(i));
 }
-items.forEach(li => li.querySelector('button').addEventListener('click', () => playAt(+li.dataset.i)));
+items.forEach(li => { if (!li.dataset.ext) li.querySelector('button').addEventListener('click', () => playAt(+li.dataset.i)); });
 $('start').addEventListener('click', () => playAt(shownIndex()));
 $('next').addEventListener('click', () => { if (RP.current()) RP.next(); else playAt(visible()[(visible().indexOf(sel) + 1) % visible().length]); });
 $('shuffle').addEventListener('click', () => { RP.setShuffle(!RP.getShuffle()); mark(); });

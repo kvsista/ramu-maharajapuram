@@ -128,17 +128,24 @@ def album_line(s):
     return ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else '')
 
 
+# Videos whose owners block playback on other websites (checked in a browser on the live site; ETV blocks all of its clips).
+bp = os.path.join(D, 'embed_blocked.json')
+BLOCKED = set(json.load(open(bp))) if os.path.exists(bp) else set()
+
 rows = []
 for i, s in enumerate(songs):
     if s['cat'] in ('spb', 'stage'):
         meta = ' · '.join(x for x in [s['album'], LANG.get(s['lang'], ''), s['venue'], s['note']] if x)
     else:
         meta = ' · '.join(x for x in [('Film: ' if s['film'] else '') + s['album'], LANG.get(s['lang'], ''), str(s['year'] or '')] if x)
+    ext = s['id'] in BLOCKED
+    opener = (f'<a class="song-btn" href="https://www.youtube.com/watch?v={s["id"]}" target="_blank" rel="noopener" title="Plays on YouTube">' if ext
+              else '<button type="button" class="song-btn">')
     rows.append(
-        f'<li class="song" data-i="{i}" data-id="{s["id"]}" data-lang="{s["lang"]}" data-cat="{s["cat"]}" data-deity="{s["deity"]}" '
-        f'data-q="{E((s["title"] + " " + s["album"] + " " + s.get("venue", "") + " " + s["note"]).lower())}"><button type="button" class="song-btn">'
+        f'<li class="song" data-i="{i}" data-id="{s["id"]}" data-lang="{s["lang"]}" data-cat="{s["cat"]}" data-deity="{s["deity"]}"{" data-ext=1" if ext else ""} '
+        f'data-q="{E((s["title"] + " " + s["album"] + " " + s.get("venue", "") + " " + s["note"]).lower())}">{opener}'
         f'<span class="num">{i + 1}</span><span class="st">{E(s["title"])}</span><span class="sm">{E(meta)}</span>'
-        f'<span class="sd">{dur(s["secs"])}</span></button></li>')
+        f'<span class="sd">{"YouTube ↗" if ext else dur(s["secs"])}</span>{"</a>" if ext else "</button>"}</li>')
 
 cats = ''.join(f'<button type="button" class="cat" role="tab" data-c="{c}" aria-selected="{str(c == ORDER[0]).lower()}">{CATS[c]} <span>{ccount[c]}</span></button>'
                for c in ORDER if ccount[c])

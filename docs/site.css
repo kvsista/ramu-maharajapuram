@@ -588,3 +588,10 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .pick select option { background: var(--night-2); color: var(--text); }
 .pick::after { content: ""; position: absolute; right: 14px; top: 50%; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 .pick select:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+.song[data-ext] .sd { color: var(--gold); }
+a.song-btn { color: inherit; text-decoration: none; }
+
+/* Videos whose owners block playing on other sites (e.g. ETV): thumbnail that opens YouTube */
+.yt-ext { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 16/9; background: #000 center/cover no-repeat; border-radius: var(--radius); border: 1px solid var(--line); text-decoration: none; }
+.yt-ext-note { position: absolute; left: 10px; bottom: 10px; background: rgba(17,16,26,.85); color: var(--text); font: 600 .74rem var(--body); padding: 4px 10px; border-radius: 999px; }
+.timeline .t-media figcaption { margin-top: 6px; color: var(--muted); font-size: .82rem; }
