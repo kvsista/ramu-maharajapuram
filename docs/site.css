@@ -568,4 +568,4 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 
 /* Invite: WhatsApp button inside the contact list */
 .contact li { align-items: center; }
-.contact a.wa-btn { font-family: var(--body); font-size: .9rem; text-decoration: none; justify-self: start; }
+.contact a.wa-btn { margin: 0; font-family: var(--body); font-size: .9rem; text-decoration: none; justify-self: start; }
