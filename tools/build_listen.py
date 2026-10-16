@@ -72,29 +72,85 @@ for x in v:
                   'lang': album_lang.get(norm(m['album'])) or 'other', 'film': False, 'secs': x['p'].get('secs') or 0,
                   'links': app_links(x['id'], x['title'], m['album'])})
 
-films = sorted([s for s in songs if s['film']], key=lambda s: s['year'])
-rest = sorted([s for s in songs if not s['film']], key=lambda s: (-(s['year'] or 0), s['album'].lower(), s['title'].lower()))
-songs = films + rest
-LANG = {'telugu': 'Telugu', 'tamil': 'Tamil', 'kannada': 'Kannada', 'sanskrit': 'Sanskrit', 'other': ''}
+DEITIES = [  # (key, label, keywords) — first match wins, so more specific names come first
+    ('christian', 'Christian', r'yesu|yese|kaluvari|parisudda|yesayya|nithirai'),
+    ('sai', 'Sai Baba', r'\bsai|shirdi|shiridi|sayee'),
+    ('ayyappa', 'Ayyappa', r'ayyapp|harivarasanam|manikant|sabari|shabari|sastha|harihara|hari hara|swamiye|bhagavan saranam|irumurthy|bhoothanatha|bhuthanatha'),
+    ('hanuman', 'Hanuman', r'hanuman|gandi kshethr|anjaney|anjineya|maruthi|maaruthi|vayu kumara'),
+    ('narasimha', 'Narasimha', r'narasim'),
+    ('guru', 'Gurus & saints', r'raghavendra|guru|alangudi|dhakshina|brahmayya|bramayya|pothulurayya|paramathma'),
+    ('ganesha', 'Ganesha', r'vinayak|vinayag|ganapath|gananat|gananad|ganesh|kanipakam|ekadhant|yekadhant|gajamukha|pillaiyaar|dandanayaka|ganamgal'),
+    ('murugan', 'Murugan', r'murug|subraman|subrahman|\bvel\b|velaiya|aarupadai|naayagare'),
+    ('surya', 'Surya', r'surya|aadhavane|adithya|bhaskara'),
+    ('shiva', 'Shiva', r'shiv|\bsiv|eshwara|eswara|shankara|mahadeva|arunachala|annamalai|linga|neelakanta|kailasa|bhairava|bairava|malleshwara|mylara|harane|kasi|param porul|omkara roopame|omkaara'),
+    ('devi', 'Devi', r'amma|durga|amman|ambig|ambika|shakthi|shakti|sakthi|rajarajeswari|meenakshi|lakshmi|vaarahi|abirami|karumari|mahishasura|chowdeswari|navarathri|vaaniye|vengamamba'),
+    ('rama', 'Rama & Krishna', r'\brama|\bram\b|ramuni|raghurama|krishna|gopal|gopika|nandha kumara|brindhavan|ramayya'),
+    ('vishnu', 'Venkateswara & Vishnu', r'venkat|venakt|srinivas|tirumala|govind|perumal|narayana|vishnu|sapthagiri|varaha|madhavan|thiruppaavai'),
+]
+
+
+def deity(s):
+    hay = (s['title'] + ' ' + s['album']).lower()
+    return next((k for k, _, rx in DEITIES if re.search(rx, hay)), 'other')
+
+
+for s in songs:
+    s['cat'] = 'film' if s['film'] else 'dev'
+    s['deity'] = '' if s['film'] else deity(s)
+    s['note'] = ''
+
+# Live and TV performances, verified one by one (see data/live_performances.json).
+live_path = os.path.join(D, 'live_performances.json')
+live = json.load(open(live_path)) if os.path.exists(live_path) else []
+for x in live:
+    songs.append({'id': x['id'], 'title': x['song'], 'album': x['film'] or '', 'year': x.get('year'), 'lang': x['lang'], 'film': False,
+                  'secs': x.get('secs') or 0, 'cat': 'spb' if x.get('spb') else 'stage', 'deity': '',
+                  'venue': x['venue'], 'note': x.get('note', ''),
+                  'links': {'ytmusic': f"https://music.youtube.com/watch?v={x['id']}"}})
+
+ORDER = ['spb', 'film', 'stage', 'dev']
+CATS = {'spb': 'Songs of SPB', 'film': 'His film songs', 'stage': 'More on stage & TV', 'dev': 'Devotional'}
+films = sorted([s for s in songs if s['cat'] == 'film'], key=lambda s: s['year'])
+dev = sorted([s for s in songs if s['cat'] == 'dev'], key=lambda s: (-(s['year'] or 0), s['album'].lower(), s['title'].lower()))
+liveorder = lambda c: [s for s in songs if s['cat'] == c]  # kept in the curated order of the JSON file
+songs = liveorder('spb') + films + liveorder('stage') + dev
+LANG = {'telugu': 'Telugu', 'tamil': 'Tamil', 'kannada': 'Kannada', 'sanskrit': 'Sanskrit', 'hindi': 'Hindi', 'other': ''}
 counts = {k: sum(1 for s in songs if s['lang'] == k) for k in LANG}
+ccount = {c: sum(1 for s in songs if s['cat'] == c) for c in ORDER}
+dcount = {k: sum(1 for s in songs if s['deity'] == k) for k, _, _ in DEITIES}
 
 
 def dur(s):
     return f"{s // 60}:{s % 60:02d}" if s else ''
 
 
+def album_line(s):
+    if s['cat'] in ('spb', 'stage'):
+        return ' · '.join(x for x in [s['album'], s['venue']] if x)
+    return ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else '')
+
+
 rows = []
 for i, s in enumerate(songs):
-    meta = ' · '.join(x for x in [('Film: ' if s['film'] else '') + s['album'], LANG.get(s['lang'], ''), str(s['year'] or '')] if x)
+    if s['cat'] in ('spb', 'stage'):
+        meta = ' · '.join(x for x in [s['album'], LANG.get(s['lang'], ''), s['venue'], s['note']] if x)
+    else:
+        meta = ' · '.join(x for x in [('Film: ' if s['film'] else '') + s['album'], LANG.get(s['lang'], ''), str(s['year'] or '')] if x)
     rows.append(
-        f'<li class="song" data-i="{i}" data-id="{s["id"]}" data-lang="{s["lang"]}" data-film="{1 if s["film"] else 0}" '
-        f'data-q="{E((s["title"] + " " + s["album"]).lower())}"><button type="button" class="song-btn">'
+        f'<li class="song" data-i="{i}" data-id="{s["id"]}" data-lang="{s["lang"]}" data-cat="{s["cat"]}" data-deity="{s["deity"]}" '
+        f'data-q="{E((s["title"] + " " + s["album"] + " " + s.get("venue", "") + " " + s["note"]).lower())}"><button type="button" class="song-btn">'
         f'<span class="num">{i + 1}</span><span class="st">{E(s["title"])}</span><span class="sm">{E(meta)}</span>'
         f'<span class="sd">{dur(s["secs"])}</span></button></li>')
 
-filters = '<button type="button" class="filter" data-f="film" aria-pressed="false">Film songs <span>{}</span></button>'.format(len(films))
-filters += ''.join(f'<button type="button" class="filter" data-f="{k}" aria-pressed="false">{n} <span>{counts[k]}</span></button>'
-                   for k, n in LANG.items() if k != 'other' and counts[k])
+cats = ''.join(f'<button type="button" class="cat" role="tab" data-c="{c}" aria-selected="{str(c == ORDER[0]).lower()}">{CATS[c]} <span>{ccount[c]}</span></button>'
+               for c in ORDER if ccount[c])
+cats += f'<button type="button" class="cat" role="tab" data-c="all" aria-selected="false">All <span>{len(songs)}</span></button>'
+filters = ''.join(f'<button type="button" class="filter" data-f="{k}" aria-pressed="false">{n} <span>{counts[k]}</span></button>'
+                  for k, n in LANG.items() if k != 'other' and counts[k])
+deities = ''.join(f'<button type="button" class="filter" data-d="{k}" aria-pressed="false">{n} <span>{dcount[k]}</span></button>'
+                  for k, n, _ in sorted(DEITIES, key=lambda d: -dcount[d[0]]) if dcount[k])
+if any(s['deity'] == 'other' for s in songs):
+    deities += f'<button type="button" class="filter" data-d="other" aria-pressed="false">More <span>{sum(1 for s in songs if s["deity"] == "other")}</span></button>'
 
 ld = {"@context": "https://schema.org", "@graph": [
     {"@type": "WebPage", "url": "https://ramumaharajapuram.com/listen/", "name": "Listen to Ramu Maharajapuram",
@@ -107,7 +163,7 @@ ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "ListItem", "position": 1, "name": "Ramu Maharajapuram", "item": "https://ramumaharajapuram.com/"},
         {"@type": "ListItem", "position": 2, "name": "Listen", "item": "https://ramumaharajapuram.com/listen/"}]}]}
 
-data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else ''), 'l': s['links']} for s in songs], ensure_ascii=False)
+data = json.dumps([{'id': s['id'], 't': s['title'], 'a': album_line(s), 'l': s['links']} for s in songs], ensure_ascii=False)
 
 listen_js = open(os.path.join(os.path.dirname(__file__), 'listen_page.js')).read().replace('__SONGS__', data)
 
@@ -117,7 +173,7 @@ page = f'''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Listen · Ramu Maharajapuram (SPB Ramu) · {len(songs)} Songs</title>
-<meta name="description" content="Listen to {len(songs)} songs by singer Ramu Maharajapuram (SPB Ramu), right here: film songs from Attarintiki Daredi, Partner and Kasthuri Veedu, and devotional songs in Telugu, Tamil, Kannada and Sanskrit.">
+<meta name="description" content="Listen to {len(songs)} songs by singer Ramu Maharajapuram (SPB Ramu), right here: {ccount['spb']} songs of S. P. Balasubrahmanyam sung live and on TV, film songs from Attarintiki Daredi, Partner and Kasthuri Veedu, and devotional songs in Telugu, Tamil, Kannada and Sanskrit.">
 <link rel="canonical" href="https://ramumaharajapuram.com/listen/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Listen · Ramu Maharajapuram (SPB Ramu)">
@@ -157,7 +213,7 @@ page = f'''<!doctype html>
     <div class="wrap">
       <p class="label">Listen</p>
       <h1>Hear Ramu <em>sing</em></h1>
-      <p class="lead">{len(songs)} songs, from his film work to his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
+      <p class="lead">{len(songs)} songs: the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam as Ramu sings them on stage and on TV, his own film songs, and his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
     </div>
   </section>
 
@@ -174,7 +230,7 @@ page = f'''<!doctype html>
           <div class="now now-row">
             <div class="now-text">
             <p class="now-title" id="now-title">{E(songs[0]['title'])}</p>
-            <p class="now-album" id="now-album">{E(('Film: ' if songs[0]['film'] else '') + songs[0]['album'])}</p>
+            <p class="now-album" id="now-album">{E(album_line(songs[0]))}</p>
             </div>
             <div class="now-actions">
               <button type="button" class="icon-btn" id="shuffle" aria-pressed="false" aria-label="Shuffle" title="Shuffle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3.5 21.5 8 17 12.5V9.5h-2.2c-1.1 0-2.1.5-2.8 1.4l-4.6 6.2c-1.1 1.4-2.8 2.3-4.6 2.3H1.5v-3h1.3c.9 0 1.7-.4 2.2-1.1l4.6-6.2C10.8 7.4 12.7 6.5 14.8 6.5H17V3.5zm0 8 4.5 4.5L17 20.5v-3h-2.2c-1.6 0-3.1-.6-4.2-1.6l1.9-2.5c.6.7 1.4 1.1 2.3 1.1H17v-3zM1.5 6.5h1.3c1.6 0 3.1.6 4.2 1.6L5.1 10.6c-.6-.7-1.4-1.1-2.3-1.1H1.5v-3z"/></svg></button>
@@ -182,13 +238,15 @@ page = f'''<!doctype html>
             </div>
           </div>
         </div>
-        <p class="yt-note">Songs play from the official YouTube releases by his record labels.</p>
+        <p class="yt-note">Album songs play from his record labels' official YouTube releases; stage and TV performances from the organisers' and channels' own uploads.</p>
       </div>
       <div class="list-col">
-        <div class="toolbar" style="margin-top:0">
-          <label class="search"><span class="sr">Search songs</span><input type="search" id="q" placeholder="Search a song or album" autocomplete="off"></label>
+        <div class="cats" role="tablist" aria-label="Categories">{cats}</div>
+        <div class="toolbar" style="margin-top:14px">
+          <label class="search"><span class="sr">Search songs</span><input type="search" id="q" placeholder="Search a song, film or album" autocomplete="off"></label>
         </div>
-        <div class="filters" role="group" aria-label="Filter songs" style="margin-top:12px">{filters}</div>
+        <div class="filters" role="group" aria-label="Language" style="margin-top:12px">{filters}</div>
+        <div class="filters deities" id="deities" role="group" aria-label="Devotional songs by deity" style="margin-top:8px" hidden>{deities}</div>
         <p class="count" id="count" aria-live="polite">{len(songs)} songs</p>
         <ol class="songs" id="songs">
 {chr(10).join(rows)}
@@ -216,4 +274,4 @@ page = f'''<!doctype html>
 </html>
 '''
 open(OUT, 'w').write(page)
-print(len(songs), 'songs', len(films), 'films', counts, len(page) // 1024, 'KB')
+print(len(songs), 'songs', ccount, counts, len(page) // 1024, 'KB')

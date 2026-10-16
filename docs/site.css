@@ -569,3 +569,14 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 /* Invite: WhatsApp button inside the contact list */
 .contact li { align-items: center; }
 .contact .wa-btn { margin: 0; font-family: var(--body); font-size: .9rem; text-decoration: none; justify-self: start; }
+
+/* Listen: category tabs (Songs of SPB / film / stage & TV / devotional) */
+.cats { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); margin: 0 0 4px; }
+.cats::-webkit-scrollbar { display: none; }
+.cat { appearance: none; flex: none; background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--muted); font: 600 .92rem var(--body); padding: 10px 10px 12px; cursor: pointer; white-space: nowrap; }
+.cat span { font-weight: 500; font-size: .78rem; margin-left: 3px; }
+.cat[aria-selected="true"] { color: var(--text); border-bottom-color: var(--gold); }
+@media (hover: hover) { .cat:hover { color: var(--text); } }
+.cat:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: -2px; border-radius: 6px; }
+.deities .filter { padding: 6px 12px; font-size: .8rem; }
+.filters[hidden], .filter[hidden] { display: none; }
