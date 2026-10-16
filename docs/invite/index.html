@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Invite Ramu to Perform · Ramu Maharajapuram (SPB Ramu)</title>
-<meta name="description" content="Invite singer Ramu Maharajapuram (SPB Ramu) to perform at your concert, SPB tribute evening, temple festival, wedding or film project, in India or abroad. Email ramusinger@gmail.com, call or message on WhatsApp.">
+<meta name="description" content="Invite singer Ramu Maharajapuram (SPB Ramu) to perform at your concert, SPB tribute evening, temple festival, wedding or film project, in India or abroad. Email ramusinger@gmail.com or message on WhatsApp.">
 <link rel="canonical" href="https://ramumaharajapuram.com/invite/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Invite Ramu to Perform · Ramu Maharajapuram (SPB Ramu)">
@@ -79,9 +79,8 @@
           <ul>
             <li><span>Email</span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a></li>
             <li class="ph-row" hidden><span>WhatsApp</span><a class="btn quiet small wa-btn" id="wa-link" target="_blank" rel="noopener">Message on WhatsApp</a></li>
-            <li class="ph-row" hidden><span>Phone</span><a id="call-link">Call</a></li>
           </ul>
-          <noscript><p class="note">Turn on JavaScript to see his phone and WhatsApp number, or write to the email above.</p></noscript>
+          <noscript><p class="note">Turn on JavaScript to message Ramu on WhatsApp, or write to the email above.</p></noscript>
         </div>
       </div>
     </div>
@@ -143,10 +142,8 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 (() => {
   const d = [[54,50,57,56,51],[48,49,52,56,57],[49,57]].map((p) => String.fromCharCode(...p).split('').reverse().join('')).reverse();
   const msg = 'Hello, I would like to invite Ramu garu to perform at ';
-  const wa = document.getElementById('wa-link'), call = document.getElementById('call-link');
+  const wa = document.getElementById('wa-link');
   wa.href = 'https://wa.me/' + d.join('') + '?text=' + encodeURIComponent(msg);
-  call.href = 'tel:+' + d.join('');
-  call.textContent = '+' + d.join(' ');
   document.querySelectorAll('.ph-row').forEach((r) => { r.hidden = false; });
 })();
 </script>
