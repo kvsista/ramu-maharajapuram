@@ -1405,6 +1405,44 @@
   "source": ""
  },
  {
+  "id": "dE4hpdIVQpI",
+  "song": "Vandanam Abhivandanam",
+  "film": "Premabhishekam",
+  "year": 1981,
+  "lang": "telugu",
+  "orig": [
+   "S. P. Balasubrahmanyam",
+   "P. Susheela"
+  ],
+  "spb": true,
+  "confidence": "medium",
+  "venue": "ETV Swarabhishekam, 2017",
+  "secs": 309,
+  "date": "2017-12-06",
+  "note": "",
+  "channel": "etvteluguindia",
+  "source": ""
+ },
+ {
+  "id": "YFdrS3_Ixs0",
+  "song": "Ragulutondi Mogalipoda",
+  "film": "Khaidi",
+  "year": 1983,
+  "lang": "telugu",
+  "orig": [
+   "S. P. Balasubrahmanyam",
+   "S. Janaki"
+  ],
+  "spb": true,
+  "confidence": "high",
+  "venue": "ETV Swarabhishekam, 2017",
+  "secs": 335,
+  "date": "2017-12-06",
+  "note": "with Kalpana",
+  "channel": "etvteluguindia",
+  "source": ""
+ },
+ {
   "id": "xyT88WwbRMs",
   "song": "Aakasam Nundi",
   "film": "Mugguru Ammayilu",

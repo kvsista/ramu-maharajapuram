@@ -8,7 +8,7 @@ const $ = (id) => document.getElementById(id);
 let sel = 0;  // song shown in the card when nothing is playing yet
 
 // Songs that only play on YouTube itself (data-ext) open there and are left out of the queue.
-function visible() { return items.filter(li => !li.hidden && !li.dataset.ext).map(li => +li.dataset.i); }
+function visible() { return [...$('songs').children].filter(li => !li.hidden && !li.dataset.ext).map(li => +li.dataset.i); }
 function shownIndex() { const c = RP.current(); return c && byId.has(c.id) ? byId.get(c.id) : sel; }
 function mark() {
   const i = shownIndex(), s = SONGS[i], c = RP.current();
@@ -80,14 +80,18 @@ function apply() {
   fill(langSel, 'All languages', LANGS, k => base.filter(li => li.dataset.lang === k && (!dty || li.dataset.deity === dty)).length);
   if (cat === 'dev') fill(dtySel, 'All deities', DTYS, k => base.filter(li => li.dataset.deity === k && (!filt || li.dataset.lang === filt)).length);
   let n = 0;
-  items.forEach(li => {
+  [...$('songs').children].forEach(li => {
     const ok = base.includes(li) && (!filt || li.dataset.lang === filt) && (!dty || li.dataset.deity === dty);
     li.hidden = !ok; if (ok) li.querySelector('.num').textContent = ++n;  // number each filtered list from 1
   });
   $('count').textContent = n + (n === 1 ? ' song' : ' songs');
   $('empty').hidden = n > 0;
 }
+// The page lists each category A to Z in turn; "All" re-sorts the whole list A to Z.
+const key = (li) => li.querySelector('.st').textContent.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
+const byCategory = items.slice(), byTitle = items.slice().sort((a, b) => key(a).localeCompare(key(b)));
 function setCat(c) {
+  if ((c === 'all') !== (cat === 'all') || !setCat.done) { $('songs').append(...(c === 'all' ? byTitle : byCategory)); setCat.done = true; }
   cat = c; langSel.value = ''; dtySel.value = '';
   document.querySelectorAll('.cat').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === c)));
   $('dpick').hidden = c !== 'dev';
