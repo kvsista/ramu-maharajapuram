@@ -565,3 +565,7 @@ footer .disamb { flex-basis: 100%; font-size: .8rem; opacity: .8; }
 .timeline .t-media [data-full] { all: unset; cursor: zoom-in; display: block; }
 .timeline .t-media img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
 @media (max-width: 760px) { .timeline .card.has-media { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+/* Invite: WhatsApp button inside the contact list */
+.contact li { align-items: center; }
+.contact a.wa-btn { font-family: var(--body); font-size: .9rem; text-decoration: none; justify-self: start; }

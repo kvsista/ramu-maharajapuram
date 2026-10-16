@@ -202,7 +202,7 @@ page = f'''<!doctype html>
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
-    <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="tel:+919841038926">+91 98410 38926</a></span>
+    <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="../invite/">Invite Ramu</a></span>
     <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../music/">Music</a> · <a href="../watch/">Watch</a> · <a href="../press/">Press</a> · <a href="../invite/">Invite</a></span>
     <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>

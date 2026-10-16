@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Invite Ramu to Perform · Ramu Maharajapuram (SPB Ramu)</title>
-<meta name="description" content="Invite singer Ramu Maharajapuram (SPB Ramu) to perform at your concert, SPB tribute evening, temple festival, wedding or film project, in India or abroad. Email ramusinger@gmail.com or call +91 98410 38926.">
+<meta name="description" content="Invite singer Ramu Maharajapuram (SPB Ramu) to perform at your concert, SPB tribute evening, temple festival, wedding or film project, in India or abroad. Email ramusinger@gmail.com, call or message on WhatsApp.">
 <link rel="canonical" href="https://ramumaharajapuram.com/invite/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Invite Ramu to Perform · Ramu Maharajapuram (SPB Ramu)">
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../site.css?v=66a103c94c">
+<link rel="stylesheet" href="../site.css?v=42050eca93">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,9 +78,10 @@
           <p class="contact-title">Or contact Ramu directly</p>
           <ul>
             <li><span>Email</span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a></li>
-            <li><span>Phone</span><a href="tel:+919841038926">+91 98410 38926</a></li>
-            <li><span>WhatsApp</span><a href="https://wa.me/919841038926" target="_blank" rel="noopener">Message on WhatsApp ↗</a></li>
+            <li class="ph-row" hidden><span>WhatsApp</span><a class="btn quiet small wa-btn" id="wa-link" target="_blank" rel="noopener">Message on WhatsApp</a></li>
+            <li class="ph-row" hidden><span>Phone</span><a id="call-link">Call</a></li>
           </ul>
+          <noscript><p class="note">Turn on JavaScript to see his phone and WhatsApp number, or write to the email above.</p></noscript>
         </div>
       </div>
     </div>
@@ -130,13 +131,25 @@
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
-    <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="tel:+919841038926">+91 98410 38926</a></span>
+    <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="../invite/">Invite Ramu</a></span>
     <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../listen/">Listen</a> · <a href="../music/">Music</a> · <a href="../watch/">Watch</a> · <a href="../press/">Press</a></span>
     <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>
 </footer>
 <script src="../app.js?v=4841d5ca6b"></script>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+// The number is assembled here rather than written in the page, so address-harvesting bots don't pick it up.
+(() => {
+  const d = [[54,50,57,56,51],[48,49,52,56,57],[49,57]].map((p) => String.fromCharCode(...p).split('').reverse().join('')).reverse();
+  const msg = 'Hello, I would like to invite Ramu garu to perform at ';
+  const wa = document.getElementById('wa-link'), call = document.getElementById('call-link');
+  wa.href = 'https://wa.me/' + d.join('') + '?text=' + encodeURIComponent(msg);
+  call.href = 'tel:+' + d.join('');
+  call.textContent = '+' + d.join(' ');
+  document.querySelectorAll('.ph-row').forEach((r) => { r.hidden = false; });
+})();
+</script>
 <script src="../news-config.js?v=1198b047ef"></script>
 <script src="../news.js?v=185da6b54f" defer></script>
 </body>
