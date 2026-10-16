@@ -599,26 +599,31 @@ if (hv && byId.has(hv) && !(RP.current() && RP.current().id === hv)) {
 
 const q = $('q'), langSel = $('lang'), dtySel = $('dty'); let cat = 'spb';
 const LANGS = JSON.parse(langSel.dataset.langs);
+const DTYS = [...dtySel.options].slice(1).map(o => [o.value, o.text.replace(/ \(\d+\)$/, '')]);
+// Each dropdown counts what the list would show if you picked that option, given the other filters.
+function fill(sel, all, opts, count) {
+  const cur = sel.value; sel.replaceChildren(new Option(all, ''));
+  opts.map(([k, name]) => [k, name, count(k)]).filter(([k, , n]) => n || k === cur).sort((a, b) => b[2] - a[2])
+    .forEach(([k, name, n]) => sel.append(new Option(name + ' (' + n + ')', k)));
+  sel.value = cur;
+}
 function apply() {
-  const t = q.value.trim().toLowerCase(), filt = langSel.value, dty = cat === 'dev' ? dtySel.value : ''; let n = 0;
+  const t = q.value.trim().toLowerCase(), filt = langSel.value, dty = cat === 'dev' ? dtySel.value : '';
+  const base = items.filter(li => (cat === 'all' || li.dataset.cat === cat) && (!t || li.dataset.q.includes(t)));
+  fill(langSel, 'All languages', LANGS, k => base.filter(li => li.dataset.lang === k && (!dty || li.dataset.deity === dty)).length);
+  if (cat === 'dev') fill(dtySel, 'All deities', DTYS, k => base.filter(li => li.dataset.deity === k && (!filt || li.dataset.lang === filt)).length);
+  let n = 0;
   items.forEach(li => {
-    const ok = (cat === 'all' || li.dataset.cat === cat) && (!filt || li.dataset.lang === filt)
-      && (!dty || li.dataset.deity === dty) && (!t || li.dataset.q.includes(t));
+    const ok = base.includes(li) && (!filt || li.dataset.lang === filt) && (!dty || li.dataset.deity === dty);
     li.hidden = !ok; if (ok) li.querySelector('.num').textContent = ++n;  // number each filtered list from 1
   });
   $('count').textContent = n + (n === 1 ? ' song' : ' songs');
   $('empty').hidden = n > 0;
 }
 function setCat(c) {
-  cat = c;
+  cat = c; langSel.value = ''; dtySel.value = '';
   document.querySelectorAll('.cat').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === c)));
-  // Languages offered (with counts) depend on the category; deities only apply to devotional songs.
-  langSel.replaceChildren(new Option('All languages', ''));
-  LANGS.forEach(([k, name]) => {
-    const n = items.filter(li => (c === 'all' || li.dataset.cat === c) && li.dataset.lang === k).length;
-    if (n) langSel.append(new Option(name + ' (' + n + ')', k));
-  });
-  dtySel.value = ''; $('dpick').hidden = c !== 'dev';
+  $('dpick').hidden = c !== 'dev';
   apply();
 }
 q.addEventListener('input', apply);
