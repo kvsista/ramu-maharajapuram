@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../site.css?v=9510c77c66">
+<link rel="stylesheet" href="../site.css?v=c4ff3bc2a6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,7 +78,7 @@
           <p class="contact-title">Or contact Ramu directly</p>
           <ul>
             <li><span>Email</span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a></li>
-            <li class="ph-row" hidden><span>WhatsApp</span><a class="btn quiet small wa-btn" id="wa-link" target="_blank" rel="noopener">Message on WhatsApp</a></li>
+            <li class="ph-row" hidden><span>WhatsApp</span><button type="button" class="btn quiet small wa-btn" id="wa-link">Message on WhatsApp</button></li>
           </ul>
           <noscript><p class="note">Turn on JavaScript to message Ramu on WhatsApp, or write to the email above.</p></noscript>
         </div>
@@ -138,12 +138,14 @@
 <script src="../app.js?v=4841d5ca6b"></script>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
-// The number is assembled here rather than written in the page, so address-harvesting bots don't pick it up.
 (() => {
-  const d = [[54,50,57,56,51],[48,49,52,56,57],[49,57]].map((p) => String.fromCharCode(...p).split('').reverse().join('')).reverse();
-  const msg = 'Hello, I would like to invite Ramu garu to perform at ';
-  const wa = document.getElementById('wa-link');
-  wa.href = 'https://wa.me/' + d.join('') + '?text=' + encodeURIComponent(msg);
+  // Built only when someone taps the button, so the number never sits in the page, even for bots that run scripts.
+  document.getElementById('wa-link').addEventListener('click', () => {
+    const d = [[54,50,57,56,51],[48,49,52,56,57],[49,57]].map((p) => String.fromCharCode(...p).split('').reverse().join('')).reverse();
+    const url = 'https://wa.me/' + d.join('') + '?text=' + encodeURIComponent('Hello, I would like to invite Ramu garu to perform at ');
+    const a = Object.assign(document.createElement('a'), { href: url, target: '_blank', rel: 'noopener' });
+    document.body.append(a); a.click(); a.remove();
+  });
   document.querySelectorAll('.ph-row').forEach((r) => { r.hidden = false; });
 })();
 </script>
