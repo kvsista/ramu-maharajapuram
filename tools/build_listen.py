@@ -110,10 +110,8 @@ for x in live:
 
 ORDER = ['spb', 'film', 'stage', 'dev']
 CATS = {'spb': 'Songs of SPB', 'film': 'His film songs', 'stage': 'More on stage & TV', 'dev': 'Devotional'}
-films = sorted([s for s in songs if s['cat'] == 'film'], key=lambda s: s['year'])
-dev = sorted([s for s in songs if s['cat'] == 'dev'], key=lambda s: (-(s['year'] or 0), s['album'].lower(), s['title'].lower()))
-liveorder = lambda c: [s for s in songs if s['cat'] == c]  # kept in the curated order of the JSON file
-songs = liveorder('spb') + films + liveorder('stage') + dev
+abc = lambda s: (re.sub(r'[^a-z0-9 ]', '', s['title'].lower()).strip(), s['album'].lower(), -(s['year'] or 0))
+songs = [s for c in ORDER for s in sorted((x for x in songs if x['cat'] == c), key=abc)]  # A to Z within each category
 LANG = {'telugu': 'Telugu', 'tamil': 'Tamil', 'kannada': 'Kannada', 'sanskrit': 'Sanskrit', 'hindi': 'Hindi', 'other': ''}
 counts = {k: sum(1 for s in songs if s['lang'] == k) for k in LANG}
 ccount = {c: sum(1 for s in songs if s['cat'] == c) for c in ORDER}

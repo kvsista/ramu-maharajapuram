@@ -69,7 +69,7 @@ function apply() {
   items.forEach(li => {
     const ok = (cat === 'all' || li.dataset.cat === cat) && (!filt || li.dataset.lang === filt)
       && (!dty || li.dataset.deity === dty) && (!t || li.dataset.q.includes(t));
-    li.hidden = !ok; if (ok) n++;
+    li.hidden = !ok; if (ok) li.querySelector('.num').textContent = ++n;  // number each filtered list from 1
   });
   $('count').textContent = n + (n === 1 ? ' song' : ' songs');
   $('empty').hidden = n > 0;
