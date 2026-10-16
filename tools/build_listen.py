@@ -143,12 +143,8 @@ for i, s in enumerate(songs):
 cats = ''.join(f'<button type="button" class="cat" role="tab" data-c="{c}" aria-selected="{str(c == ORDER[0]).lower()}">{CATS[c]} <span>{ccount[c]}</span></button>'
                for c in ORDER if ccount[c])
 cats += f'<button type="button" class="cat" role="tab" data-c="all" aria-selected="false">All <span>{len(songs)}</span></button>'
-filters = ''.join(f'<button type="button" class="filter" data-f="{k}" aria-pressed="false">{n} <span>{counts[k]}</span></button>'
-                  for k, n in LANG.items() if k != 'other' and counts[k])
-deities = ''.join(f'<button type="button" class="filter" data-d="{k}" aria-pressed="false">{n} <span>{dcount[k]}</span></button>'
-                  for k, n, _ in sorted(DEITIES, key=lambda d: -dcount[d[0]]) if dcount[k])
-if any(s['deity'] == 'other' for s in songs):
-    deities += f'<button type="button" class="filter" data-d="other" aria-pressed="false">More <span>{sum(1 for s in songs if s["deity"] == "other")}</span></button>'
+LANGS = [(k, n) for k, n in LANG.items() if k != 'other' and counts[k]]
+dopts = ''.join(f'<option value="{k}">{n} ({dcount[k]})</option>' for k, n, _ in sorted(DEITIES, key=lambda d: -dcount[d[0]]) if dcount[k])
 
 ld = {"@context": "https://schema.org", "@graph": [
     {"@type": "WebPage", "url": "https://ramumaharajapuram.com/listen/", "name": "Listen to Ramu Maharajapuram",
@@ -243,8 +239,10 @@ page = f'''<!doctype html>
         <div class="toolbar" style="margin-top:14px">
           <label class="search"><span class="sr">Search songs</span><input type="search" id="q" placeholder="Search a song, film or album" autocomplete="off"></label>
         </div>
-        <div class="filters" role="group" aria-label="Language" style="margin-top:12px">{filters}</div>
-        <div class="filters deities" id="deities" role="group" aria-label="Devotional songs by deity" style="margin-top:8px" hidden>{deities}</div>
+        <div class="pickers">
+          <label class="pick"><span class="sr">Language</span><select id="lang" data-langs='{json.dumps(LANGS)}'><option value="">All languages</option></select></label>
+          <label class="pick" id="dpick" hidden><span class="sr">Deity</span><select id="dty"><option value="">All deities</option>{dopts}</select></label>
+        </div>
         <p class="count" id="count" aria-live="polite">{len(songs)} songs</p>
         <ol class="songs" id="songs">
 {chr(10).join(rows)}

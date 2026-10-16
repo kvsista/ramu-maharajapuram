@@ -63,9 +63,10 @@ if (hv && byId.has(hv) && !(RP.current() && RP.current().id === hv)) {
   const c = RP.current(); RP.prepare(RP.queueIds().map(id => SONGS[byId.get(id)] || c), RP.queueIds().indexOf(c.id), RP._resumeAt); RP._resumeAt = null;
 }
 
-const q = $('q'); let filt = null, cat = 'spb', dty = null;
+const q = $('q'), langSel = $('lang'), dtySel = $('dty'); let cat = 'spb';
+const LANGS = JSON.parse(langSel.dataset.langs);
 function apply() {
-  const t = q.value.trim().toLowerCase(); let n = 0;
+  const t = q.value.trim().toLowerCase(), filt = langSel.value, dty = cat === 'dev' ? dtySel.value : ''; let n = 0;
   items.forEach(li => {
     const ok = (cat === 'all' || li.dataset.cat === cat) && (!filt || li.dataset.lang === filt)
       && (!dty || li.dataset.deity === dty) && (!t || li.dataset.q.includes(t));
@@ -73,28 +74,23 @@ function apply() {
   });
   $('count').textContent = n + (n === 1 ? ' song' : ' songs');
   $('empty').hidden = n > 0;
-  $('deities').hidden = cat !== 'dev';
-  // Only offer languages that exist in this category.
-  document.querySelectorAll('.filter[data-f]').forEach(b => {
-    const k = items.filter(li => (cat === 'all' || li.dataset.cat === cat) && li.dataset.lang === b.dataset.f).length;
-    b.hidden = !k; b.querySelector('span').textContent = k;
-  });
 }
 function setCat(c) {
-  cat = c; dty = null; filt = null;
+  cat = c;
   document.querySelectorAll('.cat').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === c)));
-  document.querySelectorAll('.filter').forEach(x => x.setAttribute('aria-pressed', 'false'));
+  // Languages offered (with counts) depend on the category; deities only apply to devotional songs.
+  langSel.replaceChildren(new Option('All languages', ''));
+  LANGS.forEach(([k, name]) => {
+    const n = items.filter(li => (c === 'all' || li.dataset.cat === c) && li.dataset.lang === k).length;
+    if (n) langSel.append(new Option(name + ' (' + n + ')', k));
+  });
+  dtySel.value = ''; $('dpick').hidden = c !== 'dev';
   apply();
 }
 q.addEventListener('input', apply);
+langSel.addEventListener('change', apply);
+dtySel.addEventListener('change', apply);
 document.querySelectorAll('.cat').forEach(b => b.addEventListener('click', () => setCat(b.dataset.c)));
-document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => {
-  const on = b.getAttribute('aria-pressed') === 'true', key = b.dataset.f ? 'f' : 'd';
-  document.querySelectorAll('.filter[data-' + key + ']').forEach(x => x.setAttribute('aria-pressed', 'false'));
-  if (!on) b.setAttribute('aria-pressed', 'true');
-  if (key === 'f') filt = on ? null : b.dataset.f; else dty = on ? null : b.dataset.d;
-  apply();
-}));
 // Open on the category of the song that is playing (or deep-linked), else on Songs of SPB.
 { const c = RP.current(), i = hv && byId.has(hv) ? byId.get(hv) : c && byId.has(c.id) ? byId.get(c.id) : null;
   setCat(i != null ? items[i].dataset.cat : 'spb'); }
