@@ -71,11 +71,11 @@ def first(pl,name=None):
 profiles=[('Spotify',first('spotify','Maharajapuram Ramu')),('Apple Music','https://music.apple.com/gb/artist/maharajapuram-ramu/1382880352'),('JioSaavn','https://www.jiosaavn.com/artist/maharajapuram-ramu-songs/CKus1x7BFic_'),('YouTube Music',first('youtube_music','MAHARAJAPURAM RAMU')),('Deezer',first('deezer','Maharajapuram Ramu')),('Gaana',first('gaana','Maharajapuram Ramu')),('Qobuz','https://www.qobuz.com/gb-en/interpreter/maharajapuram-ramu/5656664')]
 prof=''.join(f'<a class="btn quiet small" href="{E(u)}" target="_blank" rel="noopener">{n} ↗</a>' for n,u in profiles if u)
 filters=''.join(f'<button type="button" class="filter" data-f="{k}" aria-pressed="false">{LANG.get(k if k!="other" else None)} <span>{cnt.get(None if k=="other" else k,0)}</span></button>' for k in ['telugu','tamil','kannada','sanskrit','other'])
-ld_items=[{"@type":"ListItem","position":i+1,"item":{"@type":"MusicAlbum","name":disp(r['title']),**({"datePublished":str(r['year'])} if r['year'] else {}),"byArtist":{"@id":"https://kvsista.github.io/ramu-maharajapuram/#ramu"},"url":next((r['links'][k] for k,_ in P if r['links'].get(k)),None)}} for i,r in enumerate(rel)]
+ld_items=[{"@type":"ListItem","position":i+1,"item":{"@type":"MusicAlbum","name":disp(r['title']),**({"datePublished":str(r['year'])} if r['year'] else {}),"byArtist":{"@id":"https://ramumaharajapuram.com/#ramu"},"url":next((r['links'][k] for k,_ in P if r['links'].get(k)),None)}} for i,r in enumerate(rel)]
 ld={"@context":"https://schema.org","@graph":[
- {"@type":"CollectionPage","@id":"https://kvsista.github.io/ramu-maharajapuram/music/#page","url":"https://kvsista.github.io/ramu-maharajapuram/music/","name":"Discography · Ramu Maharajapuram","isPartOf":{"@id":"https://kvsista.github.io/ramu-maharajapuram/#website"},"about":{"@id":"https://kvsista.github.io/ramu-maharajapuram/#ramu"},"mainEntity":{"@type":"ItemList","numberOfItems":len(rel),"itemListElement":ld_items}},
- {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ramu Maharajapuram","item":"https://kvsista.github.io/ramu-maharajapuram/"},{"@type":"ListItem","position":2,"name":"Discography","item":"https://kvsista.github.io/ramu-maharajapuram/music/"}]},
- {"@type":"Person","@id":"https://kvsista.github.io/ramu-maharajapuram/#ramu","name":"Ramu Maharajapuram","alternateName":["Maharajapuram Ramu","SPB Ramu"],"url":"https://kvsista.github.io/ramu-maharajapuram/"}]}
+ {"@type":"CollectionPage","@id":"https://ramumaharajapuram.com/music/#page","url":"https://ramumaharajapuram.com/music/","name":"Discography · Ramu Maharajapuram","isPartOf":{"@id":"https://ramumaharajapuram.com/#website"},"about":{"@id":"https://ramumaharajapuram.com/#ramu"},"mainEntity":{"@type":"ItemList","numberOfItems":len(rel),"itemListElement":ld_items}},
+ {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ramu Maharajapuram","item":"https://ramumaharajapuram.com/"},{"@type":"ListItem","position":2,"name":"Discography","item":"https://ramumaharajapuram.com/music/"}]},
+ {"@type":"Person","@id":"https://ramumaharajapuram.com/#ramu","name":"Ramu Maharajapuram","alternateName":["Maharajapuram Ramu","SPB Ramu"],"url":"https://ramumaharajapuram.com/"}]}
 page=f'''<!doctype html>
 <html lang="en">
 <head>
@@ -83,14 +83,14 @@ page=f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Discography · Ramu Maharajapuram (SPB Ramu) · Songs, Albums &amp; Films</title>
 <meta name="description" content="Complete discography of singer Ramu Maharajapuram (SPB Ramu): {len(rel)} albums and singles, {ntracks} songs in Telugu, Tamil, Kannada and Sanskrit from {min(years)} to {max(years)}, including film songs from Partner and Kasthuri Veedu, with links to Spotify, Apple Music, JioSaavn, YouTube and Deezer.">
-<link rel="canonical" href="https://kvsista.github.io/ramu-maharajapuram/music/">
+<link rel="canonical" href="https://ramumaharajapuram.com/music/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Discography · Ramu Maharajapuram (SPB Ramu)">
 <meta property="og:description" content="{len(rel)} albums and singles, {ntracks} songs, {min(years)}–{max(years)}. Film songs, devotional albums and TV performances, with links to every platform.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://kvsista.github.io/ramu-maharajapuram/music/">
+<meta property="og:url" content="https://ramumaharajapuram.com/music/">
 <meta property="og:site_name" content="Ramu Maharajapuram">
-<meta property="og:image" content="https://kvsista.github.io/ramu-maharajapuram/media/stage-orange.jpg">
+<meta property="og:image" content="https://ramumaharajapuram.com/media/stage-orange.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#11101a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311101a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d2a95e'%3ERM%3C/text%3E%3C/svg%3E">

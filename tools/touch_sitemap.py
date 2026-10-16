@@ -4,7 +4,7 @@ Usage: git diff --name-only | python3 tools/touch_sitemap.py docs/sitemap.xml
 """
 import re, sys, datetime
 
-SITE = 'https://kvsista.github.io/ramu-maharajapuram/'
+SITE = 'https://ramumaharajapuram.com/'
 path = sys.argv[1]
 today = datetime.date.today().isoformat()
 changed = [l.strip() for l in sys.stdin if l.strip().startswith('docs/') and l.strip().endswith('index.html')]

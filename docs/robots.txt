@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kvsista.github.io/ramu-maharajapuram/sitemap.xml
+Sitemap: https://ramumaharajapuram.com/sitemap.xml

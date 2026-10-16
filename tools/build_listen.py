@@ -97,15 +97,15 @@ filters += ''.join(f'<button type="button" class="filter" data-f="{k}" aria-pres
                    for k, n in LANG.items() if k != 'other' and counts[k])
 
 ld = {"@context": "https://schema.org", "@graph": [
-    {"@type": "WebPage", "url": "https://kvsista.github.io/ramu-maharajapuram/listen/", "name": "Listen to Ramu Maharajapuram",
-     "isPartOf": {"@id": "https://kvsista.github.io/ramu-maharajapuram/#website"}, "about": {"@id": "https://kvsista.github.io/ramu-maharajapuram/#ramu"}},
+    {"@type": "WebPage", "url": "https://ramumaharajapuram.com/listen/", "name": "Listen to Ramu Maharajapuram",
+     "isPartOf": {"@id": "https://ramumaharajapuram.com/#website"}, "about": {"@id": "https://ramumaharajapuram.com/#ramu"}},
     {"@type": "MusicPlaylist", "name": "Ramu Maharajapuram: songs", "numTracks": len(songs),
      "track": [{"@type": "MusicRecording", "name": s['title'], "inAlbum": {"@type": "MusicAlbum", "name": s['album']},
-                "byArtist": {"@id": "https://kvsista.github.io/ramu-maharajapuram/#ramu"},
+                "byArtist": {"@id": "https://ramumaharajapuram.com/#ramu"},
                 "url": f"https://www.youtube.com/watch?v={s['id']}"} for s in songs[:60]]},
     {"@type": "BreadcrumbList", "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Ramu Maharajapuram", "item": "https://kvsista.github.io/ramu-maharajapuram/"},
-        {"@type": "ListItem", "position": 2, "name": "Listen", "item": "https://kvsista.github.io/ramu-maharajapuram/listen/"}]}]}
+        {"@type": "ListItem", "position": 1, "name": "Ramu Maharajapuram", "item": "https://ramumaharajapuram.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Listen", "item": "https://ramumaharajapuram.com/listen/"}]}]}
 
 data = json.dumps([{'id': s['id'], 't': s['title'], 'a': ('Film: ' if s['film'] else '') + s['album'] + (f" · {s['year']}" if s['year'] else ''), 'l': s['links']} for s in songs], ensure_ascii=False)
 
@@ -118,14 +118,14 @@ page = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Listen · Ramu Maharajapuram (SPB Ramu) · {len(songs)} Songs</title>
 <meta name="description" content="Listen to {len(songs)} songs by singer Ramu Maharajapuram (SPB Ramu), right here: film songs from Attarintiki Daredi, Partner and Kasthuri Veedu, and devotional songs in Telugu, Tamil, Kannada and Sanskrit.">
-<link rel="canonical" href="https://kvsista.github.io/ramu-maharajapuram/listen/">
+<link rel="canonical" href="https://ramumaharajapuram.com/listen/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Listen · Ramu Maharajapuram (SPB Ramu)">
 <meta property="og:description" content="{len(songs)} songs, playable right on the page.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://kvsista.github.io/ramu-maharajapuram/listen/">
+<meta property="og:url" content="https://ramumaharajapuram.com/listen/">
 <meta property="og:site_name" content="Ramu Maharajapuram">
-<meta property="og:image" content="https://kvsista.github.io/ramu-maharajapuram/media/stage-closeup-kurta.jpg">
+<meta property="og:image" content="https://ramumaharajapuram.com/media/stage-closeup-kurta.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#11101a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311101a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23d2a95e'%3ERM%3C/text%3E%3C/svg%3E">
