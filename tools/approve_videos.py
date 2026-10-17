@@ -54,6 +54,36 @@ def headline(text, n=90):
     return t if len(t) <= n else t[:n].rsplit(' ', 1)[0] + '…'
 
 
+def sort_timeline(s):
+    """Order the events inside each era newest first. A bare year ("2026") sorts above that year's months.
+    Eras with undated events (Childhood, Teenage years) are left as they are."""
+    start = s.index('<ol class="timeline">') + len('<ol class="timeline">')
+    end = s.index('</ol>', start)
+    items = re.findall(r'\s*<li class="(?:era|event[^"]*)">.*?</li>', s[start:end], re.S)
+    if ''.join(items).strip() != s[start:end].strip():
+        return s
+    out, group = [], []
+
+    def key(ev):
+        d = (re.search(r'<time datetime="([^"]+)"', ev) or [None, ''])[1]
+        return d + '-99' if re.fullmatch(r'\d{4}', d) else d
+
+    def flush():
+        if group and all(re.search(r'<time datetime="', g) for g in group):
+            group.sort(key=key, reverse=True)
+        out.extend(group)
+        group.clear()
+
+    for it in items:
+        if 'class="era"' in it:
+            flush()
+            out.append(it)
+        else:
+            group.append(it)
+    flush()
+    return s[:start] + ''.join('\n' + x.strip('\n') + '\n' for x in out) + '\n      ' + s[end:]
+
+
 for line in comment.splitlines():
     line = line.strip()
     m = re.match(r'(add|listen|stage|news|story)\b\s*(.*)', line, re.I)
@@ -129,7 +159,7 @@ for line in comment.splitlines():
                          + f'<span class="yt-ext-note">View on {where} ↗</span></a></figure></div>') if photo else ''
                 entry = (f'''
         <li class="event">
-          <time datetime="{d.strftime('%Y-%m')}">{d.strftime('%b %Y')}</time>
+          <time datetime="{d.isoformat()}">{d.strftime('%b %Y')}</time>
           <div class="card{' has-media' if media else ''}">
             <div class="t-text">
             <h3>{E(title)}</h3>
@@ -139,9 +169,9 @@ for line in comment.splitlines():
           </div>
         </li>
 ''')
-                # Newest first: right after the first era heading.
+                # Into the newest era, then keep every era in date order (newest first).
                 s = re.sub(r'(<ol class="timeline">\s*<li class="era">.*?</li>\n)', lambda m: m.group(1) + entry, s, count=1, flags=re.S)
-                open(page, 'w').write(s)
+                open(page, 'w').write(sort_timeline(s))
                 done.append(f'Story: {title}')
 
 print('\n'.join(f'- {x}' for x in done) if done else 'Nothing matched. Use lines like `add 1 3`, `listen 2`, `stage 4`, `news P2` or `story P3: Title`.')

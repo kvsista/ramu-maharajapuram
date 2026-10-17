@@ -71,6 +71,6 @@ for page in ['index.html', 'invite/index.html']:
         if start in s:
             s = re.sub(re.escape(start) + '.*?' + re.escape(end), lambda m: start + ''.join(card(x) for x in lst) + end, s, flags=re.S)
             # show/hide the surrounding section in the static HTML
-            s = re.sub(r'(<section class="news-section"[^>]*data-kind="' + kind + r'")( hidden)?', lambda m: m.group(1) + ('' if lst else ' hidden'), s)
+            s = re.sub(r'(<section class="news-section[^"]*"[^>]*data-kind="' + kind + r'")( hidden)?', lambda m: m.group(1) + ('' if lst else ' hidden'), s)
     open(p, 'w').write(s)
 print('build_news:', {k: len(v) for k, v in blocks.items()})
