@@ -1,5 +1,5 @@
-# When the site owner comments "add 1 3" (or "add all") on a "New videos to review" issue,
-# publish those videos to the Watch page and close the issue.
+# When the site owner replies to a weekly review issue ("add 1 3", "listen 2", "stage 4", "news P1",
+# "story P2: Title"), publish those things and reply with what was done.
 name: Approve videos
 
 on:
@@ -19,31 +19,38 @@ jobs:
     if: >-
       contains(github.event.issue.labels.*.name, 'video-review') &&
       github.event.comment.author_association == 'OWNER' &&
-      startsWith(github.event.comment.body, 'add')
+      (startsWith(github.event.comment.body, 'add') || startsWith(github.event.comment.body, 'listen') ||
+       startsWith(github.event.comment.body, 'stage') || startsWith(github.event.comment.body, 'news') ||
+       startsWith(github.event.comment.body, 'story') || contains(github.event.comment.body, '\nlisten') ||
+       contains(github.event.comment.body, '\nnews') || contains(github.event.comment.body, '\nstory') ||
+       contains(github.event.comment.body, '\nstage') || contains(github.event.comment.body, '\nadd'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Publish approved videos
+      - name: Publish what was approved
         env:
           COMMENT: ${{ github.event.comment.body }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number }}
         run: |
-          added="$(python3 tools/approve_videos.py data)"
+          done="$(python3 tools/approve_videos.py data docs)"
           python3 tools/build_watch_latest.py data docs/watch/index.html
+          python3 tools/build_listen.py data docs/listen/index.html
+          python3 tools/build_news.py docs
           python3 tools/stamp_assets.py docs
           git diff --name-only | python3 tools/touch_sitemap.py docs/sitemap.xml
           if [ -n "$(git status --porcelain docs data)" ]; then
             git config user.name "Site updater"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add docs data
-            git commit -m "Add approved videos (issue #$ISSUE)"
+            git commit -m "Weekly review (issue #$ISSUE): $(echo "$done" | head -1 | cut -c3-80)"
             git push
+            gh issue comment "$ISSUE" --body "Done, live in about a minute:
+          $done"
+          else
+            gh issue comment "$ISSUE" --body "$done"
           fi
-          gh issue comment "$ISSUE" --body "Published on the Watch page (live in about a minute):
-          $added"
-          gh issue close "$ISSUE"

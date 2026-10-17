@@ -39,14 +39,20 @@ jobs:
           python3 tools/build_listen.py data docs/listen/index.html
           python3 tools/build_home_latest.py data docs/index.html
 
-      - name: Write approved family news into the pages
-        run: python3 tools/build_news.py docs
+      - name: Find new videos of Ramu and his new posts
+        run: |
+          python3 tools/discover_videos.py data > candidates.json
+          python3 tools/discover_posts.py data > posts.json
+          # Gopal Sapthaswaram videos (credits in their descriptions) were added to Listen directly
+          python3 tools/build_listen.py data docs/listen/index.html
+
+      - name: Write news into the pages and refresh the album counts
+        run: |
+          python3 tools/build_news.py docs
+          python3 tools/update_counts.py data docs
 
       - name: Version stylesheets and scripts
         run: python3 tools/stamp_assets.py docs
-
-      - name: Find new videos by others
-        run: python3 tools/discover_videos.py data > candidates.json
 
       - name: Publish changes
         run: |
@@ -61,23 +67,40 @@ jobs:
             echo "No changes this week."
           fi
 
-      - name: Open a review issue for new videos
+      - name: Open the weekly review issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'EOF'
           import json, subprocess
-          c = json.load(open('candidates.json'))
-          if not c:
-              print('No new videos to review.'); raise SystemExit
-          lines = ['New YouTube videos that mention Ramu were found this week. They are **not** on the site yet.', '',
-                   'To publish some, comment with their numbers, for example `add 1 3`. To publish all, comment `add all`.',
-                   'To ignore them, just close this issue.', '']
-          for i, v in enumerate(c, 1):
-              meta = ' · '.join(x for x in [v.get('channel'), v.get('published'), v.get('length')] if x)
-              lines.append(f"{i}. [{v['title']}](https://www.youtube.com/watch?v={v['id']}) — {meta}")
-          lines += ['', '<!-- candidates:' + json.dumps(c, ensure_ascii=False) + ' -->']
+          c, p = json.load(open('candidates.json')), json.load(open('posts.json'))
+          if not c and not p:
+              print('Nothing new to review.'); raise SystemExit
+          L = ['New things found this week. Nothing here is on the site until you reply.', '',
+               'Reply with one instruction per line, for example:', '',
+               '```', 'listen 1 3', 'add 2', 'news P1', 'story P2: Canada Day concert, Mississauga', '```', '',
+               '- `listen N` adds a video to **Listen → Songs of SPB** (he sings an SPB song). `listen N: Song name` also names the song',
+               '- `stage N` adds it to **Listen → More on stage & TV** (any other song)',
+               '- `add N` puts it on the **Watch** page (`add all` for every video)',
+               '- `news PN` shows a post in the **homepage news** (optionally `news PN: Your headline`)',
+               '- `story PN: Title` adds a post to the top of the **Story** timeline', '',
+               'You can reply more than once. Close the issue when you are done.', '']
+          if c:
+              L.append(f'### Videos ({len(c)})')
+              for i, v in enumerate(c, 1):
+                  meta = ' · '.join(x for x in [v.get('channel'), v.get('published'), v.get('length')] if x)
+                  tags = (' ✓ his usual channel' if v.get('trusted') else '') + (' · plays on YouTube only' if v.get('blocked') else '')
+                  L.append(f"{i}. [{v['title']}](https://www.youtube.com/watch?v={v['id']}) — {meta}{tags}")
+              L.append('')
+          if p:
+              L.append(f'### His posts ({len(p)})')
+              for i, x in enumerate(p, 1):
+                  t = ' '.join(x['text'].split())[:120] or '(no caption)'
+                  where = 'Instagram' if x['src'] == 'instagram' else 'Facebook'
+                  L.append(f"P{i}. [{t}]({x['link']}) — {where} · {x['time'][:10]}{' · video' if x.get('video') else ''}")
+              L.append('')
+          L += ['<!-- candidates:' + json.dumps(c, ensure_ascii=False) + ' -->', '<!-- posts:' + json.dumps(p, ensure_ascii=False) + ' -->']
           subprocess.run(['gh', 'label', 'create', 'video-review', '--color', 'D2A95E', '--force'], check=False)
-          subprocess.run(['gh', 'issue', 'create', '--title', f'New videos to review ({len(c)})',
-                          '--label', 'video-review', '--body', '\n'.join(lines)], check=True)
+          subprocess.run(['gh', 'issue', 'create', '--title', f'Weekly review: {len(c)} videos, {len(p)} posts',
+                          '--label', 'video-review', '--body', '\n'.join(L)], check=True)
           EOF

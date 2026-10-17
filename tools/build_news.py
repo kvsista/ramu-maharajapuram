@@ -5,21 +5,20 @@ Reads the published CSV address from docs/news-config.js. Fills the blocks betwe
 <!-- NEWS:latest:START/END --> (homepage) and <!-- NEWS:upcoming:START/END --> (Invite page).
 docs/news.js refreshes the same blocks live in visitors' browsers between weekly runs.
 """
-import csv, datetime, html, io, os, re, sys, urllib.request
+import csv, datetime, html, io, json, os, re, sys, urllib.request
 
 DOCS = sys.argv[1]
 cfg = open(os.path.join(DOCS, 'news-config.js')).read()
 m = re.search(r"RAMU_NEWS_CSV\s*=\s*'([^']*)'", cfg)
 url = m.group(1) if m else ''
-if not url:
-    print('build_news: no sheet configured yet, skipping')
-    sys.exit(0)
-try:
-    with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as r:
-        text = r.read().decode('utf-8')
-except Exception as e:
-    print('build_news: could not read sheet, pages left unchanged:', e.__class__.__name__)
-    sys.exit(0)
+text = ''
+if url:
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as r:
+            text = r.read().decode('utf-8')
+    except Exception as e:
+        print('build_news: could not read sheet, pages left unchanged:', e.__class__.__name__)
+        sys.exit(0)
 
 rows = list(csv.reader(io.StringIO(text)))
 head = [h.strip().lower() for h in (rows[0] if rows else [])]
@@ -34,6 +33,10 @@ C = {k: col(*v) for k, v in {'type': ('what is it', 'type'), 'title': ('title',)
 get = lambda r, k: (r[C[k]].strip() if C[k] is not None and C[k] < len(r) else '')
 items = [dict((k, get(r, k)) for k in C) for r in rows[1:]]
 items = [x for x in items if re.fullmatch(r'y(es)?', x['show'], re.I) and x['title'] and re.fullmatch(r'\d{4}-\d{2}-\d{2}', x['date'])]
+# News picked from his Instagram / Facebook posts in the weekly review issue (data/news.json).
+jp = os.path.join(DOCS, '..', 'data', 'news.json')
+for x in (json.load(open(jp)) if os.path.exists(jp) else []):
+    items.append(dict({k: '' for k in C}, **{k: x.get(k, '') for k in C if k != 'show'}))
 items.sort(key=lambda x: x['date'], reverse=True)
 today = datetime.date.today().isoformat()
 E = lambda s: html.escape(s, quote=True)
@@ -47,11 +50,11 @@ def card(x):
     if x['details']:
         out += f'<p class="news-details">{E(x["details"])}</p>'
     link = x['link'] if re.match(r'https?://', x['link'], re.I) else ''
-    photo = x['photo'] if re.match(r'https?://', x['photo'], re.I) else ''
+    photo = x['photo'] if re.match(r'https?://|/media/', x['photo'], re.I) else ''
     if photo and 'youtu' not in link:
         out += f'<img class="news-photo" src="{E(photo)}" alt="{E(x["title"])}" loading="lazy">'
     if link:
-        label = 'View on Facebook ↗' if re.search(r'facebook\.com|fb\.watch', link) else 'Watch ↗' if 'youtu' in link else 'More details ↗'
+        label = 'View on Facebook ↗' if re.search(r'facebook\.com|fb\.watch', link) else 'View on Instagram ↗' if 'instagram.com' in link else 'Watch ↗' if 'youtu' in link else 'More details ↗'
         out += f'<a class="news-link" href="{E(link)}" target="_blank" rel="noopener">{label}</a>'
     return out + '</article>'
 
