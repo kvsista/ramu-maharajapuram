@@ -70,7 +70,7 @@ items = []
 
 posts = graph(f"{page['id']}/posts", fields='id,message,created_time,permalink_url,full_picture', limit=15).get('data', [])
 for p in posts:
-    if not (p.get('message') or p.get('full_picture')):
+    if not p.get('message'):  # skip profile/cover photo changes and other posts with no words
         continue
     items.append({'src': 'facebook', 'id': p['id'], 'time': p['created_time'], 'text': p.get('message', ''),
                   'link': p.get('permalink_url', ''), 'photo': save_photo('fb_' + p['id'].split('_')[-1], p.get('full_picture'))})

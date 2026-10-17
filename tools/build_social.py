@@ -25,7 +25,7 @@ def card(it):
              else '<span class="social-thumb social-thumb-text">')
     thumb += ('<span class="latest-play"></span>' if it.get('video') else '') + '</span>'
     return (f'<a class="social-card" href="{E(it["link"])}" target="_blank" rel="noopener">{thumb}'
-            f'<span class="social-text">{E(snippet(it["text"])) or E(where + " post")}</span>'
+            f'<span class="social-text">{E(snippet(it["text"])) or ("A video on " if it.get("video") else "A photo on ") + where}</span>'
             f'<span class="latest-meta">{where} · {d}</span></a>')
 
 
