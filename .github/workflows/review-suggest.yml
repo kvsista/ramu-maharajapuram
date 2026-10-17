@@ -1,0 +1,35 @@
+# Add AI suggestions to an existing weekly review issue (run from the Actions tab with the issue number).
+name: Add suggestions to a review issue
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: "Issue number"
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Suggest and rewrite the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ISSUE: ${{ inputs.issue }}
+        run: |
+          gh issue view "$ISSUE" --json body --jq .body > body.txt
+          python3 - <<'PY'
+          import json, re
+          b = open('body.txt').read()
+          for tag, f in (('candidates', 'candidates.json'), ('posts', 'posts.json')):
+              m = re.search(r'<!-- ' + tag + r':(.*?) -->', b, re.S)
+              json.dump(json.loads(m.group(1)) if m else [], open(f, 'w'), ensure_ascii=False)
+          PY
+          python3 tools/suggest_titles.py posts.json candidates.json
+          python3 tools/review_issue.py candidates.json posts.json --edit "$ISSUE"
