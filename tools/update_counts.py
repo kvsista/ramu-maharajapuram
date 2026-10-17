@@ -13,6 +13,10 @@ PATTERNS = [
     (r'(\b(?:released|With|with) )\d+( albums and singles)', r'\g<1>{n}\g<2>'),
     (r'(\b)\d+( albums and singles in Telugu)', r'\g<1>{n}\g<2>'),
 ]
+live = json.load(open(os.path.join(D, 'live_performances.json'))) if os.path.exists(os.path.join(D, 'live_performances.json')) else []
+spb = sum(1 for x in live if x.get('spb'))
+if spb:
+    PATTERNS.append((r'(All )\d+( songs of SPB)', r'\g<1>' + str(spb) + r'\g<2>'))
 changed = []
 for page in glob.glob(os.path.join(DOCS, '**', 'index.html'), recursive=True):
     s = open(page).read()
@@ -22,4 +26,4 @@ for page in glob.glob(os.path.join(DOCS, '**', 'index.html'), recursive=True):
     if t != s:
         open(page, 'w').write(t)
         changed.append(os.path.relpath(page, DOCS))
-print(f'update_counts: {n} releases', ('updated ' + ', '.join(changed)) if changed else '(pages already current)')
+print(f'update_counts: {n} releases, {spb} songs of SPB', ('updated ' + ', '.join(changed)) if changed else '(pages already current)')

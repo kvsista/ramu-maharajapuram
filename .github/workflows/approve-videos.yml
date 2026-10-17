@@ -41,6 +41,8 @@ jobs:
           python3 tools/build_watch_latest.py data docs/watch/index.html
           python3 tools/build_listen.py data docs/listen/index.html
           python3 tools/build_news.py docs
+          python3 tools/build_home_new.py data docs/index.html
+          python3 tools/update_counts.py data docs
           python3 tools/stamp_assets.py docs
           git diff --name-only | python3 tools/touch_sitemap.py docs/sitemap.xml
           if [ -n "$(git status --porcelain docs data)" ]; then

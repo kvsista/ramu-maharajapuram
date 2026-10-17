@@ -30,7 +30,7 @@ jobs:
         run: python3 tools/fetch_social.py data docs
       - name: Update the homepage
         run: |
-          python3 tools/build_social.py data docs/index.html
+          python3 tools/build_home_new.py data docs/index.html
           python3 tools/stamp_assets.py docs
       - name: Publish changes
         run: |

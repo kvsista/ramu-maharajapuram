@@ -37,7 +37,6 @@ jobs:
         run: |
           python3 tools/refresh_youtube.py data
           python3 tools/build_listen.py data docs/listen/index.html
-          python3 tools/build_home_latest.py data docs/index.html
 
       - name: Find new videos of Ramu and his new posts
         run: |
@@ -54,6 +53,8 @@ jobs:
       - name: Write news into the pages and refresh the album counts
         run: |
           python3 tools/build_news.py docs
+          python3 tools/build_home_new.py data docs/index.html
+          python3 tools/build_services.py data docs
           python3 tools/update_counts.py data docs
 
       - name: Version stylesheets and scripts

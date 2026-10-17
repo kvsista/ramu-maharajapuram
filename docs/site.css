@@ -616,3 +616,41 @@ a.song-btn { color: inherit; text-decoration: none; }
 .social-player-bar a { color: var(--gold-hi); font-size: .88rem; text-decoration: none; }
 .social-player-bar button { appearance: none; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font: 600 .85rem var(--body); cursor: pointer; }
 .social-player-frame iframe { display: block; width: 100%; height: min(78vh, 720px); border: 0; background: #fff; }
+
+/* Home: one "What's new" strip (songs, posts, news) */
+.whatsnew { padding-block: 64px 40px; }
+.new-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+.new-card { text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.new-thumb { aspect-ratio: 1; border-radius: 10px; background: var(--night-2) center/cover no-repeat; position: relative; border: 1px solid var(--line); transition: border-color .15s; }
+.new-card:hover .new-thumb { border-color: var(--gold); }
+.new-kind { position: absolute; left: 8px; top: 8px; font: 700 .66rem var(--body); letter-spacing: .12em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(17,16,26,.82); color: var(--gold-hi); }
+.new-title { font-weight: 600; font-size: .9rem; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.new-meta { color: var(--muted); font-size: .78rem; }
+@media (max-width: 900px) { .new-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .new-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 46%; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; scrollbar-width: none; }
+  .new-grid::-webkit-scrollbar { display: none; }
+  .new-card { scroll-snap-align: start; }
+}
+
+/* Home: three featured SPB performances */
+.spb-feature .lead { margin-top: 10px; max-width: 62ch; }
+.spb-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+.spb-card { text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.spb-thumb { aspect-ratio: 16/9; border-radius: var(--radius); background: #000 center/cover no-repeat; border: 1px solid var(--line); display: grid; place-items: center; transition: border-color .15s; }
+.spb-card:hover .spb-thumb { border-color: var(--gold); }
+.spb-title { font: 500 1.2rem var(--display); }
+.spb-meta { color: var(--muted); font-size: .88rem; }
+@media (max-width: 760px) { .spb-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; } }
+
+/* Story: at a glance (honours, places, legends) above the timeline */
+.glance { padding-block: 8px 8px; }
+.glance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 26px; }
+.glance-grid p { margin: 0; font-size: .95rem; }
+.glance-grid .label { margin-bottom: 8px; }
+.glance-grid a { color: var(--muted); }
+@media (max-width: 760px) { .glance-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+@media (max-width: 560px) {
+  .whatsnew .social-follow { gap: 16px; }
+  .whatsnew .social-follow .btn { padding: 0; border: 0; background: none; color: var(--gold-hi); font-size: .86rem; min-height: 0; }
+}
