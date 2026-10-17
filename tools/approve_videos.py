@@ -85,7 +85,7 @@ for line in comment.splitlines():
                 w = {'desc': '', 'date': '', 'secs': 0, 'channel': v.get('channel', '')}
             ch = v.get('channel') or w['channel']
             p = partner(v['title'], w['desc'])
-            live.insert(0, {'id': v['id'], 'song': (title if len(picks) == 1 else '') or song_from_title(v['title']), 'film': '', 'year': None,
+            live.insert(0, {'id': v['id'], 'song': (title if len(picks) == 1 else '') or v.get('suggested') or song_from_title(v['title']), 'film': '', 'year': None,
                             'lang': lang_guess(ch, v['title']), 'orig': [], 'spb': cmd == 'listen', 'confidence': 'owner',
                             'venue': venue(ch, v['title'], w['desc'], w['date']), 'secs': w['secs'], 'date': w['date'],
                             'note': f'with {p}' if p else '', 'channel': ch, 'source': 'approved in review issue',
@@ -106,12 +106,13 @@ for line in comment.splitlines():
                 news = load('news.json', [])
                 if post['id'] in {x.get('post') for x in news}:
                     continue
-                news.insert(0, {'post': post['id'], 'type': 'News', 'title': title or headline(post['text']) or f'New on {where}',
+                news.insert(0, {'post': post['id'], 'type': 'News', 'title': title or post.get('suggested') or headline(post['text']) or f'New on {where}',
                                 'date': when, 'venue': '', 'details': headline(post['text'], 220) if title else '', 'link': post['link'],
                                 'photo': '/' + keep_photo(post, 'news') if post.get('photo') else ''})
                 save('news.json', news)
                 done.append(f"Home news: {news[0]['title']}")
             else:
+                title = title or post.get('suggested', '')
                 if not title:
                     done.append(f'Story P{n} skipped: add a title after a colon, e.g. "story P{n}: Canada Day concert"')
                     continue

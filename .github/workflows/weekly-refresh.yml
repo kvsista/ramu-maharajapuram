@@ -10,6 +10,7 @@ on:
 permissions:
   contents: write
   issues: write
+  models: read      # GitHub Models (free) suggests headlines in the review issue
 
 concurrency:
   group: site-update
@@ -45,6 +46,11 @@ jobs:
           python3 tools/discover_posts.py data > posts.json
           # Gopal Sapthaswaram videos (credits in their descriptions) were added to Listen directly
           python3 tools/build_listen.py data docs/listen/index.html
+
+      - name: Suggest headlines and song names (GitHub Models, free)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/suggest_titles.py posts.json candidates.json || true
 
       - name: Write news into the pages and refresh the album counts
         run: |
@@ -84,20 +90,23 @@ jobs:
                '- `add N` puts it on the **Watch** page (`add all` for every video)',
                '- `news PN` shows a post in the **homepage news** (optionally `news PN: Your headline`)',
                '- `story PN: Title` adds a post to the top of the **Story** timeline', '',
+               'Where a **suggested** headline or song name is shown, `story PN`, `news PN` or `listen N` on its own uses it.', '',
                'You can reply more than once. Close the issue when you are done.', '']
           if c:
               L.append(f'### Videos ({len(c)})')
               for i, v in enumerate(c, 1):
                   meta = ' · '.join(x for x in [v.get('channel'), v.get('published'), v.get('length')] if x)
                   tags = (' ✓ his usual channel' if v.get('trusted') else '') + (' · plays on YouTube only' if v.get('blocked') else '')
-                  L.append(f"{i}. [{v['title']}](https://www.youtube.com/watch?v={v['id']}) — {meta}{tags}")
+                  L.append(f"{i}. [{v['title']}](https://www.youtube.com/watch?v={v['id']}) — {meta}{tags}"
+                           + (f"<br>Song: **{v['suggested']}**" if v.get('suggested') else ''))
               L.append('')
           if p:
               L.append(f'### His posts ({len(p)})')
               for i, x in enumerate(p, 1):
                   t = ' '.join(x['text'].split())[:120] or '(no caption)'
                   where = 'Instagram' if x['src'] == 'instagram' else 'Facebook'
-                  L.append(f"P{i}. [{t}]({x['link']}) — {where} · {x['time'][:10]}{' · video' if x.get('video') else ''}")
+                  L.append(f"P{i}. [{t}]({x['link']}) — {where} · {x['time'][:10]}{' · video' if x.get('video') else ''}"
+                           + (f"<br>Suggested headline: **{x['suggested']}**" if x.get('suggested') else ''))
               L.append('')
           L += ['<!-- candidates:' + json.dumps(c, ensure_ascii=False) + ' -->', '<!-- posts:' + json.dumps(p, ensure_ascii=False) + ' -->']
           subprocess.run(['gh', 'label', 'create', 'video-review', '--color', 'D2A95E', '--force'], check=False)
