@@ -10,7 +10,6 @@ on:
 permissions:
   contents: write
   issues: write
-  models: read      # GitHub Models (free) suggests headlines in the review issue
 
 concurrency:
   group: site-update
@@ -47,9 +46,9 @@ jobs:
           # Gopal Sapthaswaram videos (credits in their descriptions) were added to Listen directly
           python3 tools/build_listen.py data docs/listen/index.html
 
-      - name: Suggest headlines and song names (GitHub Models, free)
+      - name: Suggest headlines and song names (Gemini free tier)
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 tools/suggest_titles.py posts.json candidates.json || true
 
       - name: Write news into the pages and refresh the album counts

@@ -1,15 +1,17 @@
-"""Suggest headlines for new posts and clean song names for new videos, using GitHub Models (free in Actions).
+"""Suggest headlines for new posts and clean song names for new videos, using Google's Gemini API free tier.
 
-Usage (in the weekly job, which has `permissions: models: read`):
-  GITHUB_TOKEN=... python3 tools/suggest_titles.py posts.json candidates.json
+Usage (in the weekly job):
+  GEMINI_API_KEY=... python3 tools/suggest_titles.py posts.json candidates.json
+The key comes from Google AI Studio (free) and is stored as the GitHub secret GEMINI_API_KEY.
+(GitHub Models, the first choice, was retired by GitHub on 30 July 2026.)
 Adds a "suggested" field to each item. These are only suggestions shown in the review issue;
 nothing is published until the owner replies. If the service can't be reached, items are left as they are.
 """
-import json, os, re, sys, urllib.error, urllib.request
+import json, os, re, sys, time, urllib.error, urllib.request
 
-TOKEN = os.environ.get('GITHUB_TOKEN', '')
-URL = 'https://models.github.ai/inference/chat/completions'
-MODEL = os.environ.get('SUGGEST_MODEL', 'openai/gpt-4.1-mini')
+TOKEN = os.environ.get('GEMINI_API_KEY', '')
+MODEL = os.environ.get('SUGGEST_MODEL', 'gemini-2.5-flash-lite')
+URL = f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent'
 posts_f, vids_f = sys.argv[1], sys.argv[2]
 
 SYSTEM = """You write short headlines for the website of Ramu Maharajapuram ("SPB Ramu"), a playback and concert singer
@@ -20,16 +22,18 @@ naturally rather than translating word for word. If there is nothing to go on, a
 
 
 def ask(prompt):
-    req = urllib.request.Request(URL, data=json.dumps({'model': MODEL, 'temperature': 0.2, 'max_tokens': 40, 'messages': [
-        {'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': prompt}]}).encode(),
-        headers={'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json'})
+    req = urllib.request.Request(URL, data=json.dumps({
+        'systemInstruction': {'parts': [{'text': SYSTEM}]},
+        'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
+        'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 60}}).encode(),
+        headers={'x-goog-api-key': TOKEN, 'Content-Type': 'application/json'})
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             raw = r.read().decode('utf-8', 'replace')
     except urllib.error.HTTPError as e:
         raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:200]}')
     try:
-        out = json.loads(raw)['choices'][0]['message']['content'].strip().strip('"“”').strip()
+        out = json.loads(raw)['candidates'][0]['content']['parts'][0]['text'].strip().strip('"“”').strip()
     except Exception:
         raise RuntimeError('unexpected reply: ' + raw[:200].replace('\n', ' '))
     out = re.sub(r'[#@]\w+', '', out).strip(' .')
@@ -51,12 +55,13 @@ def run(path, prompt_for):
         if s:
             it['suggested'] = s
             n += 1
+        time.sleep(4.5)  # stay well under the free tier's per-minute limit
     json.dump(items, open(path, 'w'), ensure_ascii=False, indent=1)
     return n
 
 
 if not TOKEN:
-    print('suggest_titles: no token, skipping', file=sys.stderr)
+    print('suggest_titles: no GEMINI_API_KEY, skipping (the issue simply shows no suggestions)', file=sys.stderr)
     sys.exit(0)
 
 np = run(posts_f, lambda x: (f"Write a headline for a timeline entry about this {('Instagram' if x['src'] == 'instagram' else 'Facebook')} post "
