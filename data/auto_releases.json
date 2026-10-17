@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-15",
+ "fetched": "2026-10-17",
  "releases": [
   {
    "source": "deezer",
@@ -10629,48 +10629,6 @@
   },
   {
    "source": "jiosaavn",
-   "title": "SRI VINAYAKA MANASA SMARAMI",
-   "year": 2025,
-   "date": null,
-   "language": "kannada",
-   "label": "Bhakthi Music Channel",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-vinayaka-manasa-smarami/uwafB,6Cyd8_"
-   },
-   "tracks": [
-    {
-     "title": "SRI VINAYAKA MANASA SMARAMI",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-vinayaka-manasa-smarami/Fw4mWSJEXnw"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "SRI RAGHAVENDRA MANASASMARAMI",
-   "year": 2025,
-   "date": null,
-   "language": "kannada",
-   "label": "Bhakthi Music Channel",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-raghavendra-manasasmarami/FKPIADZOUiU_"
-   },
-   "tracks": [
-    {
-     "title": "SRI RAGHAVENDRA MANASASMARAMI",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-raghavendra-manasasmarami/LwlccjtTTl0"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
    "title": "SRI ANJANEYA MANASA SMARAMI",
    "year": 2025,
    "date": null,
@@ -10707,6 +10665,132 @@
      "ramu_sings": true,
      "links": {
       "jiosaavn": "https://www.jiosaavn.com/song/siva-manasasmarami/GEUSSzJ6UAI"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "SRI RAGHAVENDRA MANASASMARAMI",
+   "year": 2025,
+   "date": null,
+   "language": "kannada",
+   "label": "Bhakthi Music Channel",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-raghavendra-manasasmarami/FKPIADZOUiU_"
+   },
+   "tracks": [
+    {
+     "title": "SRI RAGHAVENDRA MANASASMARAMI",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-raghavendra-manasasmarami/LwlccjtTTl0"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "SRI VINAYAKA MANASA SMARAMI",
+   "year": 2025,
+   "date": null,
+   "language": "kannada",
+   "label": "Bhakthi Music Channel",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-vinayaka-manasa-smarami/uwafB,6Cyd8_"
+   },
+   "tracks": [
+    {
+     "title": "SRI VINAYAKA MANASA SMARAMI",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-vinayaka-manasa-smarami/Fw4mWSJEXnw"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Maha Lakshmi Manasasmarami",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
+   },
+   "tracks": [
+    {
+     "title": "Maha Lakshmi Manasasmarami",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Shiridi Vasuda O Sainadha",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
+   },
+   "tracks": [
+    {
+     "title": "Shiridi Vasuda O Sainadha",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Pratyaksha Deva Grahapati Surya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/pratyaksha-deva-grahapati-surya/FNuP5urzQrI_"
+   },
+   "tracks": [
+    {
+     "title": "Pratyaksha Deva Grahapati Surya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/pratyaksha-deva-grahapati-surya/MjcbZhBoc2k"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Sri Rama Rama Jaya Rama",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-rama-rama-jaya-rama/XkryMoNFrUY_"
+   },
+   "tracks": [
+    {
+     "title": "Sri Rama Rama Jaya Rama",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-rama-rama-jaya-rama/CQUyWEx6RHk"
      }
     }
    ]
@@ -10776,42 +10860,63 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Bhakthaprahalladha Sri Narasimha",
+   "title": "Vaarahi Namavali",
    "year": 2025,
    "date": null,
-   "language": "telugu",
+   "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/bhakthaprahalladha-sri-narasimha/xAzEdVsSUzU_"
+    "jiosaavn": "https://www.jiosaavn.com/album/vaarahi-namavali/mD3TxNQLKk8_"
    },
    "tracks": [
     {
-     "title": "Bhakthaprahalladha Sri Narasimha",
+     "title": "Vaarahi Namavali",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/bhakthaprahalladha-sri-narasimha/JSkdWUBGYAA"
+      "jiosaavn": "https://www.jiosaavn.com/song/vaarahi-namavali/Iw4uUhNgeGo"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Neevele Maaku Bhagyam Brahmayya",
+   "title": "Maruthi Maruthi",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/neevele-maaku-bhagyam-brahmayya/ZSwR4sO7q,Q_"
+    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
    },
    "tracks": [
     {
-     "title": "Neevele Maaku Bhagyam Brahmayya",
+     "title": "Maruthi Maruthi",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/neevele-maaku-bhagyam-brahmayya/Py8FWDFlZHU"
+      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Sri Guru Sri Pothulurayya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
+   },
+   "tracks": [
+    {
+     "title": "Sri Guru Sri Pothulurayya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
      }
     }
    ]
@@ -10881,6 +10986,48 @@
   },
   {
    "source": "jiosaavn",
+   "title": "Bhakthaprahalladha Sri Narasimha",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/bhakthaprahalladha-sri-narasimha/xAzEdVsSUzU_"
+   },
+   "tracks": [
+    {
+     "title": "Bhakthaprahalladha Sri Narasimha",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/bhakthaprahalladha-sri-narasimha/JSkdWUBGYAA"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Neevele Maaku Bhagyam Brahmayya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/neevele-maaku-bhagyam-brahmayya/ZSwR4sO7q,Q_"
+   },
+   "tracks": [
+    {
+     "title": "Neevele Maaku Bhagyam Brahmayya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/neevele-maaku-bhagyam-brahmayya/Py8FWDFlZHU"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
    "title": "Sri Surya Ninu Kolichithi",
    "year": 2025,
    "date": null,
@@ -10938,153 +11085,6 @@
      "ramu_sings": true,
      "links": {
       "jiosaavn": "https://www.jiosaavn.com/song/anjaneyar-namavali/PkURZEBcAwo"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Vaarahi Namavali",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaarahi-namavali/mD3TxNQLKk8_"
-   },
-   "tracks": [
-    {
-     "title": "Vaarahi Namavali",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaarahi-namavali/Iw4uUhNgeGo"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Maruthi Maruthi",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
-   },
-   "tracks": [
-    {
-     "title": "Maruthi Maruthi",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Sri Guru Sri Pothulurayya",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
-   },
-   "tracks": [
-    {
-     "title": "Sri Guru Sri Pothulurayya",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Pratyaksha Deva Grahapati Surya",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/pratyaksha-deva-grahapati-surya/FNuP5urzQrI_"
-   },
-   "tracks": [
-    {
-     "title": "Pratyaksha Deva Grahapati Surya",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/pratyaksha-deva-grahapati-surya/MjcbZhBoc2k"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Sri Rama Rama Jaya Rama",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-rama-rama-jaya-rama/XkryMoNFrUY_"
-   },
-   "tracks": [
-    {
-     "title": "Sri Rama Rama Jaya Rama",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-rama-rama-jaya-rama/CQUyWEx6RHk"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Maha Lakshmi Manasasmarami",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
-   },
-   "tracks": [
-    {
-     "title": "Maha Lakshmi Manasasmarami",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Shiridi Vasuda O Sainadha",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
-   },
-   "tracks": [
-    {
-     "title": "Shiridi Vasuda O Sainadha",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
      }
     }
    ]
