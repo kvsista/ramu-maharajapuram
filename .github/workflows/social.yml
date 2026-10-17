@@ -1,0 +1,45 @@
+# Every day: copy Ramu's latest Facebook Page and Instagram posts onto the homepage.
+# Uses the META_PAGE_TOKEN secret (a Page access token). Free: GitHub Actions + Meta's Graph API.
+name: Social posts
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # 07:30 India time
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-update
+  cancel-in-progress: false
+
+jobs:
+  social:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet pillow
+      - name: Fetch latest posts
+        env:
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+        run: python3 tools/fetch_social.py data docs
+      - name: Update the homepage
+        run: |
+          python3 tools/build_social.py data docs/index.html
+          python3 tools/stamp_assets.py docs
+      - name: Publish changes
+        run: |
+          if [ -n "$(git status --porcelain docs data)" ]; then
+            git config user.name "Site updater"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs data
+            git commit -m "Latest social posts $(date +%Y-%m-%d)"
+            git push
+          else
+            echo "No new posts."
+          fi
