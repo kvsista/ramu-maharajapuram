@@ -5,7 +5,7 @@ Usage (in the weekly job, which has `permissions: models: read`):
 Adds a "suggested" field to each item. These are only suggestions shown in the review issue;
 nothing is published until the owner replies. If the service can't be reached, items are left as they are.
 """
-import json, os, re, sys, urllib.request
+import json, os, re, sys, urllib.error, urllib.request
 
 TOKEN = os.environ.get('GITHUB_TOKEN', '')
 URL = 'https://models.github.ai/inference/chat/completions'
@@ -23,8 +23,15 @@ def ask(prompt):
     req = urllib.request.Request(URL, data=json.dumps({'model': MODEL, 'temperature': 0.2, 'max_tokens': 40, 'messages': [
         {'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': prompt}]}).encode(),
         headers={'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json'})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        out = json.load(r)['choices'][0]['message']['content'].strip().strip('"“”').strip()
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            raw = r.read().decode('utf-8', 'replace')
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:200]}')
+    try:
+        out = json.loads(raw)['choices'][0]['message']['content'].strip().strip('"“”').strip()
+    except Exception:
+        raise RuntimeError('unexpected reply: ' + raw[:200].replace('\n', ' '))
     out = re.sub(r'[#@]\w+', '', out).strip(' .')
     return '' if not out or out.upper() == 'NONE' or len(out) > 90 else out
 
@@ -39,7 +46,7 @@ def run(path, prompt_for):
         try:
             s = ask(p)
         except Exception as e:
-            print('suggest_titles: stopped,', e.__class__.__name__, getattr(e, 'code', ''), file=sys.stderr)
+            print('suggest_titles: stopped,', e, file=sys.stderr)
             break
         if s:
             it['suggested'] = s
