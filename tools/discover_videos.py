@@ -63,7 +63,7 @@ for url, channel in pages:
         continue
     for v in out:
         hay = f"{v['title']} {v['channel']}"
-        if not re.search(r'\bramu\b|ராமு|రాము|maharajapuram', hay, re.I) or NOT_HIM.search(hay):
+        if not re.search(r'\bramu\b|ராமு|రాము', hay, re.I) or NOT_HIM.search(hay):
             continue
         if v['id'] in seen or v['id'] in on_site:
             continue
