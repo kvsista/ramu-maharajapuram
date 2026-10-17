@@ -50,12 +50,17 @@ def save_photo(key, url):
 
 
 # Accept either the Page key or the user key it came from: a user key is swapped for the Page's own key.
-accounts = graph('me/accounts', fields='id,name,access_token') if 'error' not in (who := graph('me', fields='id,name,metadata{type}', metadata=1)) and \
-    who.get('metadata', {}).get('type') == 'user' else None
+# (Only a user key can list the Pages it manages; for a Page key this call fails and we carry on.)
+try:
+    accounts = graph('me/accounts', fields='id,name,access_token')
+except SystemExit:
+    accounts = None
 if accounts is not None:
+    print('fetch_social: key manages', len(accounts.get('data', [])), 'Page(s)')
     pages = [a for a in accounts.get('data', []) if 'ramu' in a['name'].lower()] or accounts.get('data', [])
     if not pages:
-        raise SystemExit('fetch_social: this key belongs to a person who manages no Facebook Page')
+        raise SystemExit('fetch_social: this key belongs to a person who manages no Facebook Page '
+                         '(add yourself to the Page with full control, then grant pages_show_list when making the key)')
     print(f"fetch_social: key is a user key; using the Page key for {pages[0]['name']}"
           ' (save that Page key as META_PAGE_TOKEN so it never expires)')
     TOKEN = pages[0]['access_token']
