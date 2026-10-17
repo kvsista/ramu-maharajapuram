@@ -10,8 +10,24 @@ nothing is published until the owner replies. If the service can't be reached, i
 import json, os, re, sys, time, urllib.error, urllib.request
 
 TOKEN = os.environ.get('GEMINI_API_KEY', '')
-MODEL = os.environ.get('SUGGEST_MODEL', 'gemini-2.5-flash-lite')
-URL = f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent'
+API = 'https://generativelanguage.googleapis.com/v1beta/'
+
+
+def pick_model():
+    """Google renames and retires models, so choose from what the key can use today:
+    the newest stable 'flash-lite', else the newest stable 'flash'."""
+    if os.environ.get('SUGGEST_MODEL'):
+        return os.environ['SUGGEST_MODEL']
+    req = urllib.request.Request(API + 'models?pageSize=200', headers={'x-goog-api-key': TOKEN})
+    names = [m['name'].split('/')[-1] for m in json.load(urllib.request.urlopen(req, timeout=30)).get('models', [])
+             if 'generateContent' in m.get('supportedGenerationMethods', [])]
+    stable = [n for n in names if re.fullmatch(r'gemini-[\d.]+-flash(-lite)?', n)]
+    ver = lambda n: [int(x) for x in re.findall(r'\d+', n)]
+    for kind in ('flash-lite', 'flash'):
+        pool = sorted((n for n in stable if n.endswith(kind)), key=ver)
+        if pool:
+            return pool[-1]
+    return next((n for n in names if 'flash' in n), names[0])
 posts_f, vids_f = sys.argv[1], sys.argv[2]
 
 SYSTEM = """You write short headlines for the website of Ramu Maharajapuram ("SPB Ramu"), a playback and concert singer
@@ -22,7 +38,7 @@ naturally rather than translating word for word. If there is nothing to go on, a
 
 
 def ask(prompt):
-    req = urllib.request.Request(URL, data=json.dumps({
+    req = urllib.request.Request(f'{API}models/{MODEL}:generateContent', data=json.dumps({
         'systemInstruction': {'parts': [{'text': SYSTEM}]},
         'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
         'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 60}}).encode(),
@@ -64,6 +80,12 @@ if not TOKEN:
     print('suggest_titles: no GEMINI_API_KEY, skipping (the issue simply shows no suggestions)', file=sys.stderr)
     sys.exit(0)
 
+try:
+    MODEL = pick_model()
+except Exception as e:
+    print('suggest_titles: could not list models,', e, file=sys.stderr)
+    sys.exit(0)
+print('suggest_titles: using', MODEL, file=sys.stderr)
 np = run(posts_f, lambda x: (f"Write a headline for a timeline entry about this {('Instagram' if x['src'] == 'instagram' else 'Facebook')} post "
                              f"by Ramu, dated {x['time'][:10]}. Caption:\n{x['text']}") if x.get('text', '').strip() else None)
 nv = run(vids_f, lambda v: ("Give only the name of the song being performed in this YouTube video, in its usual English spelling, "
