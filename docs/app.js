@@ -38,6 +38,8 @@
   const $ = (id) => document.getElementById(id);
 
   let queue = [], idx = -1, shuffle = false, player = null, ready = false, pending = null, playing = false;
+  // The mini player appears on other pages only once the visitor has actually played something.
+  let started = false;
   let dockEl = null, raf = 0;
   let source = 'yt';
   const SOURCES = ['yt', 'apple', 'spotify', 'deezer'];
@@ -79,6 +81,7 @@
           },
           onStateChange: (e) => {
             playing = e.data === YT.PlayerState.PLAYING;
+            if (playing && !started) { started = true; save(); }
             if (e.data === YT.PlayerState.ENDED) next(); else { paint(); emit('state'); }
             if (playing) pauseOtherMedia();
           },
@@ -138,7 +141,7 @@
   }
 
   function current() { return idx >= 0 ? queue[idx] : null; }
-  function show() { shell.hidden = !current(); layout(); }
+  function show() { shell.hidden = !current() || (!dockEl && !started); layout(); }
 
   function paint() {
     const s = current();
@@ -151,6 +154,7 @@
   function setQueue(q, i) { queue = q.map((s) => ({ id: s.id, t: s.t, a: s.a, l: s.l })); idx = i; }
 
   function play(q, i) {
+    started = true;
     if (q) setQueue(q, i); else if (i != null) idx = i;
     const s = current(); if (!s) return;
     if (source !== 'yt' && appleEmbed(s)) { applySource(); show(); paint(); save(); emit('change'); return; }
@@ -181,7 +185,7 @@
   function pause() { if (player && ready && playing) player.pauseVideo(); }
   function close() {
     if (player) { try { player.destroy(); } catch (e) {} }
-    player = null; ready = false; playing = false; queue = []; idx = -1;
+    player = null; ready = false; playing = false; queue = []; idx = -1; started = false;
     const v = $('rp-video'); v.innerHTML = '<div id="rp-yt"></div>';
     showApple(''); shell.classList.remove('am'); $('rp-am').hidden = true; $('rp-video').hidden = false;
     try { sessionStorage.removeItem('rp'); } catch (e) {}
@@ -209,8 +213,8 @@
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', schedule);
   const ro = 'ResizeObserver' in window ? new ResizeObserver(schedule) : null;
-  function dock(el) { dockEl = el; if (ro) ro.observe(el); layout(); }
-  function undock() { if (ro && dockEl) ro.unobserve(dockEl); dockEl = null; layout(); }
+  function dock(el) { dockEl = el; if (ro) ro.observe(el); show(); }
+  function undock() { if (ro && dockEl) ro.unobserve(dockEl); dockEl = null; show(); }
 
   /* ---------- keep music and page videos from playing over each other ---------- */
   function pauseOtherMedia() { document.querySelectorAll('main video').forEach((v) => { if (!v.paused) v.pause(); }); }
@@ -220,7 +224,7 @@
   function save() {
     try {
       const t = player && ready && player.getCurrentTime ? player.getCurrentTime() : 0;
-      if (current()) sessionStorage.setItem('rp', JSON.stringify({ queue, idx, shuffle, t }));
+      if (current() && started) sessionStorage.setItem('rp', JSON.stringify({ queue, idx, shuffle, t }));
     } catch (e) {}
   }
   setInterval(() => { if (playing) save(); }, 5000);
@@ -248,7 +252,7 @@
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest('a[href]'); const u = internal(a);
     if (!u) return;
-    if (!current()) return; // nothing playing: ordinary navigation is fine
+    if (!current() || !started) return; // nothing played yet: ordinary navigation is fine
     e.preventDefault();
     go(u.href, true);
   });
@@ -333,10 +337,10 @@
   try {
     const saved = JSON.parse(sessionStorage.getItem('rp') || 'null');
     if (saved && saved.queue && saved.queue.length && !document.body.classList.contains('listen-page')) {
-      shuffle = !!saved.shuffle;
+      shuffle = !!saved.shuffle; started = true;
       prepare(saved.queue, saved.idx, saved.t);
     } else if (saved && saved.queue && saved.queue.length) {
-      shuffle = !!saved.shuffle; setQueue(saved.queue, saved.idx); window.RP._resumeAt = saved.t;
+      shuffle = !!saved.shuffle; started = true; setQueue(saved.queue, saved.idx); window.RP._resumeAt = saved.t;
     }
   } catch (e) {}
   history.replaceState(Object.assign({}, history.state, { rp: true, y: scrollY }), '');
