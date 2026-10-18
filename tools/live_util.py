@@ -20,7 +20,7 @@ TRUSTED = {
 EMBED_BLOCKED_CHANNELS = {'etvteluguindia', 'ETV Saragalu', 'ETV Telugu', 'ETV Plus India'}
 # Other people called Ramu, and channels that only post SPB's own recordings.
 NOT_HIM = re.compile(r'ramachandran|santhanam|vaibhav ramu|ramu thangaraj|ramu rathod|ramu yadav|nurani ramu|'
-                     r'ramu music|ramu kaka|sridevi drama|jabardasth|ramu master|dance perf|#shorts|idhi kadha pandagante|hyper aadi|\bramu\b.*\b(1966|1968)\b|ramu telugu (full )?movie|- topic', re.I)
+                     r'ramu music|ramu.s channel|ramu kaka|sridevi drama|jabardasth|ramu master|dance perf|#shorts|idhi kadha pandagante|hyper aadi|\bramu\b.*\b(1966|1968)\b|ramu telugu (full )?movie|- topic', re.I)
 TELUGU_CHANNELS = {'etvteluguindia', 'ETV Saragalu', 'ChimataMusic-Kuteeram Concerts', 'chimatamusic1', 'Ramana Juvvadi'}
 TAMIL_CHANNELS = {'Gopal Sapthaswaram'}
 
