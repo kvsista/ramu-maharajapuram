@@ -90,7 +90,33 @@ function apply() {
 // The page lists each category A to Z in turn; "All" re-sorts the whole list A to Z.
 const key = (li) => li.querySelector('.st').textContent.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
 const byCategory = items.slice(), byTitle = items.slice().sort((a, b) => key(a).localeCompare(key(b)));
+// Albums: the discography panel, fetched the first time the tab is opened.
+let albumsLoaded = false;
+function showAlbums() {
+  const panel = $('albums-panel');
+  if (albumsLoaded) return;
+  albumsLoaded = true;
+  const url = new URL('listen/' + panel.dataset.src, document.querySelector('script[src*="app.js"]').src);
+  fetch(url).then(r => r.text()).then(html => {
+    panel.innerHTML = html;
+    const rels = [...panel.querySelectorAll('.rel')], aq = $('aq'), al = $('alang');
+    const filter = () => {
+      const t = aq.value.trim().toLowerCase(), l = al.value; let n = 0;
+      rels.forEach(r => { const ok = (!l || r.dataset.lang === l) && (!t || r.dataset.q.includes(t)); r.hidden = !ok; if (ok) n++; });
+      $('acount').textContent = n + (n === 1 ? ' release' : ' releases');
+      $('aempty').hidden = n > 0;
+    };
+    aq.addEventListener('input', filter); al.addEventListener('change', filter);
+  }).catch(() => { albumsLoaded = false; panel.innerHTML = '<p class="empty">Couldn\u2019t load the albums. Check your connection and tap Albums again.</p>'; });
+}
 function setCat(c) {
+  const albums = c === 'albums';
+  $('songs-panel').hidden = albums; $('albums-panel').hidden = !albums;
+  document.querySelectorAll('.cat').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === c)));
+  // Keep the chosen tab visible in the scrolling tab row (without moving the page).
+  const row = document.querySelector('.cats'), tab = row.querySelector('[aria-selected="true"]');
+  if (tab && (tab.offsetLeft < row.scrollLeft || tab.offsetLeft + tab.offsetWidth > row.scrollLeft + row.clientWidth)) row.scrollLeft = tab.offsetLeft - 16;
+  if (albums) { cat = c; showAlbums(); return; }
   if ((c === 'all') !== (cat === 'all') || !setCat.done) { $('songs').append(...(c === 'all' ? byTitle : byCategory)); setCat.done = true; }
   cat = c; langSel.value = ''; dtySel.value = '';
   document.querySelectorAll('.cat').forEach(b => b.setAttribute('aria-selected', String(b.dataset.c === c)));
@@ -101,9 +127,9 @@ q.addEventListener('input', apply);
 langSel.addEventListener('change', apply);
 dtySel.addEventListener('change', apply);
 document.querySelectorAll('.cat').forEach(b => b.addEventListener('click', () => setCat(b.dataset.c)));
-// Open on the category of the song that is playing (or deep-linked), else on Songs of SPB.
+// Open on the category of the song that is playing (or deep-linked), else on Songs of SPB; #albums opens Albums.
 { const c = RP.current(), i = hv && byId.has(hv) ? byId.get(hv) : c && byId.has(c.id) ? byId.get(c.id) : null;
-  setCat(i != null ? items[i].dataset.cat : 'spb'); }
+  setCat(location.hash === '#albums' && $('albums-panel') && document.querySelector('.cat[data-c=albums]') ? 'albums' : i != null ? items[i].dataset.cat : 'spb'); }
 
 // Phones: once the player is pinned at the top, hide the button row to give the list more room.
 const grid = document.querySelector('.listen-grid'), pcol = document.querySelector('.player-col');

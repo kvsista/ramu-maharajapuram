@@ -4,7 +4,7 @@ Usage: python3 tools/build_listen.py "research_notes/Ramu discography" docs/list
 Only songs whose YouTube credits name Ramu on an album from his verified discography are included
 (see tools/ytlist.py, ytverify.py, ytfilter.py).
 """
-import json, os, re, sys, html
+import hashlib, json, os, re, sys, html
 
 D, OUT = sys.argv[1], sys.argv[2]
 v = json.load(open(D + '/youtube_verified.json'))
@@ -155,7 +155,14 @@ for i, s in enumerate(songs):
 
 cats = ''.join(f'<button type="button" class="cat" role="tab" data-c="{c}" aria-selected="{str(c == ORDER[0]).lower()}">{CATS[c]} <span>{ccount[c]}</span></button>'
                for c in ORDER if ccount[c])
-cats += f'<button type="button" class="cat" role="tab" data-c="all" aria-selected="false">All <span>{len(songs)}</span></button>'
+cats += f'<button type="button" class="cat" role="tab" data-c="all" aria-selected="false">All songs <span>{len(songs)}</span></button>'
+# Albums: the discography (built by build_music.py as listen/albums.html), loaded when the tab is opened.
+ap = os.path.join(os.path.dirname(OUT), 'albums.html')
+albums_ver = hashlib.sha1(open(ap, 'rb').read()).hexdigest()[:10] if os.path.exists(ap) else ''
+n_albums = len(re.findall(r'<details class="rel"', open(ap).read())) if albums_ver else 0
+if n_albums:
+    cats += f'<button type="button" class="cat" role="tab" data-c="albums" aria-selected="false">Albums <span>{n_albums}</span></button>'
+albums_ld = json.load(open(os.path.join(D, 'albums_ld.json'))) if os.path.exists(os.path.join(D, 'albums_ld.json')) else []
 LANGS = [(k, n) for k, n in LANG.items() if k != 'other' and counts[k]]
 dopts = ''.join(f'<option value="{k}">{n} ({dcount[k]})</option>' for k, n, _ in sorted(DEITIES, key=lambda d: -dcount[d[0]]) if dcount[k])
 
@@ -166,6 +173,7 @@ ld = {"@context": "https://schema.org", "@graph": [
      "track": [{"@type": "MusicRecording", "name": s['title'], "inAlbum": {"@type": "MusicAlbum", "name": s['album']},
                 "byArtist": {"@id": "https://ramumaharajapuram.com/#ramu"},
                 "url": f"https://www.youtube.com/watch?v={s['id']}"} for s in songs[:60]]},
+    {"@type": "ItemList", "name": "Ramu Maharajapuram: albums and singles", "numberOfItems": len(albums_ld), "itemListElement": albums_ld},
     {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Ramu Maharajapuram", "item": "https://ramumaharajapuram.com/"},
         {"@type": "ListItem", "position": 2, "name": "Listen", "item": "https://ramumaharajapuram.com/listen/"}]}]}
@@ -207,7 +215,6 @@ page = f'''<!doctype html>
       <a href="../">Home</a>
       <a href="../life-story/">Story</a>
       <a href="../listen/" aria-current="page">Listen</a>
-      <a href="../music/">Music</a>
       <a href="../watch/">Watch</a>
     </nav>
     <a class="btn primary small invite-btn" href="../invite/">Invite</a>
@@ -219,7 +226,7 @@ page = f'''<!doctype html>
     <div class="wrap">
       <p class="label">Listen</p>
       <h1>Hear Ramu <em>sing</em></h1>
-      <p class="lead">{len(songs)} songs: the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam as Ramu sings them on stage and on TV, his own film songs, and his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
+      <p class="lead">{len(songs)} songs{f' and {n_albums} albums' if n_albums else ''}: the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam as Ramu sings them on stage and on TV, his own film songs, and his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
     </div>
   </section>
 
@@ -248,6 +255,7 @@ page = f'''<!doctype html>
       </div>
       <div class="list-col">
         <div class="cats" role="tablist" aria-label="Categories">{cats}</div>
+        <div id="songs-panel">
         <div class="toolbar" style="margin-top:14px">
           <label class="search"><span class="sr">Search songs</span><input type="search" id="q" placeholder="Search a song, film or album" autocomplete="off"></label>
         </div>
@@ -260,6 +268,8 @@ page = f'''<!doctype html>
 {chr(10).join(rows)}
         </ol>
         <p class="empty" id="empty" hidden>No songs match. Try another word or clear the filter.</p>
+        </div>
+        <div id="albums-panel" data-src="albums.html?v={albums_ver}" hidden><p class="count">Loading albums…</p></div>
       </div>
     </div>
   </section>
@@ -269,7 +279,7 @@ page = f'''<!doctype html>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
     <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="../invite/">Invite Ramu</a></span>
-    <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../music/">Music</a> · <a href="../watch/">Watch</a> · <a href="../invite/#press">Press kit</a> · <a href="../invite/">Invite</a></span>
+    <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../watch/">Watch</a> · <a href="../invite/#press">Press kit</a> · <a href="../invite/">Invite</a></span>
     <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer and voice artist. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>
 </footer>

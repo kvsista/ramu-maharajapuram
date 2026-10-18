@@ -31,7 +31,7 @@ jobs:
       - name: Rebuild discography
         run: |
           python3 tools/merge.py data
-          python3 tools/build_music.py data docs/music/index.html
+          python3 tools/build_music.py data docs/listen/albums.html
 
       - name: Add new YouTube releases and rebuild Listen
         run: |
