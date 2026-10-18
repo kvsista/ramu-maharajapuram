@@ -676,3 +676,17 @@ a.song-btn { color: inherit; text-decoration: none; }
 @media (max-width: 560px) { .reel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } .reels .social-follow { gap: 16px; } .reels .social-follow .btn { padding: 0; border: 0; background: none; color: var(--gold-hi); font-size: .86rem; } }
 @media (max-width: 560px) { .reel-card:nth-child(n+7) { display: none; } }
 .cats { position: relative; }
+
+/* Listen → Albums: play an album or one of its songs in the site player */
+.rel-play { appearance: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 12px; border-radius: 999px; border: 0; background: var(--gold); color: var(--on-gold); font: 600 .82rem var(--body); cursor: pointer; }
+.rel-play::before, .trk-play::before { content: ""; border-style: solid; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent currentColor; }
+.tracks li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; }
+.trk-play { appearance: none; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--gold-hi); display: grid; place-items: center; padding: 0 0 0 2px; cursor: pointer; }
+.trk-play.off { border: 0; cursor: default; }
+.trk-play.off::before { content: none; }
+@media (hover: hover) { .trk-play:not(.off):hover { border-color: var(--gold); } }
+.tracks li.playing .t { color: var(--gold-hi); }
+.tracks li.playing .trk-play { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
+#albums-panel .rel summary { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+#albums-panel .rel summary .chips { grid-column: 1; grid-row: auto; justify-content: flex-start; padding-left: 1.3em; flex-wrap: wrap; }
+#albums-panel .tracks { padding-left: 1.3em; }

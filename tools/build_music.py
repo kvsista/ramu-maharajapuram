@@ -56,13 +56,24 @@ for v in d['videos']:
         t=v['title']; t=re.sub(r'\s*\|\s*Maharajapuram Ramu\s*','',t); t=t.split('|')[0].strip() if not t.startswith('SP Balasubrahmanyam') else 'SPB tribute: '+t.split('|')[2].strip()
         t=t.replace('&', ', with')
         vids+=f'<li><a href="{E(v["url"])}" target="_blank" rel="noopener">{E(t)}</a><span>{E(v.get("channel"))} · {v.get("year") or ""}</span></li>'
+# Songs with an official YouTube release can play in the site's own player (the same videos as Listen).
+_norm=lambda t: re.sub(r'[^a-z0-9]','',re.sub(r'\(.*?\)','',(t or '').lower()))
+yt={}
+for _x in json.load(open(D+'/youtube_verified.json')):
+    yt.setdefault((_norm((_x.get('meta') or {}).get('album')),_norm(_x['title'])),_x['id'])
+PLAY=''  # the play triangle is drawn in CSS (.trk-play::before, .rel-play::before)
+def track(r,t):
+    vid=yt.get((_norm(r['title']),_norm(t['title'])))
+    btn=(f'<button type="button" class="trk-play" aria-label="Play {E(disp(t["title"]))}">{PLAY}</button>' if vid else '<span class="trk-play off" aria-hidden="true"></span>')
+    return f'<li{f" data-id={chr(34)}{vid}{chr(34)}" if vid else ""}>{btn}<span class="t">{E(disp(t["title"]))}</span><span class="chips">{chips(t["links"],"chip sm")}</span></li>'
 rows=[]
 for r in cat:
     lang=r['language']; L=LANG.get(lang) if lang else ''
-    tr=''.join(f'<li><span class="t">{E(disp(t["title"]))}</span><span class="chips">{chips(t["links"],"chip sm")}</span></li>' for t in r['tracks'])
+    tr=''.join(track(r,t) for t in r['tracks'])
     n=len(r['tracks'])
+    np_=tr.count('data-id=')
     rows.append(f'''<details class="rel" data-lang="{lang or 'other'}" data-q="{E((disp(r['title'])+' '+' '.join(t['title'] for t in r['tracks'])).lower())}">
-<summary><span class="rt">{E(disp(r['title']))}</span><span class="rm">{' · '.join(x for x in [str(r['year'] or ''), L, E(r.get('label') or '')] if x)} · {n} song{'s' if n!=1 else ''}</span><span class="chips">{chips(r['links'])}</span></summary>
+<summary><span class="rt">{E(disp(r['title']))}</span><span class="rm">{' · '.join(x for x in [str(r['year'] or ''), L, E(r.get('label') or '')] if x)} · {n} song{'s' if n!=1 else ''}{f' · {np_} play here' if np_ and np_<n else ''}</span><span class="chips">{('<button type="button" class="rel-play">'+PLAY+'Play</button>') if np_ else ''}{chips(r['links'])}</span></summary>
 <ol class="tracks">{tr}</ol></details>''')
 ap=d['artist_pages']
 def first(pl,name=None):
@@ -77,7 +88,7 @@ ld_items=[{"@type":"ListItem","position":i+1,"item":{"@type":"MusicAlbum","name"
 json.dump(ld_items,open(D+'/albums_ld.json','w'),ensure_ascii=False)
 langs=''.join(f'<option value="{k}">{LANG.get(k if k!="other" else None)} ({cnt.get(None if k=="other" else k,0)})</option>' for k in ['telugu','tamil','kannada','sanskrit','other'] if cnt.get(None if k=="other" else k))
 panel=f'''<div class="albums-head">
-  <p class="lead">{len(rel)} albums and singles, {ntracks} songs, {min(years)}–{max(years)}. Tap a release to see its songs and where to stream them.</p>
+  <p class="lead">{len(cat)} albums and singles, {sum(len(r['tracks']) for r in cat)} songs, {min(years)}–{max(years)}. Press Play to hear an album here, or open a release to pick a song or a streaming app. His film soundtracks are under His film songs.</p>
 </div>
 <div class="toolbar" style="margin-top:14px">
   <label class="search"><span class="sr">Search albums and songs</span><input type="search" id="aq" placeholder="Search an album or song" autocomplete="off"></label>

@@ -107,7 +107,22 @@ function showAlbums() {
       $('aempty').hidden = n > 0;
     };
     aq.addEventListener('input', filter); al.addEventListener('change', filter);
+    // Play an album (or one song of it) in the site player; the rest of that album follows.
+    panel.addEventListener('click', (e) => {
+      const b = e.target.closest('.rel-play, .trk-play:not(.off)'); if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      const rel = b.closest('.rel'), ids = [...rel.querySelectorAll('li[data-id]')].map(li => li.dataset.id).filter(id => byId.has(id));
+      if (!ids.length) return;
+      const li = b.closest('li[data-id]'), start = li ? Math.max(0, ids.indexOf(li.dataset.id)) : 0;
+      RP.play(ids.map(id => SONGS[byId.get(id)]), start);
+      rel.open = true;
+    });
+    markAlbum();
   }).catch(() => { albumsLoaded = false; panel.innerHTML = '<p class="empty">Couldn\u2019t load the albums. Check your connection and tap Albums again.</p>'; });
+}
+function markAlbum() {
+  const c = RP.current();
+  document.querySelectorAll('#albums-panel li[data-id]').forEach(li => li.classList.toggle('playing', !!c && li.dataset.id === c.id));
 }
 function setCat(c) {
   const albums = c === 'albums';
@@ -141,7 +156,7 @@ addEventListener('scroll', onScroll, { passive: true });
 small.addEventListener('change', stuck);
 
 RP.dock($('dock'));
-const offChange = RP.on('change', mark), offState = RP.on('state', mark);
-RP.onLeave(() => { offChange(); offState(); removeEventListener('scroll', onScroll); small.removeEventListener('change', stuck); });
+const offChange = RP.on('change', mark), offState = RP.on('state', mark), offAlbum = RP.on('change', markAlbum);
+RP.onLeave(() => { offChange(); offState(); offAlbum(); removeEventListener('scroll', onScroll); small.removeEventListener('change', stuck); });
 stuck();
 mark();

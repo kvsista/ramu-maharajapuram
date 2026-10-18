@@ -36,6 +36,7 @@ jobs:
       - name: Add new YouTube releases and rebuild Listen
         run: |
           python3 tools/refresh_youtube.py data
+          python3 tools/build_music.py data docs/listen/albums.html   # again, so new YouTube songs are playable in Albums
           python3 tools/build_listen.py data docs/listen/index.html
 
       - name: Find new videos of Ramu and his new posts
