@@ -654,3 +654,13 @@ a.song-btn { color: inherit; text-decoration: none; }
   .whatsnew .social-follow { gap: 16px; }
   .whatsnew .social-follow .btn { padding: 0; border: 0; background: none; color: var(--gold-hi); font-size: .86rem; min-height: 0; }
 }
+
+/* Story: interviews and articles */
+.media-list { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.media-list li { display: grid; grid-template-columns: 90px minmax(0, 1fr) auto; gap: 4px 20px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.media-list time { color: var(--gold-hi); font-family: var(--display); font-variant-numeric: tabular-nums; }
+.media-list a { color: var(--text); font-weight: 600; text-decoration: none; }
+.media-list a:hover { color: var(--gold-hi); }
+.media-list p { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
+.media-kind { color: var(--muted); font-size: .8rem; white-space: nowrap; }
+@media (max-width: 640px) { .media-list li { grid-template-columns: minmax(0, 1fr); } .media-kind { white-space: normal; } }

@@ -209,7 +209,6 @@ page = f'''<!doctype html>
       <a href="../listen/" aria-current="page">Listen</a>
       <a href="../music/">Music</a>
       <a href="../watch/">Watch</a>
-      <a href="../press/">Press</a>
     </nav>
     <a class="btn primary small invite-btn" href="../invite/">Invite</a>
   </div>
@@ -270,7 +269,7 @@ page = f'''<!doctype html>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Ramu Maharajapuram</span>
     <span><a href="mailto:ramusinger@gmail.com">ramusinger@gmail.com</a> · <a href="../invite/">Invite Ramu</a></span>
-    <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../music/">Music</a> · <a href="../watch/">Watch</a> · <a href="../press/">Press</a> · <a href="../invite/">Invite</a></span>
+    <span><a href="../">Home</a> · <a href="../life-story/">Story</a> · <a href="../music/">Music</a> · <a href="../watch/">Watch</a> · <a href="../invite/#press">Press kit</a> · <a href="../invite/">Invite</a></span>
     <span class="disamb">Ramu Maharajapuram, “SPB Ramu”, playback and concert singer and voice artist. Not to be confused with the Carnatic vocalist Maharajapuram S. Ramachandran.</span>
   </div>
 </footer>
