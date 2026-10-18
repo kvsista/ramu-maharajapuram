@@ -28,6 +28,10 @@ jobs:
         env:
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
         run: python3 tools/fetch_social.py data docs
+      - name: Headlines for new posts (Gemini free tier)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 tools/post_headlines.py data || true
       - name: Update the homepage
         run: |
           python3 tools/build_home_new.py data docs/index.html

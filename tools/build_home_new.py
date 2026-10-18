@@ -49,12 +49,13 @@ for n in news:
                   'img': n.get('photo', ''), 'ext': True, 'embed': n['link'].rstrip('/') + '/embed/' if 'instagram.com' in n['link'] else ''})
 
 social = load('social.json', {'items': []})
+headlines = load('post_titles.json', {})  # clean headlines written by tools/post_headlines.py
 for p in social.get('items', []):
     if p['link'] in news_links:
         continue
     where = 'Instagram' if p['src'] == 'instagram' else 'Facebook'
     video = p.get('video') or re.search(r'/(reel|videos?)/', p['link'])
-    items.append({'kind': 'Post', 'date': p['time'][:10], 'title': snippet(p['text']) or ('A video on ' if video else 'A photo on ') + where,
+    items.append({'kind': 'Post', 'date': p['time'][:10], 'title': headlines.get(p['id']) or snippet(p['text']) or ('A video on ' if video else 'A photo on ') + where,
                   'meta': where, 'href': p['link'], 'img': p.get('photo') or '', 'play': bool(video), 'ext': True,
                   'embed': p['link'].rstrip('/') + '/embed/' if p['src'] == 'instagram' else ''})
 

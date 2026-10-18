@@ -7,53 +7,13 @@ The key comes from Google AI Studio (free) and is stored as the GitHub secret GE
 Adds a "suggested" field to each item. These are only suggestions shown in the review issue;
 nothing is published until the owner replies. If the service can't be reached, items are left as they are.
 """
-import json, os, re, sys, time, urllib.error, urllib.request
+import json, sys, time
+from gemini import TOKEN, pick_model, ask as gemini_ask, post_prompt
 
-TOKEN = os.environ.get('GEMINI_API_KEY', '')
-API = 'https://generativelanguage.googleapis.com/v1beta/'
-
-
-def pick_model():
-    """Google renames and retires models, so choose from what the key can use today:
-    the newest stable 'flash-lite', else the newest stable 'flash'."""
-    if os.environ.get('SUGGEST_MODEL'):
-        return os.environ['SUGGEST_MODEL']
-    req = urllib.request.Request(API + 'models?pageSize=200', headers={'x-goog-api-key': TOKEN})
-    names = [m['name'].split('/')[-1] for m in json.load(urllib.request.urlopen(req, timeout=30)).get('models', [])
-             if 'generateContent' in m.get('supportedGenerationMethods', [])]
-    stable = [n for n in names if re.fullmatch(r'gemini-[\d.]+-flash(-lite)?', n)]
-    ver = lambda n: [int(x) for x in re.findall(r'\d+', n)]
-    for kind in ('flash-lite', 'flash'):
-        pool = sorted((n for n in stable if n.endswith(kind)), key=ver)
-        if pool:
-            return pool[-1]
-    return next((n for n in names if 'flash' in n), names[0])
 posts_f, vids_f = sys.argv[1], sys.argv[2]
 
-SYSTEM = """You write short headlines for the website of Ramu Maharajapuram ("SPB Ramu"), a playback and concert singer
-from Nellore, based in Chennai, known for singing the songs of S. P. Balasubrahmanyam (SPB).
-Rules: plain, respectful English; at most 9 words; no emojis, hashtags or @handles; no quotation marks around the whole headline;
-never invent facts (places, dates, people, awards) that are not in the text; if the text is in Tamil or Telugu, paraphrase
-naturally rather than translating word for word. If there is nothing to go on, answer exactly: NONE"""
-
-
 def ask(prompt):
-    req = urllib.request.Request(f'{API}models/{MODEL}:generateContent', data=json.dumps({
-        'systemInstruction': {'parts': [{'text': SYSTEM}]},
-        'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
-        'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 60}}).encode(),
-        headers={'x-goog-api-key': TOKEN, 'Content-Type': 'application/json'})
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            raw = r.read().decode('utf-8', 'replace')
-    except urllib.error.HTTPError as e:
-        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:200]}')
-    try:
-        out = json.loads(raw)['candidates'][0]['content']['parts'][0]['text'].strip().strip('"“”').strip()
-    except Exception:
-        raise RuntimeError('unexpected reply: ' + raw[:200].replace('\n', ' '))
-    out = re.sub(r'[#@]\w+', '', out).strip(' .')
-    return '' if not out or out.upper() == 'NONE' or len(out) > 90 else out
+    return gemini_ask(MODEL, prompt)
 
 
 def run(path, prompt_for):
@@ -86,8 +46,14 @@ except Exception as e:
     print('suggest_titles: could not list models,', e, file=sys.stderr)
     sys.exit(0)
 print('suggest_titles: using', MODEL, file=sys.stderr)
-np = run(posts_f, lambda x: (f"Write a headline for a timeline entry about this {('Instagram' if x['src'] == 'instagram' else 'Facebook')} post "
-                             f"by Ramu, dated {x['time'][:10]}. Caption:\n{x['text']}") if x.get('text', '').strip() else None)
+# Reuse the headline the site already shows for a post, if the daily job has written one.
+_cache = json.load(open('data/post_titles.json')) if __import__('os').path.exists('data/post_titles.json') else {}
+_posts = json.load(open(posts_f))
+for _p in _posts:
+    if _cache.get(_p['id']):
+        _p['suggested'] = _cache[_p['id']]
+json.dump(_posts, open(posts_f, 'w'), ensure_ascii=False, indent=1)
+np = run(posts_f, lambda x: post_prompt(x) if x.get('text', '').strip() and not x.get('suggested') else None)
 nv = run(vids_f, lambda v: ("Give only the name of the song being performed in this YouTube video, in its usual English spelling, "
                             f"title case, nothing else. Video title: {v['title']}\nChannel: {v.get('channel', '')}"))
 print(f'suggest_titles: {np} post headlines, {nv} song names', file=sys.stderr)

@@ -11,6 +11,8 @@ D, PAGE = sys.argv[1], sys.argv[2]
 E = lambda s: html.escape(s or '', quote=True)
 p = os.path.join(D, 'social.json')
 social = json.load(open(p)) if os.path.exists(p) else {'items': []}
+hp = os.path.join(D, 'post_titles.json')
+headlines = json.load(open(hp)) if os.path.exists(hp) else {}  # clean headlines written by tools/post_headlines.py
 
 
 def snippet(text, n=80):
@@ -27,7 +29,7 @@ for it in social.get('items', [])[:12]:
     d = datetime.date.fromisoformat(it['time'][:10]).strftime('%-d %b %Y')
     cards += (f'<a class="reel-card" href="{E(it["link"])}" target="_blank" rel="noopener"{embed}>'
               f'<span class="reel-thumb"{style}>{"<span class=latest-play></span>" if video else ""}</span>'
-              f'<span class="reel-text">{E(snippet(it["text"])) or ("A video" if video else "A photo")}</span>'
+              f'<span class="reel-text">{E(headlines.get(it["id"]) or snippet(it["text"])) or ("A video" if video else "A photo")}</span>'
               f'<span class="new-meta">{where} · {d}</span></a>')
 
 follow = ''.join(f'<a class="btn quiet small" href="{E(u)}" target="_blank" rel="noopener">Follow on {n} ↗</a>'
