@@ -5,6 +5,14 @@
  "items": [
   {
    "src": "facebook",
+   "id": "1462245236964183_122097302925517415",
+   "time": "2026-10-17T23:41:01+0000",
+   "text": "Om Parameswari Devi Namaha",
+   "link": "https://www.facebook.com/122097271893517415/posts/122097302925517415",
+   "photo": "media/social/fb_122097302925517415.jpg"
+  },
+  {
+   "src": "facebook",
    "id": "1462245236964183_122097272139517415",
    "time": "2026-10-17T22:16:49+0000",
    "text": "One of SPB,s melody..in both Tamil and telugu ...",
@@ -100,15 +108,6 @@
    "link": "https://www.instagram.com/reel/DOQh78tEXQU/",
    "video": true,
    "photo": "media/social/ig_18088121233830978.jpg"
-  },
-  {
-   "src": "instagram",
-   "id": "17884903173359037",
-   "time": "2025-09-01T14:13:57+0000",
-   "text": "",
-   "link": "https://www.instagram.com/reel/DOEAT2Ukti5/",
-   "video": true,
-   "photo": "media/social/ig_17884903173359037.jpg"
   }
  ]
 }
