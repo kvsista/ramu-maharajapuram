@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&family=Noto+Sans+Kannada:wght@500&family=Noto+Sans+Tamil:wght@500&family=Noto+Sans+Telugu:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=38ef5c129b">
+<link rel="stylesheet" href="site.css?v=ff10b5a571">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -131,6 +131,7 @@
       document.querySelectorAll('.new-card[data-embed]').forEach((a) => a.addEventListener('click', (e) => {
         e.preventDefault();
         if (window.RP) RP.pause();
+        document.querySelectorAll('main video').forEach((v) => v.pause());
         const f = document.createElement('iframe');
         f.src = a.dataset.embed; f.title = a.dataset.where + ' post'; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
         frame.replaceChildren(f); open.href = a.href; open.textContent = 'Open on ' + a.dataset.where + ' ↗';
@@ -148,7 +149,7 @@
     <div class="wrap">
       <div class="latest-head">
         <div><p class="label">Songs of SPB</p><h2>The voice <em>of SPB</em></h2></div>
-        <a class="btn quiet small" href="listen/">All 86 songs of SPB →</a>
+        <a class="btn quiet small" href="listen/">All 87 songs of SPB →</a>
       </div>
       <p class="lead">Ramu sings the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam on stage and on television, in Telugu, Tamil and Hindi. Start with these three.</p>
       <div class="spb-grid">

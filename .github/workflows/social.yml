@@ -31,6 +31,7 @@ jobs:
       - name: Update the homepage
         run: |
           python3 tools/build_home_new.py data docs/index.html
+          python3 tools/build_watch_reels.py data docs/watch/index.html
           python3 tools/stamp_assets.py docs
       - name: Publish changes
         run: |
