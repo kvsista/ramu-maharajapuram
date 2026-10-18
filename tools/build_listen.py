@@ -226,7 +226,7 @@ page = f'''<!doctype html>
     <div class="wrap">
       <p class="label">Listen</p>
       <h1>Hear Ramu <em>sing</em></h1>
-      <p class="lead">{len(songs)} songs{f' and {n_albums} albums' if n_albums else ''}: the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam as Ramu sings them on stage and on TV, his own film songs, and his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
+      <p class="lead">{len(songs)} songs{f' and {n_albums} of his albums' if n_albums else ''}: the songs of S.&nbsp;P.&nbsp;Balasubrahmanyam as Ramu sings them on stage and on TV, his own film songs, and his devotional albums. Choose a song and it plays here; the next one follows automatically.</p>
     </div>
   </section>
 

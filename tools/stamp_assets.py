@@ -2,12 +2,12 @@
 
 Usage: python3 tools/stamp_assets.py docs
 Rewrites e.g. href="../site.css" or href="site.css?v=old" to href="../site.css?v=<hash>" in every page,
-for site.css, news.js and news-config.js. Run after any change to those files (the weekly job runs it too).
+for site.css and app.js. Run after any change to those files (the weekly job runs it too).
 """
 import hashlib, os, re, sys, glob
 
 DOCS = sys.argv[1]
-ASSETS = ['site.css', 'news.js', 'news-config.js', 'app.js']
+ASSETS = ['site.css', 'app.js']
 ver = {a: hashlib.sha1(open(os.path.join(DOCS, a), 'rb').read()).hexdigest()[:10] for a in ASSETS if os.path.exists(os.path.join(DOCS, a))}
 changed = 0
 for page in glob.glob(os.path.join(DOCS, '**', '*.html'), recursive=True):

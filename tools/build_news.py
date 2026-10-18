@@ -1,25 +1,13 @@
-"""Write approved news from the family's Google Sheet into the pages (for search engines).
+"""Write the news picked in the weekly review (data/news.json) into the pages, for search engines and visitors.
 
 Usage: python3 tools/build_news.py docs
-Reads the published CSV address from docs/news-config.js. Fills the blocks between
-<!-- NEWS:latest:START/END --> (homepage) and <!-- NEWS:upcoming:START/END --> (Invite page).
-docs/news.js refreshes the same blocks live in visitors' browsers between weekly runs.
+Fills the blocks between <!-- NEWS:upcoming:START/END --> (Invite page) and, if present, <!-- NEWS:latest:START/END -->.
+Each section is hidden while it has nothing to show. (The homepage "Latest from Ramu" strip is written by build_home_new.py.)
 """
 import csv, datetime, html, io, json, os, re, sys, urllib.request
 
 DOCS = sys.argv[1]
-cfg = open(os.path.join(DOCS, 'news-config.js')).read()
-m = re.search(r"RAMU_NEWS_CSV\s*=\s*'([^']*)'", cfg)
-url = m.group(1) if m else ''
 text = ''
-if url:
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as r:
-            text = r.read().decode('utf-8')
-    except Exception as e:
-        print('build_news: could not read sheet, pages left unchanged:', e.__class__.__name__)
-        sys.exit(0)
-
 rows = list(csv.reader(io.StringIO(text)))
 head = [h.strip().lower() for h in (rows[0] if rows else [])]
 

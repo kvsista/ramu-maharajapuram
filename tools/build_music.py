@@ -88,7 +88,7 @@ ld_items=[{"@type":"ListItem","position":i+1,"item":{"@type":"MusicAlbum","name"
 json.dump(ld_items,open(D+'/albums_ld.json','w'),ensure_ascii=False)
 langs=''.join(f'<option value="{k}">{LANG.get(k if k!="other" else None)} ({cnt.get(None if k=="other" else k,0)})</option>' for k in ['telugu','tamil','kannada','sanskrit','other'] if cnt.get(None if k=="other" else k))
 panel=f'''<div class="albums-head">
-  <p class="lead">{len(cat)} albums and singles, {sum(len(r['tracks']) for r in cat)} songs, {min(years)}–{max(years)}. Press Play to hear an album here, or open a release to pick a song or a streaming app. His film soundtracks are under His film songs.</p>
+  <p class="lead">{len(cat)} of his albums and singles are on streaming services: {sum(len(r['tracks']) for r in cat)} songs, {min(years)}–{max(years)}. Press Play to hear an album here, or open a release to pick a song or a streaming app. His film soundtracks are under His film songs.</p>
 </div>
 <div class="toolbar" style="margin-top:14px">
   <label class="search"><span class="sr">Search albums and songs</span><input type="search" id="aq" placeholder="Search an album or song" autocomplete="off"></label>
