@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-19",
+ "fetched": "2026-10-26",
  "releases": [
   {
    "source": "deezer",
@@ -4882,6 +4882,41 @@
   },
   {
    "source": "deezer",
+   "title": "Selvam Valangum Thiruvengadane",
+   "year": 2026,
+   "date": "2026-10-09",
+   "language": null,
+   "label": "REAL MUSIC",
+   "type": "album",
+   "links": {
+    "deezer": "https://www.deezer.com/album/1119452572"
+   },
+   "tracks": [
+    {
+     "title": "Appane Vinayak",
+     "ramu_sings": false,
+     "links": {
+      "deezer": "https://www.deezer.com/track/4342375972"
+     }
+    },
+    {
+     "title": "Govinda Raja",
+     "ramu_sings": true,
+     "links": {
+      "deezer": "https://www.deezer.com/track/4342375992"
+     }
+    },
+    {
+     "title": "Perumaley Hari Perumaley",
+     "ramu_sings": false,
+     "links": {
+      "deezer": "https://www.deezer.com/track/4342376012"
+     }
+    }
+   ]
+  },
+  {
+   "source": "deezer",
    "title": "Amma Durgamma, Vol. 4",
    "year": 2026,
    "date": "2026-01-14",
@@ -5100,41 +5135,6 @@
      "ramu_sings": true,
      "links": {
       "deezer": "https://www.deezer.com/track/3728023672"
-     }
-    }
-   ]
-  },
-  {
-   "source": "deezer",
-   "title": "Selvam Valangum Thiruvengadane",
-   "year": 2026,
-   "date": "2026-10-09",
-   "language": null,
-   "label": "REAL MUSIC",
-   "type": "album",
-   "links": {
-    "deezer": "https://www.deezer.com/album/1119452572"
-   },
-   "tracks": [
-    {
-     "title": "Appane Vinayak",
-     "ramu_sings": false,
-     "links": {
-      "deezer": "https://www.deezer.com/track/4342375972"
-     }
-    },
-    {
-     "title": "Govinda Raja",
-     "ramu_sings": true,
-     "links": {
-      "deezer": "https://www.deezer.com/track/4342375992"
-     }
-    },
-    {
-     "title": "Perumaley Hari Perumaley",
-     "ramu_sings": false,
-     "links": {
-      "deezer": "https://www.deezer.com/track/4342376012"
      }
     }
    ]
@@ -5547,6 +5547,41 @@
   },
   {
    "source": "apple",
+   "title": "Murugan Suprabhatham - Manasasmarami - Namavali",
+   "year": 2024,
+   "date": "2024-05-21",
+   "language": null,
+   "label": null,
+   "type": "album",
+   "links": {
+    "apple": "https://music.apple.com/in/album/murugan-suprabhatham-manasasmarami-namavali/1745480561?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Muruga Namavali",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/muruga-namavali/1745480561?i=1745480873&uo=4"
+     }
+    },
+    {
+     "title": "Murugan Manasasmarami",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/murugan-manasasmarami/1745480561?i=1745480878&uo=4"
+     }
+    },
+    {
+     "title": "Murugan Suprabhatham",
+     "ramu_sings": false,
+     "links": {
+      "apple": "https://music.apple.com/in/album/murugan-suprabhatham/1745480561?i=1745480882&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
    "title": "Shiridi Shripathi Namo",
    "year": 2024,
    "date": "2024-06-20",
@@ -5597,41 +5632,6 @@
      "ramu_sings": false,
      "links": {
       "apple": "https://music.apple.com/in/album/sai-namamu-palukura/1745685209?i=1745685679&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
-   "title": "Murugan Suprabhatham - Manasasmarami - Namavali",
-   "year": 2024,
-   "date": "2024-05-21",
-   "language": null,
-   "label": null,
-   "type": "album",
-   "links": {
-    "apple": "https://music.apple.com/in/album/murugan-suprabhatham-manasasmarami-namavali/1745480561?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Muruga Namavali",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/muruga-namavali/1745480561?i=1745480873&uo=4"
-     }
-    },
-    {
-     "title": "Murugan Manasasmarami",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/murugan-manasasmarami/1745480561?i=1745480878&uo=4"
-     }
-    },
-    {
-     "title": "Murugan Suprabhatham",
-     "ramu_sings": false,
-     "links": {
-      "apple": "https://music.apple.com/in/album/murugan-suprabhatham/1745480561?i=1745480882&uo=4"
      }
     }
    ]
@@ -5960,6 +5960,48 @@
   },
   {
    "source": "apple",
+   "title": "OmKaara Roopame",
+   "year": 2025,
+   "date": "2025-02-18",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/omkaara-roopame-single/1796981442?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "OmKaara Roopame",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/omkaara-roopame/1796981442?i=1796981447&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Sri Rama Rama Jaya Rama",
+   "year": 2025,
+   "date": "2025-02-22",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/sri-rama-rama-jaya-rama-single/1866873012?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Sri Rama Rama Jaya Rama",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/sri-rama-rama-jaya-rama/1866873012?i=1866873025&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
    "title": "Pambaisatham Udukkaisatham",
    "year": 2024,
    "date": "2024-09-13",
@@ -6017,48 +6059,6 @@
      "ramu_sings": false,
      "links": {
       "apple": "https://music.apple.com/in/album/sivanaarin/1775136205?i=1775136221&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
-   "title": "OmKaara Roopame",
-   "year": 2025,
-   "date": "2025-02-18",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/omkaara-roopame-single/1796981442?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "OmKaara Roopame",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/omkaara-roopame/1796981442?i=1796981447&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
-   "title": "Sri Rama Rama Jaya Rama",
-   "year": 2025,
-   "date": "2025-02-22",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/sri-rama-rama-jaya-rama-single/1866873012?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Sri Rama Rama Jaya Rama",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/sri-rama-rama-jaya-rama/1866873012?i=1866873025&uo=4"
      }
     }
    ]
@@ -6401,27 +6401,6 @@
   },
   {
    "source": "apple",
-   "title": "Muruga Muruga Murugayya",
-   "year": 2023,
-   "date": "2023-05-16",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/muruga-muruga-murugayya-single/1767834237?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Muruga Muruga Murugayya",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/muruga-muruga-murugayya/1767834237?i=1767834255&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Bhakthaprahalladha Sri Narasimha",
    "year": 2025,
    "date": "2025-05-31",
@@ -6437,6 +6416,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/bhakthaprahalladha-sri-narasimha/1863935006?i=1863935011&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Muruga Muruga Murugayya",
+   "year": 2023,
+   "date": "2023-05-16",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/muruga-muruga-murugayya-single/1767834237?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Muruga Muruga Murugayya",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/muruga-muruga-murugayya/1767834237?i=1767834255&uo=4"
      }
     }
    ]
@@ -7465,27 +7465,6 @@
   },
   {
    "source": "apple",
-   "title": "Sayeeshwara Mamu Brovara",
-   "year": 2025,
-   "date": "2025-04-24",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/sayeeshwara-mamu-brovara-single/1863637863?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Sayeeshwara Mamu Brovara",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/sayeeshwara-mamu-brovara/1863637863?i=1863637864&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Sri Hanuman Manasasmarami",
    "year": 2008,
    "date": "2008-01-13",
@@ -7514,6 +7493,27 @@
   },
   {
    "source": "apple",
+   "title": "Sayeeshwara Mamu Brovara",
+   "year": 2025,
+   "date": "2025-04-24",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/sayeeshwara-mamu-brovara-single/1863637863?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Sayeeshwara Mamu Brovara",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/sayeeshwara-mamu-brovara/1863637863?i=1863637864&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
    "title": "Neve Daivamu Sai",
    "year": 2024,
    "date": "2024-05-09",
@@ -7535,27 +7535,6 @@
   },
   {
    "source": "apple",
-   "title": "Pillaiyaare Yenga Pillaiyaare",
-   "year": 2024,
-   "date": "2024-01-31",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/pillaiyaare-yenga-pillaiyaare-single/1768214155?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Pillaiyaare Yenga Pillaiyaare",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/pillaiyaare-yenga-pillaiyaare/1768214155?i=1768214158&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Verkkattil Koluvirukkum Karumari",
    "year": 2024,
    "date": "2024-01-12",
@@ -7571,6 +7550,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/verkkattil-koluvirukkum-karumari/1767565350?i=1767565542&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Pillaiyaare Yenga Pillaiyaare",
+   "year": 2024,
+   "date": "2024-01-31",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/pillaiyaare-yenga-pillaiyaare-single/1768214155?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Pillaiyaare Yenga Pillaiyaare",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/pillaiyaare-yenga-pillaiyaare/1768214155?i=1768214158&uo=4"
      }
     }
    ]
@@ -7808,27 +7808,6 @@
   },
   {
    "source": "apple",
-   "title": "Shirideesha Sayeesha",
-   "year": 2024,
-   "date": "2024-09-26",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/shirideesha-sayeesha-single/1788458408?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Shirideesha Sayeesha",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/shirideesha-sayeesha/1788458408?i=1788458518&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Harihara Thanayudu Ayyappa",
    "year": 2024,
    "date": "2024-07-24",
@@ -7885,21 +7864,21 @@
   },
   {
    "source": "apple",
-   "title": "Murugayya Velaiya Velaiya",
+   "title": "Shirideesha Sayeesha",
    "year": 2024,
-   "date": "2024-05-27",
+   "date": "2024-09-26",
    "language": null,
    "label": null,
    "type": "single",
    "links": {
-    "apple": "https://music.apple.com/in/album/murugayya-velaiya-velaiya-single/1767771556?uo=4"
+    "apple": "https://music.apple.com/in/album/shirideesha-sayeesha-single/1788458408?uo=4"
    },
    "tracks": [
     {
-     "title": "Murugayya Velaiya Velaiya",
+     "title": "Shirideesha Sayeesha",
      "ramu_sings": true,
      "links": {
-      "apple": "https://music.apple.com/in/album/murugayya-velaiya-velaiya/1767771556?i=1767771558&uo=4"
+      "apple": "https://music.apple.com/in/album/shirideesha-sayeesha/1788458408?i=1788458518&uo=4"
      }
     }
    ]
@@ -7921,6 +7900,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/sri-surya-stuthi/1757823810?i=1757823819&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Murugayya Velaiya Velaiya",
+   "year": 2024,
+   "date": "2024-05-27",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/murugayya-velaiya-velaiya-single/1767771556?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Murugayya Velaiya Velaiya",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/murugayya-velaiya-velaiya/1767771556?i=1767771558&uo=4"
      }
     }
    ]
@@ -8116,27 +8116,6 @@
   },
   {
    "source": "apple",
-   "title": "Velugunu Panche Suryadevuda",
-   "year": 2025,
-   "date": "2025-01-19",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/velugunu-panche-suryadevuda-single/1796359909?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Velugunu Panche Suryadevuda",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/velugunu-panche-suryadevuda/1796359909?i=1796359911&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Sri Raghavendra Swamy Stuthi Rathanamala",
    "year": 2024,
    "date": "2024-08-18",
@@ -8152,6 +8131,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/sri-raghavendra-swamy-stuthi-rathanamala/1757795127?i=1757795130&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Velugunu Panche Suryadevuda",
+   "year": 2025,
+   "date": "2025-01-19",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/velugunu-panche-suryadevuda-single/1796359909?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Velugunu Panche Suryadevuda",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/velugunu-panche-suryadevuda/1796359909?i=1796359911&uo=4"
      }
     }
    ]
@@ -8305,48 +8305,6 @@
   },
   {
    "source": "apple",
-   "title": "Margazhiyil Thuyil Elum Madhavan",
-   "year": 2026,
-   "date": "2026-01-29",
-   "language": null,
-   "label": null,
-   "type": "album",
-   "links": {
-    "apple": "https://music.apple.com/in/album/margazhiyil-thuyil-elum-madhavan/1873939113?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Emperumaane",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/emperumaane/1873939113?i=1873939114&uo=4"
-     }
-    },
-    {
-     "title": "Hariyenum Naamam",
-     "ramu_sings": false,
-     "links": {
-      "apple": "https://music.apple.com/in/album/hariyenum-naamam/1873939113?i=1873939118&uo=4"
-     }
-    },
-    {
-     "title": "Madhavap Perumal",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/madhavap-perumal/1873939113?i=1873939120&uo=4"
-     }
-    },
-    {
-     "title": "Thiruppaavai",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/thiruppaavai/1873939113?i=1873939122&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Siva Deekhsa",
    "year": 2015,
    "date": "2015-01-12",
@@ -8403,6 +8361,48 @@
   },
   {
    "source": "apple",
+   "title": "Margazhiyil Thuyil Elum Madhavan",
+   "year": 2026,
+   "date": "2026-01-29",
+   "language": null,
+   "label": null,
+   "type": "album",
+   "links": {
+    "apple": "https://music.apple.com/in/album/margazhiyil-thuyil-elum-madhavan/1873939113?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Emperumaane",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/emperumaane/1873939113?i=1873939114&uo=4"
+     }
+    },
+    {
+     "title": "Hariyenum Naamam",
+     "ramu_sings": false,
+     "links": {
+      "apple": "https://music.apple.com/in/album/hariyenum-naamam/1873939113?i=1873939118&uo=4"
+     }
+    },
+    {
+     "title": "Madhavap Perumal",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/madhavap-perumal/1873939113?i=1873939120&uo=4"
+     }
+    },
+    {
+     "title": "Thiruppaavai",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/thiruppaavai/1873939113?i=1873939122&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
    "title": "Amma Mariamma, Vol. 2",
    "year": 2019,
    "date": "2019-08-29",
@@ -8452,27 +8452,6 @@
   },
   {
    "source": "apple",
-   "title": "Sri Surya Ninu Kolichithi",
-   "year": 2025,
-   "date": "2025-04-20",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/sri-surya-ninu-kolichithi-single/1866711014?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Sri Surya Ninu Kolichithi",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/sri-surya-ninu-kolichithi/1866711014?i=1866711023&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Muruga Muruga O Chinna Muruga",
    "year": 2024,
    "date": "2024-06-11",
@@ -8488,6 +8467,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/muruga-muruga-o-chinna-muruga/1789377351?i=1789377355&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Sri Surya Ninu Kolichithi",
+   "year": 2025,
+   "date": "2025-04-20",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/sri-surya-ninu-kolichithi-single/1866711014?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Sri Surya Ninu Kolichithi",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/sri-surya-ninu-kolichithi/1866711014?i=1866711023&uo=4"
      }
     }
    ]
@@ -8823,27 +8823,6 @@
   },
   {
    "source": "apple",
-   "title": "Deva Deva Oh Surya Deva",
-   "year": 2025,
-   "date": "2025-01-12",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/deva-deva-oh-surya-deva-single/1796369765?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Deva Deva Oh Surya Deva",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/deva-deva-oh-surya-deva/1796369765?i=1796369771&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Yetrividappa Ayyappa",
    "year": 2017,
    "date": "2017-11-10",
@@ -8929,6 +8908,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/vanga-vanga/1758917184?i=1758917471&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Deva Deva Oh Surya Deva",
+   "year": 2025,
+   "date": "2025-01-12",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/deva-deva-oh-surya-deva-single/1796369765?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Deva Deva Oh Surya Deva",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/deva-deva-oh-surya-deva/1796369765?i=1796369771&uo=4"
      }
     }
    ]
@@ -9075,27 +9075,6 @@
   },
   {
    "source": "apple",
-   "title": "Vaaniye Kalai Vaaniye",
-   "year": 2025,
-   "date": "2025-04-25",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/vaaniye-kalai-vaaniye-single/1863637984?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Vaaniye Kalai Vaaniye",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/vaaniye-kalai-vaaniye/1863637984?i=1863637987&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Maaruthi Raayaa",
    "year": 2023,
    "date": "2023-05-09",
@@ -9153,6 +9132,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/maaruthiye-jaya-maruthiye/1742993404?i=1742993969&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Vaaniye Kalai Vaaniye",
+   "year": 2025,
+   "date": "2025-04-25",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/vaaniye-kalai-vaaniye-single/1863637984?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Vaaniye Kalai Vaaniye",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/vaaniye-kalai-vaaniye/1863637984?i=1863637987&uo=4"
      }
     }
    ]
@@ -9230,6 +9230,27 @@
      "ramu_sings": false,
      "links": {
       "apple": "https://music.apple.com/in/album/manasara-ninnentho-thalichemu-o-sai/1745293977?i=1745294287&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Aigiri Nandini",
+   "year": 2023,
+   "date": "2023-10-20",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/aigiri-nandini-ep/1745292738?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Aigiri Nandini",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/aigiri-nandini/1745292738?i=1745292743&uo=4"
      }
     }
    ]
@@ -9355,27 +9376,6 @@
   },
   {
    "source": "apple",
-   "title": "Aigiri Nandini",
-   "year": 2023,
-   "date": "2023-10-20",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/aigiri-nandini-ep/1745292738?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Aigiri Nandini",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/aigiri-nandini/1745292738?i=1745292743&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Jagathguru Bramayya",
    "year": 2024,
    "date": "2024-12-04",
@@ -9481,27 +9481,6 @@
   },
   {
    "source": "apple",
-   "title": "Shabarigerisha Vandhanam",
-   "year": 2025,
-   "date": "2025-04-23",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/shabarigerisha-vandhanam-single/1857946804?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Shabarigerisha Vandhanam",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/shabarigerisha-vandhanam/1857946804?i=1857946812&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Thirumalai Vaasa",
    "year": 2019,
    "date": "2019-08-29",
@@ -9517,6 +9496,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/thirumalai-vaasa/1764217886?i=1764217891&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Shabarigerisha Vandhanam",
+   "year": 2025,
+   "date": "2025-04-23",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/shabarigerisha-vandhanam-single/1857946804?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Shabarigerisha Vandhanam",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/shabarigerisha-vandhanam/1857946804?i=1857946812&uo=4"
      }
     }
    ]
@@ -9901,27 +9901,6 @@
   },
   {
    "source": "apple",
-   "title": "Vaarahi Namavali",
-   "year": 2025,
-   "date": "2025-03-07",
-   "language": null,
-   "label": null,
-   "type": "single",
-   "links": {
-    "apple": "https://music.apple.com/in/album/vaarahi-namavali-ep/1855825733?uo=4"
-   },
-   "tracks": [
-    {
-     "title": "Vaarahi Namavali",
-     "ramu_sings": true,
-     "links": {
-      "apple": "https://music.apple.com/in/album/vaarahi-namavali/1855825733?i=1855825886&uo=4"
-     }
-    }
-   ]
-  },
-  {
-   "source": "apple",
    "title": "Simha Roopa Narasimha",
    "year": 2024,
    "date": "2024-08-31",
@@ -9937,6 +9916,27 @@
      "ramu_sings": true,
      "links": {
       "apple": "https://music.apple.com/in/album/simha-roopa-narasimha/1767765858?i=1767766099&uo=4"
+     }
+    }
+   ]
+  },
+  {
+   "source": "apple",
+   "title": "Vaarahi Namavali",
+   "year": 2025,
+   "date": "2025-03-07",
+   "language": null,
+   "label": null,
+   "type": "single",
+   "links": {
+    "apple": "https://music.apple.com/in/album/vaarahi-namavali-ep/1855825733?uo=4"
+   },
+   "tracks": [
+    {
+     "title": "Vaarahi Namavali",
+     "ramu_sings": true,
+     "links": {
+      "apple": "https://music.apple.com/in/album/vaarahi-namavali/1855825733?i=1855825886&uo=4"
      }
     }
    ]
@@ -10734,126 +10734,63 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Maha Lakshmi Manasasmarami",
+   "title": "Sri Surya Ninu Kolichithi",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-surya-ninu-kolichithi/BSyKwk07vdA_"
+   },
+   "tracks": [
+    {
+     "title": "Sri Surya Ninu Kolichithi",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-surya-ninu-kolichithi/FjA4ewYHZHE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Jagamele Shankara Parameshwara",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/jagamele-shankara-parameshwara/NApi8w1Prqc_"
+   },
+   "tracks": [
+    {
+     "title": "Jagamele Shankara Parameshwara",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/jagamele-shankara-parameshwara/MjsDSDoBZ38"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Anjaneyar Namavali",
    "year": 2025,
    "date": null,
    "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
+    "jiosaavn": "https://www.jiosaavn.com/album/anjaneyar-namavali/sbsCnqbLboM_"
    },
    "tracks": [
     {
-     "title": "Maha Lakshmi Manasasmarami",
+     "title": "Anjaneyar Namavali",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Shiridi Vasuda O Sainadha",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
-   },
-   "tracks": [
-    {
-     "title": "Shiridi Vasuda O Sainadha",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Tirumala Vasa Sri Srinivasa",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
-   },
-   "tracks": [
-    {
-     "title": "Tirumala Vasa Sri Srinivasa",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Vaaniye Kalai Vaaniye",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
-   },
-   "tracks": [
-    {
-     "title": "Vaaniye Kalai Vaaniye",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Maruthi Maruthi",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
-   },
-   "tracks": [
-    {
-     "title": "Maruthi Maruthi",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Sri Guru Sri Pothulurayya",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
-   },
-   "tracks": [
-    {
-     "title": "Sri Guru Sri Pothulurayya",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
+      "jiosaavn": "https://www.jiosaavn.com/song/anjaneyar-namavali/PkURZEBcAwo"
      }
     }
    ]
@@ -11028,63 +10965,42 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Sri Surya Ninu Kolichithi",
+   "title": "Tirumala Vasa Sri Srinivasa",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-surya-ninu-kolichithi/BSyKwk07vdA_"
+    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
    },
    "tracks": [
     {
-     "title": "Sri Surya Ninu Kolichithi",
+     "title": "Tirumala Vasa Sri Srinivasa",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-surya-ninu-kolichithi/FjA4ewYHZHE"
+      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Jagamele Shankara Parameshwara",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/jagamele-shankara-parameshwara/NApi8w1Prqc_"
-   },
-   "tracks": [
-    {
-     "title": "Jagamele Shankara Parameshwara",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/jagamele-shankara-parameshwara/MjsDSDoBZ38"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Anjaneyar Namavali",
+   "title": "Vaaniye Kalai Vaaniye",
    "year": 2025,
    "date": null,
    "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/anjaneyar-namavali/sbsCnqbLboM_"
+    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
    },
    "tracks": [
     {
-     "title": "Anjaneyar Namavali",
+     "title": "Vaaniye Kalai Vaaniye",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/anjaneyar-namavali/PkURZEBcAwo"
+      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
      }
     }
    ]
@@ -11127,6 +11043,90 @@
      "ramu_sings": true,
      "links": {
       "jiosaavn": "https://www.jiosaavn.com/song/sri-rama-rama-jaya-rama/CQUyWEx6RHk"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Maruthi Maruthi",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
+   },
+   "tracks": [
+    {
+     "title": "Maruthi Maruthi",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Sri Guru Sri Pothulurayya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
+   },
+   "tracks": [
+    {
+     "title": "Sri Guru Sri Pothulurayya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Shiridi Vasuda O Sainadha",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
+   },
+   "tracks": [
+    {
+     "title": "Shiridi Vasuda O Sainadha",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Maha Lakshmi Manasasmarami",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
+   },
+   "tracks": [
+    {
+     "title": "Maha Lakshmi Manasasmarami",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
      }
     }
    ]
