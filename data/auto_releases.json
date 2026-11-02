@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-26",
+ "fetched": "2026-11-02",
  "releases": [
   {
    "source": "deezer",
@@ -10797,6 +10797,90 @@
   },
   {
    "source": "jiosaavn",
+   "title": "Tirumala Vasa Sri Srinivasa",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
+   },
+   "tracks": [
+    {
+     "title": "Tirumala Vasa Sri Srinivasa",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Vaaniye Kalai Vaaniye",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
+   },
+   "tracks": [
+    {
+     "title": "Vaaniye Kalai Vaaniye",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Pratyaksha Deva Grahapati Surya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/pratyaksha-deva-grahapati-surya/FNuP5urzQrI_"
+   },
+   "tracks": [
+    {
+     "title": "Pratyaksha Deva Grahapati Surya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/pratyaksha-deva-grahapati-surya/MjcbZhBoc2k"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Sri Rama Rama Jaya Rama",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-rama-rama-jaya-rama/XkryMoNFrUY_"
+   },
+   "tracks": [
+    {
+     "title": "Sri Rama Rama Jaya Rama",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-rama-rama-jaya-rama/CQUyWEx6RHk"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
    "title": "Anjaneyar Manasa Smarami",
    "year": 2025,
    "date": null,
@@ -10965,84 +11049,42 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Tirumala Vasa Sri Srinivasa",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
-   },
-   "tracks": [
-    {
-     "title": "Tirumala Vasa Sri Srinivasa",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Vaaniye Kalai Vaaniye",
+   "title": "Maha Lakshmi Manasasmarami",
    "year": 2025,
    "date": null,
    "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
+    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
    },
    "tracks": [
     {
-     "title": "Vaaniye Kalai Vaaniye",
+     "title": "Maha Lakshmi Manasasmarami",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
+      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Pratyaksha Deva Grahapati Surya",
+   "title": "Shiridi Vasuda O Sainadha",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/pratyaksha-deva-grahapati-surya/FNuP5urzQrI_"
+    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
    },
    "tracks": [
     {
-     "title": "Pratyaksha Deva Grahapati Surya",
+     "title": "Shiridi Vasuda O Sainadha",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/pratyaksha-deva-grahapati-surya/MjcbZhBoc2k"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Sri Rama Rama Jaya Rama",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-rama-rama-jaya-rama/XkryMoNFrUY_"
-   },
-   "tracks": [
-    {
-     "title": "Sri Rama Rama Jaya Rama",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-rama-rama-jaya-rama/CQUyWEx6RHk"
+      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
      }
     }
    ]
@@ -11085,48 +11127,6 @@
      "ramu_sings": true,
      "links": {
       "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Shiridi Vasuda O Sainadha",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
-   },
-   "tracks": [
-    {
-     "title": "Shiridi Vasuda O Sainadha",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Maha Lakshmi Manasasmarami",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
-   },
-   "tracks": [
-    {
-     "title": "Maha Lakshmi Manasasmarami",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
      }
     }
    ]
