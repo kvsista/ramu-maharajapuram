@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-02",
+ "fetched": "2026-11-09",
  "releases": [
   {
    "source": "deezer",
@@ -10629,27 +10629,6 @@
   },
   {
    "source": "jiosaavn",
-   "title": "SRI RAGHAVENDRA MANASASMARAMI",
-   "year": 2025,
-   "date": null,
-   "language": "kannada",
-   "label": "Bhakthi Music Channel",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-raghavendra-manasasmarami/FKPIADZOUiU_"
-   },
-   "tracks": [
-    {
-     "title": "SRI RAGHAVENDRA MANASASMARAMI",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-raghavendra-manasasmarami/LwlccjtTTl0"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
    "title": "SRI VINAYAKA MANASA SMARAMI",
    "year": 2025,
    "date": null,
@@ -10713,21 +10692,21 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Vaarahi Namavali",
+   "title": "SRI RAGHAVENDRA MANASASMARAMI",
    "year": 2025,
    "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
+   "language": "kannada",
+   "label": "Bhakthi Music Channel",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaarahi-namavali/mD3TxNQLKk8_"
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-raghavendra-manasasmarami/FKPIADZOUiU_"
    },
    "tracks": [
     {
-     "title": "Vaarahi Namavali",
+     "title": "SRI RAGHAVENDRA MANASASMARAMI",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaarahi-namavali/Iw4uUhNgeGo"
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-raghavendra-manasasmarami/LwlccjtTTl0"
      }
     }
    ]
@@ -10791,48 +10770,6 @@
      "ramu_sings": true,
      "links": {
       "jiosaavn": "https://www.jiosaavn.com/song/anjaneyar-namavali/PkURZEBcAwo"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Tirumala Vasa Sri Srinivasa",
-   "year": 2025,
-   "date": null,
-   "language": "telugu",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
-   },
-   "tracks": [
-    {
-     "title": "Tirumala Vasa Sri Srinivasa",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Vaaniye Kalai Vaaniye",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
-   },
-   "tracks": [
-    {
-     "title": "Vaaniye Kalai Vaaniye",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
      }
     }
    ]
@@ -10944,42 +10881,105 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Bhakthaprahalladha Sri Narasimha",
+   "title": "Maha Lakshmi Manasasmarami",
    "year": 2025,
    "date": null,
-   "language": "telugu",
+   "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/bhakthaprahalladha-sri-narasimha/xAzEdVsSUzU_"
+    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
    },
    "tracks": [
     {
-     "title": "Bhakthaprahalladha Sri Narasimha",
+     "title": "Maha Lakshmi Manasasmarami",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/bhakthaprahalladha-sri-narasimha/JSkdWUBGYAA"
+      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Neevele Maaku Bhagyam Brahmayya",
+   "title": "Shiridi Vasuda O Sainadha",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/neevele-maaku-bhagyam-brahmayya/ZSwR4sO7q,Q_"
+    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
    },
    "tracks": [
     {
-     "title": "Neevele Maaku Bhagyam Brahmayya",
+     "title": "Shiridi Vasuda O Sainadha",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/neevele-maaku-bhagyam-brahmayya/Py8FWDFlZHU"
+      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Tirumala Vasa Sri Srinivasa",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
+   },
+   "tracks": [
+    {
+     "title": "Tirumala Vasa Sri Srinivasa",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Vaaniye Kalai Vaaniye",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
+   },
+   "tracks": [
+    {
+     "title": "Vaaniye Kalai Vaaniye",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Vaarahi Namavali",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/vaarahi-namavali/mD3TxNQLKk8_"
+   },
+   "tracks": [
+    {
+     "title": "Vaarahi Namavali",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/vaarahi-namavali/Iw4uUhNgeGo"
      }
     }
    ]
@@ -11049,42 +11049,42 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Maha Lakshmi Manasasmarami",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
-   },
-   "tracks": [
-    {
-     "title": "Maha Lakshmi Manasasmarami",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Shiridi Vasuda O Sainadha",
+   "title": "Bhakthaprahalladha Sri Narasimha",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
+    "jiosaavn": "https://www.jiosaavn.com/album/bhakthaprahalladha-sri-narasimha/xAzEdVsSUzU_"
    },
    "tracks": [
     {
-     "title": "Shiridi Vasuda O Sainadha",
+     "title": "Bhakthaprahalladha Sri Narasimha",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+      "jiosaavn": "https://www.jiosaavn.com/song/bhakthaprahalladha-sri-narasimha/JSkdWUBGYAA"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Neevele Maaku Bhagyam Brahmayya",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/neevele-maaku-bhagyam-brahmayya/ZSwR4sO7q,Q_"
+   },
+   "tracks": [
+    {
+     "title": "Neevele Maaku Bhagyam Brahmayya",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/neevele-maaku-bhagyam-brahmayya/Py8FWDFlZHU"
      }
     }
    ]
