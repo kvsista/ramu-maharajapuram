@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-09",
+ "fetched": "2026-11-16",
  "releases": [
   {
    "source": "deezer",
@@ -10776,6 +10776,48 @@
   },
   {
    "source": "jiosaavn",
+   "title": "Maha Lakshmi Manasasmarami",
+   "year": 2025,
+   "date": null,
+   "language": "tamil",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
+   },
+   "tracks": [
+    {
+     "title": "Maha Lakshmi Manasasmarami",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
+   "title": "Shiridi Vasuda O Sainadha",
+   "year": 2025,
+   "date": null,
+   "language": "telugu",
+   "label": "Jayasindoor Entertainments",
+   "type": "album",
+   "links": {
+    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
+   },
+   "tracks": [
+    {
+     "title": "Shiridi Vasuda O Sainadha",
+     "ramu_sings": true,
+     "links": {
+      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+     }
+    }
+   ]
+  },
+  {
+   "source": "jiosaavn",
    "title": "Pratyaksha Deva Grahapati Surya",
    "year": 2025,
    "date": null,
@@ -10881,84 +10923,42 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Maha Lakshmi Manasasmarami",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maha-lakshmi-manasasmarami/c6OxVS7-ym4_"
-   },
-   "tracks": [
-    {
-     "title": "Maha Lakshmi Manasasmarami",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maha-lakshmi-manasasmarami/EzJTYCZlewA"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Shiridi Vasuda O Sainadha",
+   "title": "Maruthi Maruthi",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/shiridi-vasuda-o-sainadha/LrqXR,2y4qM_"
+    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
    },
    "tracks": [
     {
-     "title": "Shiridi Vasuda O Sainadha",
+     "title": "Maruthi Maruthi",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/shiridi-vasuda-o-sainadha/RyVSfDB9YmE"
+      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Tirumala Vasa Sri Srinivasa",
+   "title": "Sri Guru Sri Pothulurayya",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
+    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
    },
    "tracks": [
     {
-     "title": "Tirumala Vasa Sri Srinivasa",
+     "title": "Sri Guru Sri Pothulurayya",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
-     }
-    }
-   ]
-  },
-  {
-   "source": "jiosaavn",
-   "title": "Vaaniye Kalai Vaaniye",
-   "year": 2025,
-   "date": null,
-   "language": "tamil",
-   "label": "Jayasindoor Entertainments",
-   "type": "album",
-   "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
-   },
-   "tracks": [
-    {
-     "title": "Vaaniye Kalai Vaaniye",
-     "ramu_sings": true,
-     "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
+      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
      }
     }
    ]
@@ -11091,42 +11091,42 @@
   },
   {
    "source": "jiosaavn",
-   "title": "Maruthi Maruthi",
+   "title": "Tirumala Vasa Sri Srinivasa",
    "year": 2025,
    "date": null,
    "language": "telugu",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/maruthi-maruthi/VEwWPiIZJ98_"
+    "jiosaavn": "https://www.jiosaavn.com/album/tirumala-vasa-sri-srinivasa/RyloaLlEAp0_"
    },
    "tracks": [
     {
-     "title": "Maruthi Maruthi",
+     "title": "Tirumala Vasa Sri Srinivasa",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/maruthi-maruthi/Qw0mfQNIaGU"
+      "jiosaavn": "https://www.jiosaavn.com/song/tirumala-vasa-sri-srinivasa/QT1bWBpnUGE"
      }
     }
    ]
   },
   {
    "source": "jiosaavn",
-   "title": "Sri Guru Sri Pothulurayya",
+   "title": "Vaaniye Kalai Vaaniye",
    "year": 2025,
    "date": null,
-   "language": "telugu",
+   "language": "tamil",
    "label": "Jayasindoor Entertainments",
    "type": "album",
    "links": {
-    "jiosaavn": "https://www.jiosaavn.com/album/sri-guru-sri-pothulurayya/8tyTFOzhfjA_"
+    "jiosaavn": "https://www.jiosaavn.com/album/vaaniye-kalai-vaaniye/jg24cx3CftA_"
    },
    "tracks": [
     {
-     "title": "Sri Guru Sri Pothulurayya",
+     "title": "Vaaniye Kalai Vaaniye",
      "ramu_sings": true,
      "links": {
-      "jiosaavn": "https://www.jiosaavn.com/song/sri-guru-sri-pothulurayya/IyZdVkZTQEc"
+      "jiosaavn": "https://www.jiosaavn.com/song/vaaniye-kalai-vaaniye/FFglaT8dBlw"
      }
     }
    ]
